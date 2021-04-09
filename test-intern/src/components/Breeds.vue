@@ -1,5 +1,5 @@
 <template>
-  <section class="voting"></section>
+  <section class="breeds"></section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <section class="voting"></section>
+  <section class="gallery"></section>
 </template>
 
 <script>

@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       isActive: {
+        headerRight: true,
         voting: false,
         breeds: false,
         gallery: false,
@@ -85,14 +86,17 @@ export default {
   methods: {
     activePage(e) {
       if (e.target.classList.contains("voting")) {
+        this.isActive.headerRight= false,
         this.isActive.voting = true;
         this.isActive.breeds = false;
         this.isActive.gallery = false;
       } else if (e.target.classList.contains("breeds")) {
+        this.isActive.headerRight= false,
         this.isActive.voting = false;
         this.isActive.breeds = true;
         this.isActive.gallery = false;
       } else if (e.target.classList.contains("gallery")) {
+        this.isActive.headerRight= false,
         this.isActive.voting = false;
         this.isActive.breeds = false;
         this.isActive.gallery = true;

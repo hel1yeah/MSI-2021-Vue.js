@@ -3,13 +3,13 @@
     <div class="container">
       <div class="wrapper-content">
         <div class="interactive">
-          <HiPage @isActive='isActive'/>
+          <HiPage @isActive='isActiveAdd'/>
         </div>
         <div class="pages">
-          <HeaderRight></HeaderRight>
-          <Voting></Voting>
-          <Breeds></Breeds>
-          <Gallery></Gallery>
+          <HeaderRight v-show="isActivePage.headerRight"></HeaderRight>
+          <Voting v-show="isActivePage.voting"></Voting>
+          <Breeds v-show="isActivePage.breeds"></Breeds>
+          <Gallery v-show="isActivePage.gallery"></Gallery>
         </div>
       </div>
     </div>
@@ -32,14 +32,19 @@ export default {
   },
   data() {
     return {
-      pages: {
-        HeaderRight: true,
+      isActivePage: {
+        headerRight: true,
         voting: false,
         breeds: false,
         gallery: false,
       },
     };
   },
+  methods:{
+    isActiveAdd(isActive){
+      this.isActivePage = isActive;
+    }
+  }
 };
 </script>
 
@@ -51,10 +56,10 @@ export default {
 }
 .interactive {
 }
-.pages {
-  width: 640px;
-  height: 840px;
-  background-color: var(--bgc-title-color);
-  border-radius: 20px;
-}
+// .pages {
+//   width: 640px;
+//   height: 840px;
+//   background-color: var(--bgc-title-color);
+//   border-radius: 20px;
+// }
 </style>

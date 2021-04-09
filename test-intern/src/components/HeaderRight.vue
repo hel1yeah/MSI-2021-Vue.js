@@ -17,6 +17,10 @@ export default {
 <style lang="scss">
 .header-img__wrapper {
   position: relative;
+  width: 640px;
+  height: 840px;
+  background-color: var(--bgc-title-color);
+  border-radius: 20px;
 }
 .header-img {
   position: absolute;
