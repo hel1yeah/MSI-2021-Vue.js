@@ -54,8 +54,8 @@ export default {
   align-items: flex-start;
   justify-content: space-between;
 }
-.interactive {
-}
+// .interactive {
+// }
 // .pages {
 //   width: 640px;
 //   height: 840px;

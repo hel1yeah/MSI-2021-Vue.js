@@ -1,65 +1,65 @@
 <template>
   <section class="header">
-    <img class="header_logo" src="./../assets/Logo.svg" alt="PetsPaw" />
-    <div class="header_info">
-      <h1 class="header_info--title">Hi intern!</h1>
-      <p class="header_info--descr">Welcome to MSI 2021 Front-end test</p>
+    <img class="header__logo" src="./../assets/Logo.svg" alt="PetsPaw" />
+    <div class="header__info">
+      <h1 class="header__info--title">Hi intern!</h1>
+      <p class="header__info--descr">Welcome to MSI 2021 Front-end test</p>
     </div>
-    <div class="header_api">
-      <p class="header_api--title">Lets start using The Dogs API</p>
+    <div class="header__api">
+      <p class="header__api--title">Lets start using The Dogs API</p>
 
-      <div class="header_cards-wrapper">
-        <div class="header_card">
+      <div class="header__cards-wrapper">
+        <div class="header__card">
           <div
-            class="header_card--bg fiolet"
+            class="header__card--bg fiolet"
             :class="{ active: isActive.voting }"
           >
             <img
-              class="header_card--img"
+              class="header__card--img"
               src="../assets/images/vote-table.svg"
               alt="vote table"
             />
           </div>
           <button
             @click="activePage"
-            class="header_card--title voting"
+            class="header__card--title voting"
             :class="{ 'voting-active': isActive.voting }"
           >
             voting
           </button>
         </div>
-        <div class="header_card">
+        <div class="header__card">
           <div
-            class="header_card--bg grean"
+            class="header__card--bg grean"
             :class="{ active: isActive.breeds }"
           >
             <img
-              class="header_card--img pet-breeds"
+              class="header__card--img pet-breeds"
               src="../assets/images/pet-breeds.svg"
               alt="vote table"
             />
           </div>
           <button
-            class="header_card--title breeds"
+            class="header__card--title breeds"
             :class="{ 'breeds-active': isActive.breeds }"
             @click="activePage"
           >
             breeds
           </button>
         </div>
-        <div class="header_card gallery" @click="activePage">
+        <div class="header__card gallery" @click="activePage">
           <div
-            class="header_card--bg orange"
+            class="header__card--bg orange"
             :class="{ active: isActive.gallery }"
           >
             <img
-              class="header_card--img images-search"
+              class="header__card--img images-search"
               src="../assets/images/images-search.svg"
               alt="vote table"
             />
           </div>
           <button
-            class="header_card--title gallery"
+            class="header__card--title gallery"
             :class="{ 'gallery-active': isActive.gallery }"
           >
             gallery
@@ -86,18 +86,15 @@ export default {
   methods: {
     activePage(e) {
       if (e.target.classList.contains("voting")) {
-        this.isActive.headerRight= false,
-        this.isActive.voting = true;
+        (this.isActive.headerRight = false), (this.isActive.voting = true);
         this.isActive.breeds = false;
         this.isActive.gallery = false;
       } else if (e.target.classList.contains("breeds")) {
-        this.isActive.headerRight= false,
-        this.isActive.voting = false;
+        (this.isActive.headerRight = false), (this.isActive.voting = false);
         this.isActive.breeds = true;
         this.isActive.gallery = false;
       } else if (e.target.classList.contains("gallery")) {
-        this.isActive.headerRight= false,
-        this.isActive.voting = false;
+        (this.isActive.headerRight = false), (this.isActive.voting = false);
         this.isActive.breeds = false;
         this.isActive.gallery = true;
       }
@@ -108,51 +105,51 @@ export default {
 </script>
 
 <style lang="scss">
-.header {
-}
-.header_logo {
+// .header {
+// }
+.header__logo {
   margin: 0 0 80px;
 }
-.header_info {
-}
-.header_info--title {
+// .header__info {
+// }
+.header__info--title {
   font-weight: 500;
   font-size: 44px;
   line-height: 58px;
   color: var(--black-color);
 }
-.header_info--descr {
+.header__info--descr {
   color: var(--gray-color);
   font-size: 20px;
   line-height: 29px;
   margin: 0 0 60px;
 }
-.header_api {
-}
-.header_api--title {
+// .header__api {
+// }
+.header__api--title {
   font-weight: 600;
   font-size: 20px;
   line-height: 29px;
 }
-.header_cards-wrapper {
+.header__cards-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 450px;
 }
-.header_card {
+.header__card {
   text-align: center;
   width: 138px;
   transition: all 0.6s;
-  &:hover .header_card--title {
+  &:hover .header__card--title {
     background-color: var(--hover-color);
     color: var(--pink-color);
   }
-  &:hover .header_card--bg {
+  &:hover .header__card--bg {
     border: 4px solid var(--while-color);
   }
 }
-.header_card--bg {
+.header__card--bg {
   display: block;
 
   box-sizing: border-box;
@@ -187,7 +184,7 @@ export default {
     }
   }
 }
-.header_card--img {
+.header__card--img {
   width: 100px;
   height: 124px;
   &.pet-breeds {
@@ -199,7 +196,7 @@ export default {
     height: 193px;
   }
 }
-.header_card--title {
+.header__card--title {
   text-transform: uppercase;
   color: var(--pink-color);
   background: var(--while-color);
