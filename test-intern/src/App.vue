@@ -6,7 +6,10 @@
           <HiPage />
         </div>
         <div class="pages">
-          <router-view></router-view>
+          <transition name='appearance' mode="out-in">
+            <router-view></router-view>
+          </transition>
+          
         </div>
       </div>
     </div>
@@ -37,5 +40,19 @@ export default {
   align-items: flex-start;
   justify-content: space-between;
 }
+.appearance-enter-active {
+  animation-delay: 4s;
+  transition: all .3s ease;
+  
+}
+.appearance-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.appearance-enter, .appearance-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
 
 </style>
