@@ -12,7 +12,6 @@
         <div class="header__card">
           <div
             class="header__card--bg fiolet"
-            :class="{ active: isActive.voting }"
           >
             <img
               class="header__card--img"
@@ -20,18 +19,18 @@
               alt="vote table"
             />
           </div>
-          <button
-            @click="activePage"
-            class="header__card--title voting"
-            :class="{ 'voting-active': isActive.voting }"
-          >
-            voting
-          </button>
+          <router-link :to="{name : 'voting'}">
+            <button
+              class="header__card--title voting"
+            >
+              voting
+            </button>
+          </router-link>
         </div>
         <div class="header__card">
           <div
             class="header__card--bg grean"
-            :class="{ active: isActive.breeds }"
+            
           >
             <img
               class="header__card--img pet-breeds"
@@ -39,18 +38,17 @@
               alt="vote table"
             />
           </div>
-          <button
-            class="header__card--title breeds"
-            :class="{ 'breeds-active': isActive.breeds }"
-            @click="activePage"
-          >
-            breeds
-          </button>
+          <router-link :to="{name : 'breeds'}">
+            <button
+              class="header__card--title breeds"
+            >
+              breeds
+            </button>
+          </router-link>
         </div>
-        <div class="header__card gallery" @click="activePage">
+        <div class="header__card gallery" >
           <div
             class="header__card--bg orange"
-            :class="{ active: isActive.gallery }"
           >
             <img
               class="header__card--img images-search"
@@ -58,12 +56,13 @@
               alt="vote table"
             />
           </div>
-          <button
-            class="header__card--title gallery"
-            :class="{ 'gallery-active': isActive.gallery }"
-          >
-            gallery
-          </button>
+          <router-link :to="{name : 'gallery'}">
+            <button
+              class="header__card--title gallery"
+            >
+              gallery
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -75,32 +74,10 @@ export default {
   name: "HiPage",
   data() {
     return {
-      isActive: {
-        headerRight: true,
-        voting: false,
-        breeds: false,
-        gallery: false,
-      },
+
     };
   },
-  methods: {
-    activePage(e) {
-      if (e.target.classList.contains("voting")) {
-        (this.isActive.headerRight = false), (this.isActive.voting = true);
-        this.isActive.breeds = false;
-        this.isActive.gallery = false;
-      } else if (e.target.classList.contains("breeds")) {
-        (this.isActive.headerRight = false), (this.isActive.voting = false);
-        this.isActive.breeds = true;
-        this.isActive.gallery = false;
-      } else if (e.target.classList.contains("gallery")) {
-        (this.isActive.headerRight = false), (this.isActive.voting = false);
-        this.isActive.breeds = false;
-        this.isActive.gallery = true;
-      }
-      this.$emit("isActive", this.isActive);
-    },
-  },
+
 };
 </script>
 
