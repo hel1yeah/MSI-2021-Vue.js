@@ -1,6 +1,9 @@
 <template>
   <section class="header">
-    <img class="header__logo" src="./../assets/Logo.svg" alt="PetsPaw" />
+    <router-link :to="{ name: 'home' }">
+      <img class="header__logo" src="./../assets/Logo.svg" alt="PetsPaw" />
+    </router-link>
+
     <div class="header__info">
       <h1 class="header__info--title">Hi intern!</h1>
       <p class="header__info--descr">Welcome to MSI 2021 Front-end test</p>
@@ -10,58 +13,39 @@
 
       <div class="header__cards-wrapper">
         <div class="header__card">
-          <div
-            class="header__card--bg fiolet"
-          >
+          <div class="header__card--bg fiolet" :class="{ active: this.$route.path == '/voting' }">
             <img
               class="header__card--img"
               src="../assets/images/vote-table.svg"
               alt="vote table"
             />
           </div>
-          <router-link :to="{name : 'voting'}">
-            <button
-              class="header__card--title voting"
-            >
-              voting
-            </button>
+          <router-link :to="{ name: 'voting' }">
+            <button class="header__card--title">voting</button>
           </router-link>
         </div>
         <div class="header__card">
-          <div
-            class="header__card--bg grean"
-            
-          >
+          <div class="header__card--bg grean" :class="{ active: this.$route.path == '/breeds' }">
             <img
               class="header__card--img pet-breeds"
               src="../assets/images/pet-breeds.svg"
               alt="vote table"
             />
           </div>
-          <router-link :to="{name : 'breeds'}">
-            <button
-              class="header__card--title breeds"
-            >
-              breeds
-            </button>
+          <router-link :to="{ name: 'breeds' }">
+            <button class="header__card--title">breeds</button>
           </router-link>
         </div>
-        <div class="header__card gallery" >
-          <div
-            class="header__card--bg orange"
-          >
+        <div class="header__card gallery">
+          <div class="header__card--bg orange" :class="{ active: this.$route.path == '/gallery' }">
             <img
               class="header__card--img images-search"
               src="../assets/images/images-search.svg"
               alt="vote table"
             />
           </div>
-          <router-link :to="{name : 'gallery'}">
-            <button
-              class="header__card--title gallery"
-            >
-              gallery
-            </button>
+          <router-link :to="{ name: 'gallery' }">
+            <button class="header__card--title">gallery</button>
           </router-link>
         </div>
       </div>
@@ -74,10 +58,9 @@ export default {
   name: "HiPage",
   data() {
     return {
-
+      routeName: null
     };
   },
-
 };
 </script>
 
@@ -189,9 +172,11 @@ export default {
     outline: transparent;
   }
 }
-.gallery-active,
-.voting-active,
-.breeds-active {
+.router-link-exact-active > .header__card--title {
+  background-color: var(--pink-color);
+  color: var(--while-color);
+}
+.router-link-exact-active > .header__card--title .header__card--bg {
   background-color: var(--pink-color);
   color: var(--while-color);
 }

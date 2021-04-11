@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import HeaderRight from "@/components/HeaderRight.vue";
-import Voting from "@/components/Voting.vue";
-import Breeds from "@/components/Breeds.vue";
-import Gallery from "@/components/Gallery.vue";
+import HeaderRight from "@/views/HeaderRight.vue";
+import Voting from "@/views/Voting.vue";
+import Breeds from "@/views/Breeds.vue";
+import Gallery from "@/views/Gallery.vue";
 
 
 Vue.use(VueRouter);

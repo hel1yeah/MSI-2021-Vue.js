@@ -14,18 +14,12 @@
 </template>
 
 <script>
-import HiPage from "@/components/HiPage.vue";
-// import HeaderRight from "@/components/HeaderRight.vue";
-// import Voting from "@/components/Voting.vue";
-// import Breeds from "@/components/Breeds.vue";
-// import Gallery from "@/components/Gallery.vue";
+import HiPage from "@/views/HiPage.vue";
+
 export default {
   components: {
     HiPage,
-    // HeaderRight,
-    // Voting,
-    // Breeds,
-    // Gallery,
+
   },
   data() {
     return {
