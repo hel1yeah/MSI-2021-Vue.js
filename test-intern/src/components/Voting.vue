@@ -68,9 +68,9 @@
         </div>
       </div>
     </div>
-    <div class="actions-wrapper">
-      <div class="actions__user">
-        <button class="actions__button-back">
+    <div class="action-wrapper">
+      <div class="photo__dog">
+        <button class="button-close-component">
           <svg
             width="12"
             height="20"
@@ -91,7 +91,7 @@
           alt="dog"
         />
         <div class="voting__content--attitude-wrapper">
-          <div class="voting__content--attitude actions__attitude--likes">
+          <div class="voting__content--attitude photo__attitude--likes">
             <svg
               width="30"
               height="30"
@@ -105,7 +105,7 @@
               />
             </svg>
           </div>
-          <div class="voting__content--attitude actions__attitude--favourites">
+          <div class="voting__content--attitude photo__attitude--favourites">
             <svg
               width="30"
               height="26"
@@ -119,7 +119,7 @@
               />
             </svg>
           </div>
-          <div class="voting__content--attitude actions__attitude--dislikes">
+          <div class="voting__content--attitude photo__attitude--dislikes">
             <svg
               width="30"
               height="30"
@@ -133,6 +133,45 @@
               />
             </svg>
           </div>
+        </div>
+      </div>
+      <div class="action-user">
+        <div class="action-user__time">22:30</div>
+        <div class="action-user__description">
+          Image ID: <span>fQSunHvl8</span> was added to Favourites
+        </div>
+        <div class="action-user__attitude">
+          <img
+            class="action-user__attitude"
+            src="./../assets/images/insignia/like.svg"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="action-user">
+        <div class="action-user__time">22:30</div>
+        <div class="action-user__description">
+          Image ID: <span>fQSunHvl8</span> was added to Favourites
+        </div>
+        <div class="action-user__attitude">
+          <img
+            class="action-user__attitude"
+            src="./../assets/images/insignia/like.svg"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="action-user">
+        <div class="action-user__time">22:30</div>
+        <div class="action-user__description">
+          Image ID: <span>fQSunHvl8</span> was added to Favourites
+        </div>
+        <div class="action-user__attitude">
+          <img
+            class="action-user__attitude"
+            src="./../assets/images/insignia/like.svg"
+            alt=""
+          />
         </div>
       </div>
     </div>
@@ -235,17 +274,17 @@ export default {
 }
 .attitude__dislikes--img {
 }
-.actions-wrapper {
+.action-wrapper {
   background-color: var(--while-color);
   padding: 20px;
   border-radius: 20px;
 }
-.actions__user {
+.photo__dog {
   display: flex;
   align-items: center;
   margin: 0 0 20px 0;
 }
-.actions__button-back {
+.button-close-component {
   background-color: var(--hover-color);
   width: 40px;
   height: 40px;
@@ -282,7 +321,6 @@ export default {
 }
 
 .voting__content {
-
 }
 .voting__content-img {
   border-radius: 20px;
@@ -292,7 +330,7 @@ export default {
   width: 250px;
   position: relative;
   z-index: 3;
-  margin: -44px auto 0 auto ;
+  margin: -44px auto 0 auto;
   border-radius: 20px;
   overflow: hidden;
   background-color: #fff;
@@ -301,7 +339,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 .voting__content--attitude {
   display: flex;
@@ -313,37 +350,66 @@ export default {
   width: 80px;
   height: 80px;
 
-
   fill: var(--while-color);
 
-  &:not(:last-child){
-      margin: 0 4px 0 0;
+  &:not(:last-child) {
+    margin: 0 4px 0 0;
   }
 
-  transition: .6s;
-
+  transition: 0.6s;
 }
 
-.actions__attitude--likes {
+.photo__attitude--likes {
   background-color: var(--grean-card-color);
-    &:hover{
+  &:hover {
     background-color: rgb(208, 250, 225);
-    fill: #97EAB9;
+    fill: #97eab9;
   }
 }
-.actions__attitude--favourites {
+.photo__attitude--favourites {
   background-color: var(--pink-color);
-    &:hover{
+  &:hover {
     background-color: #ffadb2;
     fill: var(--pink-color);
   }
 }
-.actions__attitude--dislikes {
+.photo__attitude--dislikes {
   background-color: var(--orange-card-color);
-    &:hover{
+  &:hover {
     background-color: rgb(248, 223, 177);
-    fill: #FFD280;
-    
+    fill: #ffd280;
   }
+}
+
+.action-user {
+  max-width: 100%;
+  background-color: var(--main-color);
+  padding: 15px 20px 15px 15px;
+  margin: 15px 0 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.action-user__time {
+  background-color: var(--while-color);
+  padding: 3px 10px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 5px;
+}
+.action-user__description {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-color);
+  & span {
+    color: var(--black-color);
+    font-weight: 600;
+  }
+}
+.action-user__attitude {
+  width: 20px;
+  height: 20px;
 }
 </style>
