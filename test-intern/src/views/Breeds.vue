@@ -8,7 +8,7 @@
       <div class="breeds-filter">
         <ButtonClose></ButtonClose>
         <NamePage :nameComponent="nameComponent"></NamePage>
-        <select class="breeds-select" :placeholder="asdsad">
+        <select class="breeds-select">
           <option class="breeds-select__option" value="All breeds">
             All breeds
           </option>
@@ -52,8 +52,111 @@
         </button>
       </div>
       <div class="grid-container">
-        <div class="long"></div>
-        <div class="big-right"></div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/1.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/2.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/3.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/4.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/5.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/6.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/8.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/9.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/10.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/11.jpg"
+            alt="1"
+          />
+        </div>
+                <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/4.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/5.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/6.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/8.jpg"
+            alt="1"
+          />
+        </div>
+        <div class="grid-container__item">
+          <img
+            class="grid-container__item--img"
+            src="./../assets/images/dogs/9.jpg"
+            alt="1"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -169,13 +272,35 @@ export default {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 200px 200px 200px;
-  grid-template-rows: 200px 200px 200px;
+  grid-template-columns: repeat(3, minmax(140px, 200px) );
+  grid-template-rows: repeat(9,  minmax(140px, 200px));
   gap: 20px 20px;
-  grid-template-areas:
-    "long . ."
-    "long big-right big-right"
-    ". big-right big-right";
+}
+.grid-container__item {
+  border-radius: 20px;
+  overflow: hidden;
+  &:nth-child(1) {
+    grid-area: 1 / 1 / span 2 / 1;
+  }
+  &:nth-child(5) {
+    grid-area: 2 / 2 / span 2 / span 2;
+  }
+  &:nth-child(8) {
+    grid-area: 4 / 3 / span 2 / 4;
+  }
+  &:nth-child(10) {
+    grid-area: 5 / 1 / span 2 / span 2;
+  }
+  &:nth-child(12) {
+    grid-area: 7 / 1 / span 2 / 1;
+  }
+  &:nth-child(15) {
+    grid-area: 8 / 2 / span 2 / span 2;
+  }
+}
+.grid-container__item--img {
+  height: 100%;
+  transform: translateX(-25%);
 }
 
 .long {
