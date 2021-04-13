@@ -1,6 +1,6 @@
 :root {
   --main-color: #f1f0f0;
-  --pink-color: #ff868e;
+  --pink-color: rgba(255, 134, 142, .6);
   --hover-color: #fbe0dc;
   --while-color: #ffffff;
   --black-color: #1d1d1d;
@@ -10,4 +10,7 @@
   --fiolet-card-color: rgba(180, 183, 255, 1);
   --grean-card-color: rgba(151, 234, 185,1);
   --orange-card-color: rgb(248, 223, 177); 
+
+
+  --transition: .6s;
 }
