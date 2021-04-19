@@ -4,6 +4,7 @@
       <Search />
       <Attitude />
     </div>
+    <Preloader v-if="loading"></Preloader>
     <div class="breeds__content">
       <div class="breeds-filter">
         <ButtonClose></ButtonClose>
@@ -176,11 +177,16 @@
           />
         </div>
       </div>
+      <button @click="getBreeds">test button</button>
+      {{ breeds }}
     </div>
   </section>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
+import Preloader from "@/components/Preloader.vue";
 import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
@@ -188,6 +194,7 @@ import NamePage from "@/components/NamePage.vue";
 export default {
   name: "Breeds",
   components: {
+    Preloader,
     Search,
     Attitude,
     NamePage,
@@ -197,6 +204,18 @@ export default {
     return {
       nameComponent: "breeds",
     };
+  },
+  methods: {
+    getBreeds() {
+      console.log("breeds get");
+      this.$store.dispatch("getBreeds");
+    },
+  },
+  computed: {
+    ...mapState({
+      breeds: (state) => state.breeds.isBreeds,
+      loading: (state) => state.breeds.isLoading,
+    }),
   },
 };
 </script>
