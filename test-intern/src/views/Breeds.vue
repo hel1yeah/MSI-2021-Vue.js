@@ -1,10 +1,11 @@
 <template>
   <section class="breeds">
     <div class="search-attitude-wrapper">
-      <Search />
+      <Search  @click.native="getBreeds" />
       <Attitude />
     </div>
     <Preloader v-if="loading"></Preloader>
+    {{breeds}}
     <div class="breeds__content">
       <div class="breeds-filter">
         <ButtonClose></ButtonClose>
@@ -177,8 +178,6 @@
           />
         </div>
       </div>
-      <button @click="getBreeds">test button</button>
-      {{ breeds }}
     </div>
   </section>
 </template>

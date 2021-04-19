@@ -1,16 +1,16 @@
 import breedsAPI from "@/api/breeds";
 
 const state = {
-  // isLoading: false,
+  isLoading: false,
   isBreeds: null,
 };
 
 const mutations = {
-  // isLoadingStart(state) {
-  //   isLoading = true;
-  // },
+  isLoadingStart(state) {
+    state.isLoading = true;
+  },
   isLoadingFinish(state, payload) {
-    // isLoading = false;
+    state.isLoading = false;
     state.isBreeds = payload;
   },
 };
