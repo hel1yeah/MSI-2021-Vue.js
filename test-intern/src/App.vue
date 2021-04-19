@@ -36,6 +36,7 @@ export default {
 
 <style lang="scss">
 .wrapper-content {
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -53,6 +54,5 @@ export default {
   transform: translateX(10px);
   opacity: 0;
 }
-
 
 </style>

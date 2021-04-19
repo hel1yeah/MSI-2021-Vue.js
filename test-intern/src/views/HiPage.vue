@@ -36,7 +36,7 @@
             <button class="header__card--title">breeds</button>
           </router-link>
         </div>
-        <div class="header__card gallery">
+        <div class="header__card ">
           <div class="header__card--bg orange" :class="{ active: this.$route.path == '/gallery' }">
             <img
               class="header__card--img images-search"
