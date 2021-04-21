@@ -41,7 +41,7 @@ export default {
   letter-spacing: 2px;
   font-weight: 500;
   fill: var(--pink-color);
-  transition: var(--transition);
+  transition: var(--speed);
   &:hover {
     background-color: var(--pink-color);
     color: var(--while-color);

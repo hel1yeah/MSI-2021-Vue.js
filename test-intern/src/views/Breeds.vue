@@ -1,26 +1,26 @@
 <template>
   <section class="breeds">
     <div class="search-attitude-wrapper">
-      <Search  @click.native="getBreeds" />
+      <button @click="getBreeds">getBreeds</button>
+      <Search />
       <Attitude />
     </div>
-    <Preloader v-if="loading"></Preloader>
-    {{breeds}}
+
     <div class="breeds__content">
       <div class="breeds-filter">
         <ButtonClose></ButtonClose>
         <NamePage :nameComponent="nameComponent"></NamePage>
-        <select class="breeds-select">
-          <option class="breeds-select__option" value="All breeds">
-            All breeds
+        <select class="breeds-select" v-model="name">
+          <option class="breeds-select__option" value="All Breeds">
+            All Breeds
           </option>
-          <option>Пункт 2</option>
-          <option>Пункт 3</option>
+          <option v-for="name in names" :key="name" :value="name">
+            {{ name }}
+          </option>
         </select>
-        <select class="breeds-select__limit">
-          <option class="breeds-select__limit--option" value="10">
-            Limit: 10
-          </option>
+        <select class="breeds-select__limit" v-model="limit">
+          <option value="5">Limit: 5</option>
+          <option value="10">Limit: 10</option>
           <option value="15">Limit: 15</option>
           <option value="20">Limit: 20</option>
         </select>
@@ -53,18 +53,23 @@
           </svg>
         </button>
       </div>
+      <Preloader v-if="loading"></Preloader>
       <div class="grid-container">
-        <div class="grid-container__item">
+        <div
+          class="grid-container__item"
+          v-for="bread in breeds"
+          :key="bread.id"
+        >
           <img
             class="grid-container__item--img"
-            src="./../assets/images/dogs/1.jpg"
-            alt="1"
+            :src="bread.image.url"
+            :alt="bread.name"
           />
           <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
+            <div class="name-breeds">{{ bread.name }}</div>
           </div>
         </div>
-        <div class="grid-container__item">
+        <!-- <div class="grid-container__item">
           <img
             class="grid-container__item--img"
             src="./../assets/images/dogs/2.jpg"
@@ -176,7 +181,7 @@
             src="./../assets/images/dogs/9.jpg"
             alt="1"
           />
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -202,20 +207,32 @@ export default {
   data() {
     return {
       nameComponent: "breeds",
+      limit: 5,
+      name: null,
     };
   },
   methods: {
     getBreeds() {
-      console.log("breeds get");
-      this.$store.dispatch("getBreeds");
+      console.log(this.limit);
+    },
+    getBreedsForName() {
+      this.$store.dispatch("getBreedsForName", { name: this.name });
     },
   },
   computed: {
     ...mapState({
       breeds: (state) => state.breeds.isBreeds,
+      breedsName: (state) => state.breeds.isBreedsName,
       loading: (state) => state.breeds.isLoading,
+      names: (state) => state.breeds.isNames,
     }),
   },
+  watch: {},
+  created() {
+    this.$store.dispatch("getBreeds", { limit: this.limit });
+    this.$store.dispatch("getBreedsNames");
+  },
+  mounted() {},
 };
 </script>
 
@@ -272,18 +289,18 @@ export default {
   border: transparent;
   cursor: pointer;
 }
-.breeds-select__limit--option {
-  color: var(--gray-color);
-  background: var(--options-color);
-  font-size: 16px;
-  line-height: 24px;
-  padding: 20px;
-  height: 30px;
-  cursor: pointer;
-  &:hover {
-    background: var(--options-color);
-  }
-}
+// .breeds-select__limit--option {
+//   color: var(--gray-color);
+//   background: var(--options-color);
+//   font-size: 16px;
+//   line-height: 24px;
+//   padding: 20px;
+//   height: 30px;
+//   cursor: pointer;
+//   &:hover {
+//     background: var(--options-color);
+//   }
+// }
 .breeds-select__abc-up,
 .breeds-select__abc-down {
   display: flex;
@@ -307,16 +324,20 @@ export default {
 }
 
 .grid-container {
-  display: grid;
   grid-template-columns: repeat(3, minmax(140px, 200px));
   grid-template-rows: repeat(9, minmax(140px, 200px));
   gap: 20px 20px;
 }
 .grid-container__item {
+  width: 200px;
+  // min-width: 140px;
+  // min-height: 140px;
+  height: 140px;
+
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  transition: var(--transition);
+  transition: var(--speed);
   &:nth-child(1) {
     grid-area: 1 / 1 / span 2 / 1;
   }
@@ -340,11 +361,13 @@ export default {
   }
 }
 .grid-container__item--img {
-  height: 100%;
-  transform: translateX(-25%);
+  width: 100%;
+  transform: scale(1.1);
+
+  background-color: var(--fiolet-card-color);
 }
 .grid-container__item--hover {
-  transition: var(--transition);
+  transition: var(--speed);
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -362,7 +385,8 @@ export default {
   line-height: 24px;
   color: var(--pink-color);
   background-color: var(--while-color);
-  padding: 5px 45px;
+  padding: 5px 5px;
+  min-width: 80%;
   text-align: center;
   border-radius: 10px;
   margin: 0 auto 10px;
