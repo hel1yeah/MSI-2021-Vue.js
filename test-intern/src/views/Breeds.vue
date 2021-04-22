@@ -195,6 +195,7 @@ import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
+
 export default {
   name: "Breeds",
   components: {
@@ -208,7 +209,7 @@ export default {
     return {
       nameComponent: "breeds",
       limit: 5,
-      name: null,
+      name: 'All Breeds',
     };
   },
   methods: {
