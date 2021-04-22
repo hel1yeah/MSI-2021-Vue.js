@@ -4,6 +4,7 @@
       <Search />
       <Attitude />
     </div>
+    <Preloader v-if="loading"></Preloader>
     <div class="gallery-content">
       <div class="gallery-content__title">
         <div class="gallery-content__title--item">
@@ -16,9 +17,15 @@
         <div class="gallery-content__filters--item">
           <label class="gallery-label" for="order">order</label>
           <select class="gallery-select" name="order" id="order">
-            <option class="gallery-select__option" value="">Affenpinscher</option>
-            <option class="gallery-select__option" value="">Afghan Hound</option>
-            <option class="gallery-select__option" value="">African Hunting Dog</option>
+            <option class="gallery-select__option" value="">
+              Affenpinscher
+            </option>
+            <option class="gallery-select__option" value="">
+              Afghan Hound
+            </option>
+            <option class="gallery-select__option" value="">
+              African Hunting Dog
+            </option>
           </select>
         </div>
       </div>
@@ -27,6 +34,7 @@
 </template>
 
 <script>
+import Preloader from "@/components/Preloader.vue";
 import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
@@ -35,6 +43,7 @@ import ButtonUpload from "@/components/ButtonUpload.vue";
 export default {
   name: "Gallery",
   components: {
+    Preloader,
     Search,
     Attitude,
     NamePage,
@@ -46,11 +55,16 @@ export default {
       nameComponent: "gallery",
     };
   },
+  computed: {
+    loading() {
+      return this.$store.state.gallery.isLoading;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-.gallery{
+.gallery {
   width: 680px;
 }
 .gallery-content {
@@ -58,7 +72,7 @@ export default {
   border-radius: 20px;
   padding: 20px;
 }
-.gallery-content__title { 
+.gallery-content__title {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,12 +83,12 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.gallery-content__filters{
+.gallery-content__filters {
   background-color: var(--options-color);
   border-radius: 20px;
   padding: 10px 20px 20px;
 }
-.gallery-content__filters--item{
+.gallery-content__filters--item {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
