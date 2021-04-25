@@ -1,8 +1,7 @@
 <template>
   <section class="breeds">
     <div class="search-attitude-wrapper">
-      <button @click="getBreeds">getBreeds</button>
-      <Search />
+      <Search @getBreeds="getBreeds" />
       <Attitude />
     </div>
 
@@ -57,7 +56,7 @@
       <div class="grid-container">
         <div
           class="grid-container__item"
-          v-for="bread in breeds"
+          v-for="bread in breeds "
           :key="bread.id"
         >
           <img
@@ -209,28 +208,37 @@ export default {
     return {
       nameComponent: "breeds",
       limit: 5,
-      name: 'All Breeds',
+      name: "All Breeds",
     };
   },
   methods: {
     getBreeds() {
-      console.log(this.limit);
+      this.$store.dispatch("getBreeds", { limit: this.limit, name: this.name });
     },
     getBreedsForName() {
       this.$store.dispatch("getBreedsForName", { name: this.name });
+    },
+    getNameDog() {
+      this.$store.dispatch("getNameDog", { name: this.name });
     },
   },
   computed: {
     ...mapState({
       breeds: (state) => state.breeds.isBreeds,
-      breedsName: (state) => state.breeds.isBreedsName,
       loading: (state) => state.breeds.isLoading,
       names: (state) => state.breeds.isNames,
     }),
   },
-  watch: {},
+  watch: {
+    limit: function () {
+      this.getBreeds();
+    },
+    name: function () {
+      this.getNameDog();
+    },
+  },
   created() {
-    this.$store.dispatch("getBreeds", { limit: this.limit });
+    this.getBreeds();
     this.$store.dispatch("getBreedsNames");
   },
   mounted() {},

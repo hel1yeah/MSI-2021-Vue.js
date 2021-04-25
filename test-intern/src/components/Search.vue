@@ -5,7 +5,7 @@
       class="voting__search--input"
       placeholder="Search for breeds by name"
     />
-    <button class="voting__search--button">
+    <button class="voting__search--button" @click="getBreeds">
       <div class="voting__search--icon">
         <svg
           width="20"
@@ -25,11 +25,18 @@
 <script>
 export default {
   name: "Search",
+  data() {
+    return {};
+  },
+  methods: {
+    getBreeds () {
+      this.$emit('getBreeds');
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-
 .voting__search-wrapper {
   position: relative;
   width: 470px;

@@ -10,6 +10,7 @@ const state = {
 const mutations = {
   isLoadingStart(state) {
     state.isLoading = true;
+    state.isBreeds = null;
   },
   isLoadingFinishBreeds(state, payload) {
     state.isLoading = false;
@@ -20,15 +21,15 @@ const mutations = {
   },
   isLoadingFinishBreedsName(state, payload) {
     state.isLoading = false;
-    state.isBreedsForName = payload;
+    state.isBreeds = payload;
   },
 };
 
 const actions = {
-  getBreeds({ commit }, { limit }) {
+  getBreeds({ commit }, { limit, name }) {
     commit("isLoadingStart");
     return new Promise((resolve) => {
-      breedsAPI.getBreeds(limit).then((response) => {
+      breedsAPI.getBreeds(limit, name).then((response) => {
         commit("isLoadingFinishBreeds", response.data);
       });
     });
@@ -42,7 +43,6 @@ const actions = {
         response.data.forEach((dog) => {
           names.push(dog.name);
         });
-        console.log(names);
         commit("isLoadingFinishNames", names);
       });
     });
@@ -53,7 +53,17 @@ const actions = {
     return new Promise((resolve) => {
       breedsAPI.getBreedsForName(name).then((response) => {
         console.log(response.data);
-        commit("isLoadingFinishBreedsName", response.data);
+        commit("isLoadingFinishBreeds", response.data);
+      });
+    });
+  },
+
+  getNameDog({ commit }, { name }) {
+    return new Promise((resolve) => {
+      breedsAPI.getNameDog().then((response) => {
+        let breads = response.data.filter((dog) => dog.name === name);
+
+        commit("isLoadingFinishBreeds", breads);
       });
     });
   },

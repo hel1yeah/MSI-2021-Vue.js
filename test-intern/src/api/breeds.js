@@ -1,8 +1,6 @@
 import axios from "@/api/axios";
 
 const getBreeds = (limit) => {
-  
-
   const query_params = {
     limit,
   };
@@ -24,8 +22,13 @@ const getBreedsForName = (name) => {
   });
 };
 
+const getNameDog = () => {
+  return axios.get("/breeds");
+}
+
 export default {
   getBreeds,
   getBreedsNames,
   getBreedsForName,
+  getNameDog,
 };
