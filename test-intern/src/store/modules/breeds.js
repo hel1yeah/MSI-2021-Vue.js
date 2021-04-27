@@ -14,12 +14,15 @@ export const mutationsTypes = {
   getBreedsSuccess: "[Breeds] get Breeds Success",
   getBreedsNameSuccess: "[Breeds] get Breeds Name Success",
   getBreedsFailure: "[Breeds] get Breeds Failure",
+  sortStart: "[Breeds] Sort Start",
+  sortFinish: "[Breeds] Sort Finish",
 };
 
 export const actionsTypes = {
   getBreeds: "[Breeds] Get Breeds",
   getBreedsLimit: "[Breeds] Get Breeds Limit",
   getForNameBreeds: "[Breeds] Get For Name Breeds",
+  sortForName: "[Breeds] sort For Name",
 };
 
 const mutations = {
@@ -33,6 +36,12 @@ const mutations = {
     state.breeds = payload;
   },
   [mutationsTypes.getBreedsFailure](state, payload) {
+    (state.isLoading = false), (state.data = payload);
+  },
+  [mutationsTypes.sortStart](state) {
+    state.isLoading = true;
+  },
+  [mutationsTypes.sortFinish](state, payload) {
     (state.isLoading = false), (state.data = payload);
   },
 };
@@ -83,6 +92,39 @@ const actions = {
           context.commit(mutationsTypes.getBreedsFailure, err);
         });
     });
+  },
+  [actionsTypes.sortForName](context, { sortingType }) {
+    context.commit(mutationsTypes.sortStart);
+
+    let sortArr = context.state.data;
+
+    if (sortingType === "asc") {
+      sortArr.sort((a, b) => {
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    } else if (sortingType === "desc") {
+      sortArr.sort((a, b) => {
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
+        if (nameA > nameB) {
+          return -1;
+        }
+        if (nameA < nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+
+    context.commit(mutationsTypes.sortFinish, sortArr);
   },
 };
 

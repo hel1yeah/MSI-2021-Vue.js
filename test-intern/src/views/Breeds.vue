@@ -4,7 +4,6 @@
       <Search @getBreeds="getBreeds" />
       <Attitude />
     </div>
-
     <div class="breeds__content">
       <div class="breeds-filter">
         <ButtonClose></ButtonClose>
@@ -24,7 +23,7 @@
           <option value="15">Limit: 15</option>
           <option value="20">Limit: 20</option>
         </select>
-        <button class="breeds-select__abc-up">
+        <button class="breeds-select__abc-up" @click="sort('asc')">
           <svg
             width="19"
             height="20"
@@ -38,7 +37,7 @@
             />
           </svg>
         </button>
-        <button class="breeds-select__abc-down">
+        <button class="breeds-select__abc-down" @click="sort('desc')">
           <svg
             width="19"
             height="20"
@@ -220,6 +219,9 @@ export default {
     getForNameBreeds() {
       this.limit = "all";
       this.$store.dispatch(actionsTypes.getForNameBreeds, { name: this.name });
+    },
+    sort(e) {
+      this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
     },
   },
   computed: {
