@@ -123,7 +123,6 @@ const actions = {
         return 0;
       });
     }
-
     context.commit(mutationsTypes.sortFinish, sortArr);
   },
 };

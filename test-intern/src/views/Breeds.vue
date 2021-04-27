@@ -23,7 +23,11 @@
           <option value="15">Limit: 15</option>
           <option value="20">Limit: 20</option>
         </select>
-        <button class="breeds-select__abc-up" @click="sort('asc')">
+        <button
+          class="breeds-select__abc-up"
+          @click="sort('asc')"
+          :class="{ 'breeds-select-active': currentSort }"
+        >
           <svg
             width="19"
             height="20"
@@ -37,7 +41,11 @@
             />
           </svg>
         </button>
-        <button class="breeds-select__abc-down" @click="sort('desc')">
+        <button
+          class="breeds-select__abc-down"
+          @click="sort('desc')"
+          :class="{ 'breeds-select-active': !currentSort }"
+        >
           <svg
             width="19"
             height="20"
@@ -54,7 +62,7 @@
       </div>
       <Preloader v-if="loading"></Preloader>
       <div class="grid-container">
-        <div class="grid-container__item" v-for="dog in dogs" :key="dog.id">
+        <!-- <div class="grid-container__item" v-for="dog in dogs" :key="dog.id">
           <img
             class="grid-container__item--img"
             :src="dog.image.url"
@@ -63,8 +71,8 @@
           <div class="grid-container__item--hover">
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
-        </div>
-        <!-- <div class="grid-container__item">
+        </div> -->
+        <div class="grid-container__item">
           <img
             class="grid-container__item--img"
             src="./../assets/images/dogs/2.jpg"
@@ -149,34 +157,6 @@
             alt="1"
           />
         </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/5.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/6.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/8.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/9.jpg"
-            alt="1"
-          />
-        </div> -->
       </div>
     </div>
   </section>
@@ -207,6 +187,7 @@ export default {
       nameComponent: "breeds",
       limit: "all",
       name: "All Breeds",
+      currentSort: true,
     };
   },
   methods: {
@@ -221,6 +202,8 @@ export default {
       this.$store.dispatch(actionsTypes.getForNameBreeds, { name: this.name });
     },
     sort(e) {
+      e === 'asc' ? (this.currentSort = true) : (this.currentSort = false);
+
       this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
     },
   },
@@ -327,11 +310,13 @@ export default {
     border: 2px solid var(--hover-color);
     fill: var(--pink-color);
   }
+  &.breeds-select-active {
+    border: 2px solid var(--hover-color);
+    fill: var(--pink-color);
+  }
 }
-.breeds-select__abc-up {
-}
-.breeds-select__abc-down {
-}
+
+
 
 .grid-container {
   grid-template-columns: repeat(3, minmax(140px, 200px));
