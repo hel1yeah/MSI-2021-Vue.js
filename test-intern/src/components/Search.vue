@@ -1,9 +1,11 @@
 <template>
   <div class="voting__search-wrapper">
     <input
+      v-model="search"
       type="text"
       class="voting__search--input"
       placeholder="Search for breeds by name"
+      @keyup.enter="getBreeds"
     />
     <button class="voting__search--button" @click="getBreeds">
       <div class="voting__search--icon">
@@ -26,7 +28,9 @@
 export default {
   name: "Search",
   data() {
-    return {};
+    return {
+      search: null,
+    };
   },
   methods: {
     getBreeds () {

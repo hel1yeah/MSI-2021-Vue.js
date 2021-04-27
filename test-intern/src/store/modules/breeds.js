@@ -1,70 +1,87 @@
 import breedsAPI from "@/api/breeds";
 
+import { dogNames, getForNameBreeds } from "@/helpers/getBreedsName";
+
 const state = {
+  data: null,
   isLoading: false,
-  isBreeds: null,
-  isNames: null,
-  isBreedsForName: null,
+  error: null,
+  breeds: null,
+};
+
+export const mutationsTypes = {
+  getBreedsStart: "[Breeds] get Breeds Start",
+  getBreedsSuccess: "[Breeds] get Breeds Success",
+  getBreedsNameSuccess: "[Breeds] get Breeds Name Success",
+  getBreedsFailure: "[Breeds] get Breeds Failure",
+};
+
+export const actionsTypes = {
+  getBreeds: "[Breeds] Get Breeds",
+  getBreedsLimit: "[Breeds] Get Breeds Limit",
+  getForNameBreeds: "[Breeds] Get For Name Breeds",
 };
 
 const mutations = {
-  isLoadingStart(state) {
-    state.isLoading = true;
-    state.isBreeds = null;
+  [mutationsTypes.getBreedsStart](state) {
+    (state.isLoading = true), (state.data = null);
   },
-  isLoadingFinishBreeds(state, payload) {
-    state.isLoading = false;
-    state.isBreeds = payload;
+  [mutationsTypes.getBreedsSuccess](state, payload) {
+    (state.isLoading = false), (state.data = payload);
   },
-  isLoadingFinishNames(state, payload) {
-    state.isNames = payload;
+  [mutationsTypes.getBreedsNameSuccess](state, payload) {
+    state.breeds = payload;
   },
-  isLoadingFinishBreedsName(state, payload) {
-    state.isLoading = false;
-    state.isBreeds = payload;
+  [mutationsTypes.getBreedsFailure](state, payload) {
+    (state.isLoading = false), (state.data = payload);
   },
 };
 
 const actions = {
-  getBreeds({ commit }, { limit, name }) {
-    commit("isLoadingStart");
+  [actionsTypes.getBreeds]({ commit }) {
+    commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI.getBreeds(limit, name).then((response) => {
-        commit("isLoadingFinishBreeds", response.data);
-      });
-    });
-  },
-
-  getBreedsNames({ commit }) {
-    commit("isLoadingStart");
-    return new Promise((resolve) => {
-      breedsAPI.getBreedsNames().then((response) => {
-        let names = [];
-        response.data.forEach((dog) => {
-          names.push(dog.name);
+      breedsAPI
+        .getBreeds()
+        .then((response) => {
+          const names = dogNames(response.data);
+          commit(mutationsTypes.getBreedsNameSuccess, names);
+          commit(mutationsTypes.getBreedsSuccess, response.data);
+        })
+        .catch((err) => {
+          // console.error(err);
+          commit(mutationsTypes.getBreedsFailure, err);
         });
-        commit("isLoadingFinishNames", names);
-      });
     });
   },
-
-  getBreedsForName({ commit }, { name }) {
-    commit("isLoadingStart");
+  [actionsTypes.getBreedsLimit]({ commit }, { limit }) {
+    commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI.getBreedsForName(name).then((response) => {
-        console.log(response.data);
-        commit("isLoadingFinishBreeds", response.data);
-      });
+      breedsAPI
+        .getBreedsLimit(limit)
+        .then((response) => {
+          commit(mutationsTypes.getBreedsSuccess, response.data);
+        })
+        .catch((err) => {
+          // console.error(err);
+          commit(mutationsTypes.getBreedsFailure, err);
+        });
     });
   },
-
-  getNameDog({ commit }, { name }) {
+  [actionsTypes.getForNameBreeds](context, { name }) {
+    context.commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI.getNameDog().then((response) => {
-        let breads = response.data.filter((dog) => dog.name === name);
-
-        commit("isLoadingFinishBreeds", breads);
-      });
+      breedsAPI
+        .getBreeds()
+        .then((response) => {
+          context.commit(
+            mutationsTypes.getBreedsSuccess,
+            getForNameBreeds(response.data, name)
+          );
+        })
+        .catch((err) => {
+          context.commit(mutationsTypes.getBreedsFailure, err);
+        });
     });
   },
 };

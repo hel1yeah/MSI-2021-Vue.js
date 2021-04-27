@@ -13,11 +13,12 @@
           <option class="breeds-select__option" value="All Breeds">
             All Breeds
           </option>
-          <option v-for="name in names" :key="name" :value="name">
+          <option v-for="(name, index) in nameDogs" :key="index">
             {{ name }}
           </option>
         </select>
         <select class="breeds-select__limit" v-model="limit">
+          <option value="all">All</option>
           <option value="5">Limit: 5</option>
           <option value="10">Limit: 10</option>
           <option value="15">Limit: 15</option>
@@ -54,18 +55,14 @@
       </div>
       <Preloader v-if="loading"></Preloader>
       <div class="grid-container">
-        <div
-          class="grid-container__item"
-          v-for="bread in breeds "
-          :key="bread.id"
-        >
+        <div class="grid-container__item" v-for="dog in dogs" :key="dog.id">
           <img
             class="grid-container__item--img"
-            :src="bread.image.url"
-            :alt="bread.name"
+            :src="dog.image.url"
+            :alt="dog.name"
           />
           <div class="grid-container__item--hover">
-            <div class="name-breeds">{{ bread.name }}</div>
+            <div class="name-breeds">{{ dog.name }}</div>
           </div>
         </div>
         <!-- <div class="grid-container__item">
@@ -189,6 +186,8 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 
+import { actionsTypes } from "@/store/modules/breeds";
+
 import Preloader from "@/components/Preloader.vue";
 import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
@@ -207,39 +206,39 @@ export default {
   data() {
     return {
       nameComponent: "breeds",
-      limit: 5,
+      limit: "all",
       name: "All Breeds",
     };
   },
   methods: {
     getBreeds() {
-      this.$store.dispatch("getBreeds", { limit: this.limit, name: this.name });
+      this.$store.dispatch(actionsTypes.getBreeds);
     },
-    getBreedsForName() {
-      this.$store.dispatch("getBreedsForName", { name: this.name });
+    getLimitBreeds() {
+      this.$store.dispatch(actionsTypes.getBreedsLimit, { limit: this.limit });
     },
-    getNameDog() {
-      this.$store.dispatch("getNameDog", { name: this.name });
+    getForNameBreeds() {
+      this.limit = "all";
+      this.$store.dispatch(actionsTypes.getForNameBreeds, { name: this.name });
     },
   },
   computed: {
     ...mapState({
-      breeds: (state) => state.breeds.isBreeds,
+      dogs: (state) => state.breeds.data,
+      nameDogs: (state) => state.breeds.breeds,
       loading: (state) => state.breeds.isLoading,
-      names: (state) => state.breeds.isNames,
     }),
-  },
-  watch: {
-    limit: function () {
-      this.getBreeds();
-    },
-    name: function () {
-      this.getNameDog();
-    },
   },
   created() {
     this.getBreeds();
-    this.$store.dispatch("getBreedsNames");
+  },
+  watch: {
+    limit: function () {
+      this.getLimitBreeds();
+    },
+    name: function () {
+      this.getForNameBreeds();
+    },
   },
   mounted() {},
 };
