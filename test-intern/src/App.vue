@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import HiPage from "@/views/HiPage.vue";
+
 
 export default {
   components: {
