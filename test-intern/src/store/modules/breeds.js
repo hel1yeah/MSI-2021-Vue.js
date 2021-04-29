@@ -93,19 +93,23 @@ const actions = {
         });
     });
   },
-  [actionsTypes.getForNameBreeds](context, { name }) {
-    context.commit(mutationsTypes.getBreedsStart);
+  [actionsTypes.getForNameBreeds]({ commit }, { name }) {
+    commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
       breedsAPI
         .getBreeds()
         .then((response) => {
-          context.commit(
-            mutationsTypes.getBreedsSuccess,
-            getForNameBreeds(response.data, name)
-          );
+          if (name === "All Breeds") {
+            commit(mutationsTypes.getBreedsSuccess, response.data);
+          } else {
+            commit(
+              mutationsTypes.getBreedsSuccess,
+              getForNameBreeds(response.data, name)
+            );
+          }
         })
         .catch((err) => {
-          context.commit(mutationsTypes.getBreedsFailure, err);
+          commit(mutationsTypes.getBreedsFailure, err);
         });
     });
   },
@@ -144,10 +148,17 @@ const actions = {
   [actionsTypes.onSearchBreeds]({ commit }, name) {
     commit(mutationsTypes.onSearchBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI.getSearchName(name).then((response) => {
-        commit(mutationsTypes.onSearchBreedsSuccess, response.data);
-        console.log(response.data);
-      });
+      breedsAPI
+        .getBreeds()
+        .then((response) => {
+          commit(
+            mutationsTypes.onSearchBreedsSuccess,
+            getForNameBreeds(response.data, name)
+          );
+        })
+        .catch((err) => {
+          commit(mutationsTypes.onSearchBreedsFailure, payload);
+        });
     });
   },
 };

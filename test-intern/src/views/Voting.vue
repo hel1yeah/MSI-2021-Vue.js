@@ -137,7 +137,7 @@ export default {
 // }
 
 .action-wrapper {
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -164,7 +164,7 @@ export default {
   border-radius: 20px;
   overflow: hidden;
   background-color: #fff;
-  border: 4px solid var(--while-color);
+  border: 4px solid var(--white-color);
 
   display: flex;
   align-items: center;
@@ -180,7 +180,7 @@ export default {
   width: 80px;
   height: 80px;
 
-  fill: var(--while-color);
+  fill: var(--white-color);
 
   &:not(:last-child) {
     margin: 0 4px 0 0;
@@ -222,7 +222,7 @@ export default {
   justify-content: space-between;
 }
 .action-user__time {
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   padding: 3px 10px;
   font-weight: 600;
   font-size: 16px;

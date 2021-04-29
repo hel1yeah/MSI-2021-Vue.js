@@ -24,7 +24,7 @@ export default {
   max-width: 146px;
   padding: 5px 30px;
   text-transform: uppercase;
-  color: var(--while-color);
+  color: var(--white-color);
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;

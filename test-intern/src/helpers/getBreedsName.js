@@ -10,7 +10,13 @@ export const dogNames = (dogs) => {
 export const getForNameBreeds = (data, name) => {
   let dog = [];
   data.forEach((e) => {
-    if (e.name === name) {
+    if (
+      e.name
+        .split(" ")
+        .join("")
+        .toLowerCase()
+        .includes(name.split(" ").join("").toLowerCase())
+    ) {
       dog.push(e);
     }
   });

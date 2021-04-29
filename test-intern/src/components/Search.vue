@@ -45,7 +45,7 @@ export default {
 .voting__search-wrapper {
   position: relative;
   width: 470px;
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   border-radius: 20px;
   padding: 15px 10px 15px 20px;
 }
@@ -74,7 +74,7 @@ export default {
   fill: var(--pink-color);
   &:hover {
     background-color: var(--pink-color);
-    fill: var(--while-color);
+    fill: var(--white-color);
   }
 }
 .voting__search--icon {

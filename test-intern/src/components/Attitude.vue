@@ -60,7 +60,7 @@ export default {};
 .attitude__item {
   width: 60px;
   height: 60px;
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   border-radius: 20px;
   cursor: pointer;
 
@@ -72,7 +72,7 @@ export default {};
   transition: 0.6s;
 
   &:hover {
-    fill: var(--while-color);
+    fill: var(--white-color);
     background-color: var(--pink-color);
   }
 }

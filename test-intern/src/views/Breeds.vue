@@ -77,91 +77,7 @@
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
         </div>
-        <!-- <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/2.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/3.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/4.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/5.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/6.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/8.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/9.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/10.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/11.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/4.jpg"
-            alt="1"
-          />
-        </div> -->
+        
       </div>
     </div>
   </section>
@@ -242,7 +158,7 @@ export default {
   width: 680px;
 }
 .breeds__content {
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -390,9 +306,9 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: var(--pink-color);
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   padding: 5px 5px;
-  min-width: 80%;
+  width: 180px;
   text-align: center;
   border-radius: 10px;
   margin: 0 auto 10px;
