@@ -13,7 +13,17 @@ const getBreedsLimit = (limit) => {
   });
 };
 
+const getSearchName = (name) => {
+  const query_params = {
+    q: name,
+  };
+  return axios.get("/breeds/search", {
+    params: query_params,
+  });
+};
+
 export default {
   getBreeds,
-  getBreedsLimit
+  getBreedsLimit,
+  getSearchName,
 };

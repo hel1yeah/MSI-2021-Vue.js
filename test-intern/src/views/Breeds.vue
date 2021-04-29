@@ -1,7 +1,7 @@
 <template>
   <section class="breeds">
     <div class="search-attitude-wrapper">
-      <Search @getBreeds="getBreeds" />
+      <Search @onSearchBreeds="onSearchBreeds" />
       <Attitude />
     </div>
     <div class="breeds__content">
@@ -62,17 +62,22 @@
       </div>
       <Preloader v-if="loading"></Preloader>
       <div class="grid-container">
-        <!-- <div class="grid-container__item" v-for="dog in dogs" :key="dog.id">
-          <img
+        <div
+          class="grid-container__item"
+          v-for="dog in dogs"
+          :key="dog.id"
+          :style="{ backgroundImage: `url(${dog.image.url})` }"
+        >
+          <!-- <img
             class="grid-container__item--img"
             :src="dog.image.url"
             :alt="dog.name"
-          />
+          /> -->
           <div class="grid-container__item--hover">
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
-        </div> -->
-        <div class="grid-container__item">
+        </div>
+        <!-- <div class="grid-container__item">
           <img
             class="grid-container__item--img"
             src="./../assets/images/dogs/2.jpg"
@@ -156,7 +161,7 @@
             src="./../assets/images/dogs/4.jpg"
             alt="1"
           />
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -201,8 +206,11 @@ export default {
       this.limit = "all";
       this.$store.dispatch(actionsTypes.getForNameBreeds, { name: this.name });
     },
+    onSearchBreeds(name) {
+      this.$store.dispatch(actionsTypes.onSearchBreeds, name);
+    },
     sort(e) {
-      e === 'asc' ? (this.currentSort = true) : (this.currentSort = false);
+      e === "asc" ? (this.currentSort = true) : (this.currentSort = false);
 
       this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
     },
@@ -316,30 +324,33 @@ export default {
   }
 }
 
-
-
 .grid-container {
+  display: grid;
   grid-template-columns: repeat(3, minmax(140px, 200px));
   grid-template-rows: repeat(9, minmax(140px, 200px));
   gap: 20px 20px;
 }
 .grid-container__item {
-  width: 200px;
-  // min-width: 140px;
-  // min-height: 140px;
-  height: 140px;
+  width: 100%;
+  height: 100%;
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 140px;
+  min-height: 140px;
 
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   transition: var(--speed);
-  &:nth-child(1) {
+  &:nth-child(2) {
     grid-area: 1 / 1 / span 2 / 1;
   }
   &:nth-child(5) {
     grid-area: 2 / 2 / span 2 / span 2;
   }
-  &:nth-child(8) {
+  &:nth-child(7) {
     grid-area: 4 / 3 / span 2 / 4;
   }
   &:nth-child(10) {
@@ -355,12 +366,12 @@ export default {
     top: 0;
   }
 }
-.grid-container__item--img {
-  width: 100%;
-  transform: scale(1.1);
+// .grid-container__item--img {
+//   width: 100%;
+//   transform: scale(1.1);
 
-  background-color: var(--fiolet-card-color);
-}
+//   background-color: var(--fiolet-card-color);
+// }
 .grid-container__item--hover {
   transition: var(--speed);
   position: absolute;
@@ -385,6 +396,7 @@ export default {
   text-align: center;
   border-radius: 10px;
   margin: 0 auto 10px;
+  cursor: pointer;
 }
 
 .long {

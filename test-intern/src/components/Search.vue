@@ -5,9 +5,9 @@
       type="text"
       class="voting__search--input"
       placeholder="Search for breeds by name"
-      @keyup.enter="getBreeds"
+      @keyup.enter="searchBreeds"
     />
-    <button class="voting__search--button" @click="getBreeds">
+    <button class="voting__search--button" @click="searchBreeds">
       <div class="voting__search--icon">
         <svg
           width="20"
@@ -33,8 +33,9 @@ export default {
     };
   },
   methods: {
-    getBreeds () {
-      this.$emit('getBreeds');
+    searchBreeds() {
+      this.$emit("onSearchBreeds", this.search );
+      this.search = null;
     },
   },
 };

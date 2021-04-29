@@ -16,6 +16,9 @@ export const mutationsTypes = {
   getBreedsFailure: "[Breeds] get Breeds Failure",
   sortStart: "[Breeds] Sort Start",
   sortFinish: "[Breeds] Sort Finish",
+  onSearchBreedsStart: "[Breeds] on Search Breeds Start",
+  onSearchBreedsSuccess: "[Breeds] on Search Breeds Success",
+  onSearchBreedsFailure: "[Breeds] on Search Breeds Failure",
 };
 
 export const actionsTypes = {
@@ -23,6 +26,7 @@ export const actionsTypes = {
   getBreedsLimit: "[Breeds] Get Breeds Limit",
   getForNameBreeds: "[Breeds] Get For Name Breeds",
   sortForName: "[Breeds] sort For Name",
+  onSearchBreeds: "[Breeds] on Search Breeds For Name",
 };
 
 const mutations = {
@@ -32,16 +36,28 @@ const mutations = {
   [mutationsTypes.getBreedsSuccess](state, payload) {
     (state.isLoading = false), (state.data = payload);
   },
+
   [mutationsTypes.getBreedsNameSuccess](state, payload) {
     state.breeds = payload;
   },
   [mutationsTypes.getBreedsFailure](state, payload) {
     (state.isLoading = false), (state.data = payload);
   },
+
   [mutationsTypes.sortStart](state) {
     state.isLoading = true;
   },
   [mutationsTypes.sortFinish](state, payload) {
+    (state.isLoading = false), (state.data = payload);
+  },
+
+  [mutationsTypes.onSearchBreedsStart](state) {
+    (state.isLoading = true), (state.data = null);
+  },
+  [mutationsTypes.onSearchBreedsSuccess](state, payload) {
+    (state.isLoading = false), (state.data = payload);
+  },
+  [mutationsTypes.onSearchBreedsFailure](state, payload) {
     (state.isLoading = false), (state.data = payload);
   },
 };
@@ -124,6 +140,15 @@ const actions = {
       });
     }
     context.commit(mutationsTypes.sortFinish, sortArr);
+  },
+  [actionsTypes.onSearchBreeds]({ commit }, name) {
+    commit(mutationsTypes.onSearchBreedsStart);
+    return new Promise((resolve) => {
+      breedsAPI.getSearchName(name).then((response) => {
+        commit(mutationsTypes.onSearchBreedsSuccess, response.data);
+        console.log(response.data);
+      });
+    });
   },
 };
 
