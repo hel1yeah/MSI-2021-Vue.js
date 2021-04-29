@@ -44,8 +44,8 @@ export default {
   transition: var(--speed);
   &:hover {
     background-color: var(--pink-color);
-    color: var(--while-color);
-    fill: var(--while-color);
+    color: var(--white-color);
+    fill: var(--white-color);
   }
 }
 .button-upload__img {

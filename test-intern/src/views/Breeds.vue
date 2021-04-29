@@ -1,11 +1,9 @@
 <template>
   <section class="breeds">
     <div class="search-attitude-wrapper">
-      <button @click="getBreeds">getBreeds</button>
-      <Search />
+      <Search @onSearchBreeds="onSearchBreeds" />
       <Attitude />
     </div>
-
     <div class="breeds__content">
       <div class="breeds-filter">
         <ButtonClose></ButtonClose>
@@ -14,17 +12,22 @@
           <option class="breeds-select__option" value="All Breeds">
             All Breeds
           </option>
-          <option v-for="name in names" :key="name" :value="name">
+          <option v-for="(name, index) in nameDogs" :key="index">
             {{ name }}
           </option>
         </select>
         <select class="breeds-select__limit" v-model="limit">
+          <option value="all">All</option>
           <option value="5">Limit: 5</option>
           <option value="10">Limit: 10</option>
           <option value="15">Limit: 15</option>
           <option value="20">Limit: 20</option>
         </select>
-        <button class="breeds-select__abc-up">
+        <button
+          class="breeds-select__abc-up"
+          @click="sort('asc')"
+          :class="{ 'breeds-select-active': currentSort }"
+        >
           <svg
             width="19"
             height="20"
@@ -38,7 +41,11 @@
             />
           </svg>
         </button>
-        <button class="breeds-select__abc-down">
+        <button
+          class="breeds-select__abc-down"
+          @click="sort('desc')"
+          :class="{ 'breeds-select-active': !currentSort }"
+        >
           <svg
             width="19"
             height="20"
@@ -57,131 +64,20 @@
       <div class="grid-container">
         <div
           class="grid-container__item"
-          v-for="bread in breeds"
-          :key="bread.id"
+          v-for="dog in dogs"
+          :key="dog.id"
+          :style="{ backgroundImage: `url(${dog.image.url})` }"
         >
-          <img
+          <!-- <img
             class="grid-container__item--img"
-            :src="bread.image.url"
-            :alt="bread.name"
-          />
+            :src="dog.image.url"
+            :alt="dog.name"
+          /> -->
           <div class="grid-container__item--hover">
-            <div class="name-breeds">{{ bread.name }}</div>
+            <div class="name-breeds">{{ dog.name }}</div>
           </div>
         </div>
-        <!-- <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/2.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/3.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/4.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/5.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/6.jpg"
-            alt="1"
-          />
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">Affenpinscher</div>
-          </div>
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/8.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/9.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/10.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/11.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/4.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/5.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/6.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/8.jpg"
-            alt="1"
-          />
-        </div>
-        <div class="grid-container__item">
-          <img
-            class="grid-container__item--img"
-            src="./../assets/images/dogs/9.jpg"
-            alt="1"
-          />
-        </div> -->
+        
       </div>
     </div>
   </section>
@@ -189,6 +85,8 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
+
+import { actionsTypes } from "@/store/modules/breeds";
 
 import Preloader from "@/components/Preloader.vue";
 import Search from "@/components/Search.vue";
@@ -208,30 +106,48 @@ export default {
   data() {
     return {
       nameComponent: "breeds",
-      limit: 5,
-      name: 'All Breeds',
+      limit: "all",
+      name: "All Breeds",
+      currentSort: true,
     };
   },
   methods: {
     getBreeds() {
-      console.log(this.limit);
+      this.$store.dispatch(actionsTypes.getBreeds);
     },
-    getBreedsForName() {
-      this.$store.dispatch("getBreedsForName", { name: this.name });
+    getLimitBreeds() {
+      this.$store.dispatch(actionsTypes.getBreedsLimit, { limit: this.limit });
+    },
+    getForNameBreeds() {
+      this.limit = "all";
+      this.$store.dispatch(actionsTypes.getForNameBreeds, { name: this.name });
+    },
+    onSearchBreeds(name) {
+      this.$store.dispatch(actionsTypes.onSearchBreeds, name);
+    },
+    sort(e) {
+      e === "asc" ? (this.currentSort = true) : (this.currentSort = false);
+
+      this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
     },
   },
   computed: {
     ...mapState({
-      breeds: (state) => state.breeds.isBreeds,
-      breedsName: (state) => state.breeds.isBreedsName,
+      dogs: (state) => state.breeds.data,
+      nameDogs: (state) => state.breeds.breeds,
       loading: (state) => state.breeds.isLoading,
-      names: (state) => state.breeds.isNames,
     }),
   },
-  watch: {},
   created() {
-    this.$store.dispatch("getBreeds", { limit: this.limit });
-    this.$store.dispatch("getBreedsNames");
+    this.getBreeds();
+  },
+  watch: {
+    limit: function () {
+      this.getLimitBreeds();
+    },
+    name: function () {
+      this.getForNameBreeds();
+    },
   },
   mounted() {},
 };
@@ -242,7 +158,7 @@ export default {
   width: 680px;
 }
 .breeds__content {
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -318,34 +234,39 @@ export default {
     border: 2px solid var(--hover-color);
     fill: var(--pink-color);
   }
-}
-.breeds-select__abc-up {
-}
-.breeds-select__abc-down {
+  &.breeds-select-active {
+    border: 2px solid var(--hover-color);
+    fill: var(--pink-color);
+  }
 }
 
 .grid-container {
+  display: grid;
   grid-template-columns: repeat(3, minmax(140px, 200px));
   grid-template-rows: repeat(9, minmax(140px, 200px));
   gap: 20px 20px;
 }
 .grid-container__item {
-  width: 200px;
-  // min-width: 140px;
-  // min-height: 140px;
-  height: 140px;
+  width: 100%;
+  height: 100%;
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 140px;
+  min-height: 140px;
 
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   transition: var(--speed);
-  &:nth-child(1) {
+  &:nth-child(2) {
     grid-area: 1 / 1 / span 2 / 1;
   }
   &:nth-child(5) {
     grid-area: 2 / 2 / span 2 / span 2;
   }
-  &:nth-child(8) {
+  &:nth-child(7) {
     grid-area: 4 / 3 / span 2 / 4;
   }
   &:nth-child(10) {
@@ -361,12 +282,12 @@ export default {
     top: 0;
   }
 }
-.grid-container__item--img {
-  width: 100%;
-  transform: scale(1.1);
+// .grid-container__item--img {
+//   width: 100%;
+//   transform: scale(1.1);
 
-  background-color: var(--fiolet-card-color);
-}
+//   background-color: var(--fiolet-card-color);
+// }
 .grid-container__item--hover {
   transition: var(--speed);
   position: absolute;
@@ -385,12 +306,13 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: var(--pink-color);
-  background-color: var(--while-color);
+  background-color: var(--white-color);
   padding: 5px 5px;
-  min-width: 80%;
+  width: 180px;
   text-align: center;
   border-radius: 10px;
   margin: 0 auto 10px;
+  cursor: pointer;
 }
 
 .long {

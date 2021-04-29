@@ -39,7 +39,7 @@ export default {
   fill: var(--pink-color);
   transition: 0.6s;
   &:hover {
-    fill: var(--while-color);
+    fill: var(--white-color);
     background-color: var(--pink-color);
   }
 }
