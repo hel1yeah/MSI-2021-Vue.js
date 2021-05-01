@@ -115,7 +115,7 @@ export default {
     color: var(--pink-color);
   }
   &:hover .header__card--bg {
-    border: 4px solid var(--while-color);
+    border: 4px solid var(--white-color);
   }
 }
 .header__card--bg {
@@ -168,7 +168,7 @@ export default {
 .header__card--title {
   text-transform: uppercase;
   color: var(--pink-color);
-  background: var(--while-color);
+  background: var(--white-color);
   border-radius: 10px;
   width: 100%;
   padding: 10px 0;
@@ -183,11 +183,11 @@ export default {
 }
 .router-link-exact-active > .header__card--title {
   background-color: var(--pink-color);
-  color: var(--while-color);
+  color: var(--white-color);
 }
 .router-link-exact-active > .header__card--title .header__card--bg {
   background-color: var(--pink-color);
-  color: var(--while-color);
+  color: var(--white-color);
 }
 // hover
 </style>
