@@ -3,10 +3,10 @@
     <div class="container">
       <div class="wrapper-content">
         <div class="interactive">
-          <HiPage />
+          <HiPage /> <!-- главное меню -->
         </div>
         <div class="pages">
-          <transition name='appearance' mode="out-in">
+          <transition name='appearance' mode="out-in"> <!-- преключение между страницамис помощью роута -->
             <router-view></router-view>
           </transition>
           
