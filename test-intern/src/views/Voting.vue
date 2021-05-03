@@ -73,32 +73,7 @@
           />
         </div>
       </div>
-      <div class="action-user">
-        <div class="action-user__time">22:30</div>
-        <div class="action-user__description">
-          Image ID: <span>fQSunHvl8</span> was added to Favourites
-        </div>
-        <div class="action-user__attitude">
-          <img
-            class="action-user__attitude"
-            src="./../assets/images/insignia/like.svg"
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="action-user">
-        <div class="action-user__time">22:30</div>
-        <div class="action-user__description">
-          Image ID: <span>fQSunHvl8</span> was added to Favourites
-        </div>
-        <div class="action-user__attitude">
-          <img
-            class="action-user__attitude"
-            src="./../assets/images/insignia/like.svg"
-            alt=""
-          />
-        </div>
-      </div>
+      <button @click="getImage">test gets images</button>
     </div>
   </section>
 </template>
@@ -108,6 +83,8 @@ import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
+
+import { actionsTypes } from '@/store/modules/voting';
 
 export default {
   name: "Voting",
@@ -122,6 +99,11 @@ export default {
       nameComponent: "Voting",
     };
   },
+  methods:{
+    getImage(){
+      this.$store.dispatch(actionsTypes.getImage)
+    }
+  }
 };
 </script>
 
