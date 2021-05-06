@@ -10,13 +10,22 @@
         <NamePage :nameComponent="nameComponent"></NamePage>
       </div>
       <div class="voting__content">
-        <img
+
+        <div
           class="voting__content-img"
-          src="./../assets/images/dog-test.jpg"
+          :style="{ backgroundImage: `url(${dog.url})` }"
+        ></div>
+        <!-- <img
+          class="voting__content-img"
+          :src="dog.url"
           alt="dog"
-        />
+        /> -->
         <div class="voting__content--attitude-wrapper">
-          <div class="voting__content--attitude photo__attitude--likes">
+          <div
+            class="voting__content--attitude photo__attitude--likes"
+            @click="voteLike"
+          >
+
             <svg
               width="30"
               height="30"
@@ -44,7 +53,11 @@
               />
             </svg>
           </div>
-          <div class="voting__content--attitude photo__attitude--dislikes">
+          <div
+            class="voting__content--attitude photo__attitude--dislikes"
+            @click="voteUnLike"
+          >
+
             <svg
               width="30"
               height="30"
@@ -60,31 +73,38 @@
           </div>
         </div>
       </div>
-      <div class="action-user">
-        <div class="action-user__time">22:30</div>
+      <div class="action-user" v-for="action in actions" :key="action.time">
+        <div class="action-user__time">{{ action.time }}</div>
         <div class="action-user__description">
-          Image ID: <span>fQSunHvl8</span> was added to Favourites
+          Image ID: <span>{{ action.id }}</span> was added to
+          {{ action.action }}
+
         </div>
         <div class="action-user__attitude">
           <img
             class="action-user__attitude"
-            src="./../assets/images/insignia/like.svg"
-            alt=""
+
+            :src="getImg(action.action)"
+            alt="dog"
           />
         </div>
       </div>
-      <button @click="getImage">test gets images</button>
+
     </div>
   </section>
 </template>
 
 <script>
+
+import { mapState } from "vuex";
+
+import { actionsTypes } from "@/store/modules/voting";
+
 import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
 
-import { actionsTypes } from '@/store/modules/voting';
 
 export default {
   name: "Voting",
@@ -97,13 +117,64 @@ export default {
   data() {
     return {
       nameComponent: "Voting",
+      actions: [
+        {
+          time: "13:26",
+          id: "dfhgfh3",
+          action: "Likes",
+        },
+      ],
+      likes: require("../assets/images/insignia/like.svg"),
+      unLikes: require("../assets/images/insignia/like.svg"),
+      favorite: require("../assets/images/insignia/like.svg"),
     };
   },
-  methods:{
-    getImage(){
-      this.$store.dispatch(actionsTypes.getImage)
-    }
-  }
+  methods: {
+    getImage() {
+      this.$store.dispatch(actionsTypes.getImage);
+    },
+    voteLike() {
+      this.actions.push(this.creatActionItem("Likes"));
+      this.$store.dispatch(actionsTypes.voteLike);
+      this.$store.dispatch(actionsTypes.getImage);
+    },
+    voteUnLike() {
+      this.actions.push(this.creatActionItem("Unlike"));
+      this.$store.dispatch(actionsTypes.voteUnLike);
+      this.$store.dispatch(actionsTypes.getImage);
+    },
+    getImg(action) {
+      let act = action.toLowerCase();
+      if (act === "like") {
+        return this.likes;
+      } else if (act === "unlike") {
+        return this.likes;
+      } else {
+        return this.favorite;
+      }
+    },
+    creatActionItem(act) {
+      let id = this.dog.id;
+      let actionItem = { time: this.getTime(), id, action: act };
+      return actionItem;
+    },
+    getTime() {
+      let data = new Date();
+      let hours = data.getHours();
+      let minutes = data.getMinutes();
+      let time = `${hours}:${minutes}`;
+      return time;
+    },
+  },
+  computed: {
+    ...mapState({
+      dog: (state) => state.voting.data,
+    }),
+  },
+  created() {
+    this.getImage();
+  },
+
 };
 </script>
 
@@ -135,7 +206,14 @@ export default {
 .voting__content {
 }
 .voting__content-img {
+
+  width: 100%;
+  height: 360px;
   border-radius: 20px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
   z-index: 1;
 }
 .voting__content--attitude-wrapper {
