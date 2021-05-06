@@ -31,7 +31,8 @@ export const actionsTypes = {
 
 const mutations = {
   [mutationsTypes.getBreedsStart](state) {
-    (state.isLoading = true), (state.data = null);
+    state.isLoading = true;
+    state.data = null;
   },
   [mutationsTypes.getBreedsSuccess](state, payload) {
     (state.isLoading = false), (state.data = payload);
