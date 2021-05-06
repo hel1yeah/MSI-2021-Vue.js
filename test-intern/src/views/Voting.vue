@@ -118,11 +118,11 @@ export default {
     return {
       nameComponent: "Voting",
       actions: [
-        {
-          time: "13:26",
-          id: "dfhgfh3",
-          action: "Likes",
-        },
+        // {
+        //   time: "13:26",
+        //   id: "dfhgfh3",
+        //   action: "Likes",
+        // },
       ],
       likes: require("../assets/images/insignia/like.svg"),
       unLikes: require("../assets/images/insignia/like.svg"),
