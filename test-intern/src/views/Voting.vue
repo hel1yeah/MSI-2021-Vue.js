@@ -10,13 +10,20 @@
         <NamePage :nameComponent="nameComponent"></NamePage>
       </div>
       <div class="voting__content">
-        <img
+        <div
           class="voting__content-img"
-          src="./../assets/images/dog-test.jpg"
+          :style="{ backgroundImage: `url(${dog.url})` }"
+        ></div>
+        <!-- <img
+          class="voting__content-img"
+          :src="dog.url"
           alt="dog"
-        />
+        /> -->
         <div class="voting__content--attitude-wrapper">
-          <div class="voting__content--attitude photo__attitude--likes">
+          <div
+            class="voting__content--attitude photo__attitude--likes"
+            @click="voteLike"
+          >
             <svg
               width="30"
               height="30"
@@ -63,7 +70,7 @@
       <div class="action-user">
         <div class="action-user__time">22:30</div>
         <div class="action-user__description">
-          Image ID: <span>fQSunHvl8</span> was added to Favourites
+          Image ID: <span>{{ dog.id }}</span> was added to Favourites
         </div>
         <div class="action-user__attitude">
           <img
@@ -73,18 +80,21 @@
           />
         </div>
       </div>
-      <button @click="getImage">test gets images</button>
+      {{dog.breeds}}
+
     </div>
   </section>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
+import { actionsTypes } from "@/store/modules/voting";
+
 import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
-
-import { actionsTypes } from '@/store/modules/voting';
 
 export default {
   name: "Voting",
@@ -99,11 +109,22 @@ export default {
       nameComponent: "Voting",
     };
   },
-  methods:{
-    getImage(){
-      this.$store.dispatch(actionsTypes.getImage)
-    }
-  }
+  methods: {
+    getImage() {
+      this.$store.dispatch(actionsTypes.getImage);
+    },
+    voteLike() {
+      this.$store.dispatch(actionsTypes.voteLike);
+    },
+  },
+  computed: {
+    ...mapState({
+      dog: (state) => state.voting.data,
+    }),
+  },
+  created() {
+    this.getImage();
+  },
 };
 </script>
 
@@ -135,7 +156,12 @@ export default {
 .voting__content {
 }
 .voting__content-img {
+  width: 100%;
+  height: 360px;
   border-radius: 20px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   z-index: 1;
 }
 .voting__content--attitude-wrapper {

@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 import { actionsTypes } from "@/store/modules/breeds";
 
