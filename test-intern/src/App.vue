@@ -6,10 +6,9 @@
           <HiPage />
         </div>
         <div class="pages">
-          <transition name='appearance' mode="out-in">
+          <transition name="appearance" mode="out-in">
             <router-view></router-view>
           </transition>
-          
         </div>
       </div>
     </div>
@@ -17,20 +16,16 @@
 </template>
 
 <script>
-
+import HiPage from "@/views/HiPage.vue";
 
 export default {
   components: {
     HiPage,
-
   },
   data() {
-    return {
-    };
+    return {};
   },
-  methods:{
-
-  }
+  methods: {},
 };
 </script>
 
@@ -43,16 +38,14 @@ export default {
 }
 .appearance-enter-active {
   animation-delay: 4s;
-  transition: all .3s ease;
-  
+  transition: all 0.3s ease;
 }
 .appearance-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .appearance-enter, .appearance-leave-to
 /* .slide-fade-leave-active до версии 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
 }
-
 </style>
