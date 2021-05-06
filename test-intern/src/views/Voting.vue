@@ -10,6 +10,7 @@
         <NamePage :nameComponent="nameComponent"></NamePage>
       </div>
       <div class="voting__content">
+
         <div
           class="voting__content-img"
           :style="{ backgroundImage: `url(${dog.url})` }"
@@ -24,6 +25,7 @@
             class="voting__content--attitude photo__attitude--likes"
             @click="voteLike"
           >
+
             <svg
               width="30"
               height="30"
@@ -55,6 +57,7 @@
             class="voting__content--attitude photo__attitude--dislikes"
             @click="voteUnLike"
           >
+
             <svg
               width="30"
               height="30"
@@ -75,20 +78,24 @@
         <div class="action-user__description">
           Image ID: <span>{{ action.id }}</span> was added to
           {{ action.action }}
+
         </div>
         <div class="action-user__attitude">
           <img
             class="action-user__attitude"
+
             :src="getImg(action.action)"
             alt="dog"
           />
         </div>
       </div>
+
     </div>
   </section>
 </template>
 
 <script>
+
 import { mapState } from "vuex";
 
 import { actionsTypes } from "@/store/modules/voting";
@@ -97,6 +104,7 @@ import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
+
 
 export default {
   name: "Voting",
@@ -166,6 +174,7 @@ export default {
   created() {
     this.getImage();
   },
+
 };
 </script>
 
@@ -197,12 +206,14 @@ export default {
 .voting__content {
 }
 .voting__content-img {
+
   width: 100%;
   height: 360px;
   border-radius: 20px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+
   z-index: 1;
 }
 .voting__content--attitude-wrapper {

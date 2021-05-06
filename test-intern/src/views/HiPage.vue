@@ -1,6 +1,9 @@
 <template>
   <section class="header">
-    <img class="header__logo" src="./../assets/Logo.svg" alt="PetsPaw" />
+    <router-link :to="{ name: 'home' }">
+      <img class="header__logo" src="./../assets/Logo.svg" alt="PetsPaw" />
+    </router-link>
+
     <div class="header__info">
       <h1 class="header__info--title">Hi intern!</h1>
       <p class="header__info--descr">Welcome to MSI 2021 Front-end test</p>
@@ -12,7 +15,7 @@
         <div class="header__card">
           <div
             class="header__card--bg fiolet"
-            :class="{ active: isActive.voting }"
+            :class="{ active: this.$route.path == '/voting' }"
           >
             <img
               class="header__card--img"
@@ -20,18 +23,14 @@
               alt="vote table"
             />
           </div>
-          <button
-            @click="activePage"
-            class="header__card--title voting"
-            :class="{ 'voting-active': isActive.voting }"
-          >
-            voting
-          </button>
+          <router-link :to="{ name: 'voting' }">
+            <button class="header__card--title">voting</button>
+          </router-link>
         </div>
         <div class="header__card">
           <div
             class="header__card--bg grean"
-            :class="{ active: isActive.breeds }"
+            :class="{ active: this.$route.path == '/breeds' }"
           >
             <img
               class="header__card--img pet-breeds"
@@ -39,18 +38,14 @@
               alt="vote table"
             />
           </div>
-          <button
-            class="header__card--title breeds"
-            :class="{ 'breeds-active': isActive.breeds }"
-            @click="activePage"
-          >
-            breeds
-          </button>
+          <router-link :to="{ name: 'breeds' }">
+            <button class="header__card--title">breeds</button>
+          </router-link>
         </div>
-        <div class="header__card gallery" @click="activePage">
+        <div class="header__card">
           <div
             class="header__card--bg orange"
-            :class="{ active: isActive.gallery }"
+            :class="{ active: this.$route.path == '/gallery' }"
           >
             <img
               class="header__card--img images-search"
@@ -58,12 +53,9 @@
               alt="vote table"
             />
           </div>
-          <button
-            class="header__card--title gallery"
-            :class="{ 'gallery-active': isActive.gallery }"
-          >
-            gallery
-          </button>
+          <router-link :to="{ name: 'gallery' }">
+            <button class="header__card--title">gallery</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -75,31 +67,8 @@ export default {
   name: "HiPage",
   data() {
     return {
-      isActive: {
-        headerRight: true,
-        voting: false,
-        breeds: false,
-        gallery: false,
-      },
+      routeName: null,
     };
-  },
-  methods: {
-    activePage(e) {
-      if (e.target.classList.contains("voting")) {
-        (this.isActive.headerRight = false), (this.isActive.voting = true);
-        this.isActive.breeds = false;
-        this.isActive.gallery = false;
-      } else if (e.target.classList.contains("breeds")) {
-        (this.isActive.headerRight = false), (this.isActive.voting = false);
-        this.isActive.breeds = true;
-        this.isActive.gallery = false;
-      } else if (e.target.classList.contains("gallery")) {
-        (this.isActive.headerRight = false), (this.isActive.voting = false);
-        this.isActive.breeds = false;
-        this.isActive.gallery = true;
-      }
-      this.$emit("isActive", this.isActive);
-    },
   },
 };
 </script>
@@ -146,7 +115,7 @@ export default {
     color: var(--pink-color);
   }
   &:hover .header__card--bg {
-    border: 4px solid var(--while-color);
+    border: 4px solid var(--white-color);
   }
 }
 .header__card--bg {
@@ -199,7 +168,7 @@ export default {
 .header__card--title {
   text-transform: uppercase;
   color: var(--pink-color);
-  background: var(--while-color);
+  background: var(--white-color);
   border-radius: 10px;
   width: 100%;
   padding: 10px 0;
@@ -212,11 +181,13 @@ export default {
     outline: transparent;
   }
 }
-.gallery-active,
-.voting-active,
-.breeds-active {
+.router-link-exact-active > .header__card--title {
   background-color: var(--pink-color);
-  color: var(--while-color);
+  color: var(--white-color);
+}
+.router-link-exact-active > .header__card--title .header__card--bg {
+  background-color: var(--pink-color);
+  color: var(--white-color);
 }
 // hover
 </style>

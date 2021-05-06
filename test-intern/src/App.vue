@@ -3,13 +3,13 @@
     <div class="container">
       <div class="wrapper-content">
         <div class="interactive">
-          <HiPage @isActive='isActiveAdd'/>
+          <HiPage /> <!-- главное меню -->
         </div>
         <div class="pages">
-          <HeaderRight v-show="isActivePage.headerRight"></HeaderRight>
-          <Voting v-show="isActivePage.voting"></Voting>
-          <Breeds v-show="isActivePage.breeds"></Breeds>
-          <Gallery v-show="isActivePage.gallery"></Gallery>
+          <transition name='appearance' mode="out-in"> <!-- преключение между страницамис помощью роута -->
+
+            <router-view></router-view>
+          </transition>
         </div>
       </div>
     </div>
@@ -17,49 +17,36 @@
 </template>
 
 <script>
-import HiPage from "@/components/HiPage.vue";
-import HeaderRight from "@/components/HeaderRight.vue";
-import Voting from "@/components/Voting.vue";
-import Breeds from "@/components/Breeds.vue";
-import Gallery from "@/components/Gallery.vue";
+import HiPage from '@/views/HiPage.vue'
+
 export default {
   components: {
     HiPage,
-    HeaderRight,
-    Voting,
-    Breeds,
-    Gallery,
   },
   data() {
-    return {
-      isActivePage: {
-        headerRight: true,
-        voting: false,
-        breeds: false,
-        gallery: false,
-      },
-    };
+    return {};
   },
-  methods:{
-    isActiveAdd(isActive){
-      this.isActivePage = isActive;
-    }
-  }
+  methods: {},
 };
 </script>
 
 <style lang="scss">
 .wrapper-content {
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 }
-// .interactive {
-// }
-// .pages {
-//   width: 640px;
-//   height: 840px;
-//   background-color: var(--bgc-title-color);
-//   border-radius: 20px;
-// }
+.appearance-enter-active {
+  animation-delay: 4s;
+  transition: all 0.3s ease;
+}
+.appearance-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.appearance-enter, .appearance-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>

@@ -10,18 +10,22 @@ export const mutationsTypes = {
   getImageStart: "[Voting] get Image Start",
   getImageSuccess: "[Voting] get Image Success",
   getImageFailure: "[Voting] get Image Start",
+
   voteLikeStart: "[Voting] vote Like Start",
   voteUnLikeStart: "[Voting] vote UnLike Start",
+
 };
 
 export const actionsTypes = {
   getImage: "[Voting] get Image",
+
   voteLike: "[Voting] vote Like",
   voteUnLike: "[Voting] vote Un Like",
 };
 
 const mutations = {
   // getImage
+
   [mutationsTypes.getImageStart](state) {
     state.data = null;
     state.isLoading = true;
@@ -37,10 +41,12 @@ const mutations = {
     state.isLoading = false;
     state.error = payload;
   },
+
   // voteLike
   [mutationsTypes.voteLikeStart](state) {},
   //voteUnLike
   [mutationsTypes.voteUnLikeStart](state) {},
+
 };
 
 const actions = {
@@ -50,6 +56,7 @@ const actions = {
       votingAPI
         .getImage()
         .then((response) => {
+
           commit(mutationsTypes.getImageSuccess, response.data[0]);
         })
         .catch((err) => {
@@ -57,6 +64,7 @@ const actions = {
         });
     });
   },
+
   [actionsTypes.voteLike]({ commit, state }) {
     return new Promise((resolve) => {
       votingAPI
@@ -81,6 +89,7 @@ const actions = {
         });
     });
   },
+
 };
 
 export default {

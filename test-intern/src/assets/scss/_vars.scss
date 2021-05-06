@@ -1,12 +1,16 @@
 :root {
   --main-color: #f1f0f0;
-  --pink-color: #ff868e;
-  --hover-color: #FBE0DC;
-  --while-color: #ffffff;
-  --black-color: #1D1D1D;
-  --gray-color: #8C8C8C;
-  --bgc-title-color: #FBE0DC;
+  --pink-color: rgba(255, 134, 142, .6);
+  --hover-color: #fbe0dc;
+  --white-color: #ffffff;
+  --black-color: #1d1d1d;
+  --gray-color: #8c8c8c;
+  --options-color: #f8f8f7;
+  --bgc-title-color: #fbe0dc;
   --fiolet-card-color: rgba(180, 183, 255, 1);
   --grean-card-color: rgba(151, 234, 185,1);
   --orange-card-color: rgb(248, 223, 177); 
+
+  
+  --speed: .6s;
 }
