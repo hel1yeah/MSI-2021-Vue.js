@@ -23,7 +23,7 @@
               alt="vote table"
             />
           </div>
-          <router-link :to="{ name: 'voting' }">
+          <router-link :to="{ name: 'dogVote' }">
             <button class="header__card--title">voting</button>
           </router-link>
         </div>
@@ -120,7 +120,6 @@ export default {
 }
 .header__card--bg {
   display: block;
-
   box-sizing: border-box;
   border-radius: 20px;
   height: 198px;

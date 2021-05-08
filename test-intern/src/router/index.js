@@ -6,6 +6,7 @@ import PageVoting from "@/views/PageVoting.vue";
 import PageBreeds from "@/views/PageBreeds.vue";
 import PageGallery from "@/views/PageGallery.vue";
 
+import DogVote from "@/components/voting/DogVote.vue";
 import DogLike from "@/components/voting/DogLike.vue";
 import DogDislike from "@/components/voting/DogDislike.vue";
 import DogFavourite from "@/components/voting/DogFavourite.vue";
@@ -25,8 +26,8 @@ const routes = [
     children: [
       {
         path: "vote",
-        name: "dogLike",
-        component: DogLike,
+        name: "dogVote",
+        component: DogVote,
       },
       {
         path: "like",
