@@ -32,11 +32,19 @@ const voteFavouriteImage = (id) => {
   };
   return axios.post("/favourites", post_body);
 };
+const getVotes = () => {
+  let query_params = {
+    order: "DESC",
+    limit: 5,
+    sub_id: "test-user-23",
+  };
+  return axios.get("/votes", { params: query_params });
+};
 
 export default {
   getImage,
+  getVotes,
   voteLike,
   voteDislike,
-  voteFavouriteImage
+  voteFavouriteImage,
 };
-

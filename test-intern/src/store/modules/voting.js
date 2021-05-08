@@ -4,6 +4,10 @@ const state = {
   data: null,
   isLoading: false,
   error: null,
+  isVotes: null,
+  isVotesLike: null,
+  isVodesDislike: null,
+  isVotesFavorite: null,
 };
 
 export const mutationsTypes = {
@@ -13,10 +17,14 @@ export const mutationsTypes = {
 
   voteLikeStart: "[Voting] vote Like Start",
   voteDislikeStart: "[Voting] vote UnLike Start",
+  voteFavoriteStart: "[Voting] vote UnLike Start",
+
+  getVotesStart: "[Voting] get Votes All",
 };
 
 export const actionsTypes = {
   getImage: "[Voting] get Image",
+  getVotes: "[Voting] get Votes",
 
   voteLike: "[Voting] vote Like",
   voteDislike: "[Voting] vote Dislike",
@@ -48,6 +56,21 @@ const mutations = {
   [mutationsTypes.voteDislikeStart](state) {},
   //voteFavouriteImage
   [mutationsTypes.voteFavouriteImageStart](state) {},
+  //voteFavouriteImage
+  [mutationsTypes.getVotesStart](state) {
+    state.isVotes = null;
+    state.isLoading = true;
+    state.error = null;
+  },
+  [mutationsTypes.getVotesSuccess](state, payload) {
+    state.isVotes = payload;
+    state.isLoading = false;
+  },
+  [mutationsTypes.getVotesFailure](state, payload) {
+    state.isVotes = null;
+    state.isLoading = false;
+    state.error = payload;
+  },
 };
 
 const actions = {
@@ -98,6 +121,19 @@ const actions = {
         })
         .catch((err) => {
           console.log(err);
+        });
+    });
+  },
+  [actionsTypes.getVotes]({ commit }) {
+    return new Promise((resolve) => {
+      commit(mutationsTypes.getVotesStart);
+      votingAPI
+        .getVotes()
+        .then((response) => {
+          commit(mutationsTypes.getVotesSuccess, response.data);
+        })
+        .catch((err) => {
+          commit(mutationsTypes.getImageFailure, err);
         });
     });
   },
