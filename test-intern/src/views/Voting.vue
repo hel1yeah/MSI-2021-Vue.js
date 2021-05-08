@@ -10,7 +10,6 @@
         <NamePage :nameComponent="nameComponent"></NamePage>
       </div>
       <div class="voting__content">
-
         <div
           class="voting__content-img"
           :style="{ backgroundImage: `url(${dog.url})` }"
@@ -25,7 +24,6 @@
             class="voting__content--attitude photo__attitude--likes"
             @click="voteLike"
           >
-
             <svg
               width="30"
               height="30"
@@ -55,9 +53,8 @@
           </div>
           <div
             class="voting__content--attitude photo__attitude--dislikes"
-            @click="voteUnLike"
+            @click="voteDislike"
           >
-
             <svg
               width="30"
               height="30"
@@ -73,29 +70,25 @@
           </div>
         </div>
       </div>
-      <div class="action-user" v-for="action in actions" :key="action.time">
+      <div class="action-user" v-for="action in actions" :key="action.id">
         <div class="action-user__time">{{ action.time }}</div>
         <div class="action-user__description">
           Image ID: <span>{{ action.id }}</span> was added to
           {{ action.action }}
-
         </div>
         <div class="action-user__attitude">
           <img
             class="action-user__attitude"
-
-            :src="getImg(action.action)"
+            :src="action.actionImg"
             alt="dog"
           />
         </div>
       </div>
-
     </div>
   </section>
 </template>
 
 <script>
-
 import { mapState } from "vuex";
 
 import { actionsTypes } from "@/store/modules/voting";
@@ -104,7 +97,6 @@ import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
-
 
 export default {
   name: "Voting",
@@ -118,15 +110,16 @@ export default {
     return {
       nameComponent: "Voting",
       actions: [
-        // {
-        //   time: "13:26",
-        //   id: "dfhgfh3",
-        //   action: "Likes",
-        // },
+        {
+          time: "13:26",
+          id: "dfhgfh3",
+          action: "Likes",
+          actionImg: require("../assets/images/insignia/like.svg"),
+        },
       ],
       likes: require("../assets/images/insignia/like.svg"),
-      unLikes: require("../assets/images/insignia/like.svg"),
-      favorite: require("../assets/images/insignia/like.svg"),
+      dislikes: require("../assets/images/insignia/dislikes.svg"),
+      favorite: require("../assets/images/insignia/favourites.svg"),
     };
   },
   methods: {
@@ -134,28 +127,34 @@ export default {
       this.$store.dispatch(actionsTypes.getImage);
     },
     voteLike() {
-      this.actions.push(this.creatActionItem("Likes"));
+      this.actions.push(this.creatActionItem("like"));
       this.$store.dispatch(actionsTypes.voteLike);
       this.$store.dispatch(actionsTypes.getImage);
     },
-    voteUnLike() {
-      this.actions.push(this.creatActionItem("Unlike"));
-      this.$store.dispatch(actionsTypes.voteUnLike);
+    voteDislike() {
+      this.actions.push(this.creatActionItem("dislikes"));
+      this.$store.dispatch(actionsTypes.voteDislike);
       this.$store.dispatch(actionsTypes.getImage);
     },
-    getImg(action) {
+    getActionImg(action) {
       let act = action.toLowerCase();
+      console.log(act);
       if (act === "like") {
         return this.likes;
-      } else if (act === "unlike") {
-        return this.likes;
+      } else if (act === "dislikes") {
+        return this.dislikes;
       } else {
         return this.favorite;
       }
     },
     creatActionItem(act) {
       let id = this.dog.id;
-      let actionItem = { time: this.getTime(), id, action: act };
+      let actionItem = {
+        time: this.getTime(),
+        id,
+        action: act,
+        actionImg: this.getActionImg(act),
+      };
       return actionItem;
     },
     getTime() {
@@ -174,7 +173,6 @@ export default {
   created() {
     this.getImage();
   },
-
 };
 </script>
 
@@ -206,7 +204,6 @@ export default {
 .voting__content {
 }
 .voting__content-img {
-
   width: 100%;
   height: 360px;
   border-radius: 20px;
