@@ -16,7 +16,7 @@ const voteLike = (id) => {
   };
   return axios.post("/votes", body);
 };
-const voteUnLike = (id) => {
+const voteDislike = (id) => {
   let body = {
     image_id: id,
     value: 0,
@@ -28,5 +28,6 @@ const voteUnLike = (id) => {
 export default {
   getImage,
   voteLike,
-  voteUnLike,
+  voteDislike
 };
+

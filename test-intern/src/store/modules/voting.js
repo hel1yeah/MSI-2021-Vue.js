@@ -12,7 +12,7 @@ export const mutationsTypes = {
   getImageFailure: "[Voting] get Image Start",
 
   voteLikeStart: "[Voting] vote Like Start",
-  voteUnLikeStart: "[Voting] vote UnLike Start",
+  voteDislikeStart: "[Voting] vote UnLike Start",
 
 };
 
@@ -20,7 +20,7 @@ export const actionsTypes = {
   getImage: "[Voting] get Image",
 
   voteLike: "[Voting] vote Like",
-  voteUnLike: "[Voting] vote Un Like",
+  voteDislike: "[Voting] vote Un Like",
 };
 
 const mutations = {
@@ -44,8 +44,8 @@ const mutations = {
 
   // voteLike
   [mutationsTypes.voteLikeStart](state) {},
-  //voteUnLike
-  [mutationsTypes.voteUnLikeStart](state) {},
+  //voteDislike
+  [mutationsTypes.voteDislikeStart](state) {},
 
 };
 
@@ -77,10 +77,10 @@ const actions = {
         });
     });
   },
-  [actionsTypes.voteUnLike]({ commit, state }) {
+  [actionsTypes.voteDislike]({ commit, state }) {
     return new Promise((resolve) => {
       votingAPI
-        .voteUnLike(state.data.id)
+        .voteDislike(state.data.id)
         .then((response) => {
           console.log(response);
         })
