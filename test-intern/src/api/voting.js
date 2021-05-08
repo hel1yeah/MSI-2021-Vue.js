@@ -1,7 +1,6 @@
 import axios from "@/api/axios";
 
 const getImage = () => {
-
   const query_params = {
     limit: 1,
     size: "full",
@@ -24,7 +23,6 @@ const voteDislike = (id) => {
     sub_id: "test-user-23",
   };
   return axios.post("/votes", body);
-
 };
 
 export default {
@@ -32,7 +30,4 @@ export default {
   voteLike,
   voteDislike
 };
-
-
-
 
