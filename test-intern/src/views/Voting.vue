@@ -37,7 +37,10 @@
               />
             </svg>
           </div>
-          <div class="voting__content--attitude photo__attitude--favourites">
+          <div
+            class="voting__content--attitude photo__attitude--favourites"
+            @click="voteFavouriteImage"
+          >
             <svg
               width="30"
               height="26"
@@ -134,6 +137,11 @@ export default {
     voteDislike() {
       this.actions.push(this.creatActionItem("dislikes"));
       this.$store.dispatch(actionsTypes.voteDislike);
+      this.$store.dispatch(actionsTypes.getImage);
+    },
+    voteFavouriteImage() {
+      this.actions.push(this.creatActionItem("favourite"));
+      this.$store.dispatch(actionsTypes.voteFavouriteImage);
       this.$store.dispatch(actionsTypes.getImage);
     },
     getActionImg(action) {
