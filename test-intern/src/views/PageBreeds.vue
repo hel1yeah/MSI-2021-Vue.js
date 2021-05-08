@@ -94,7 +94,7 @@ import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
 
 export default {
-  name: "Breeds",
+  name: "PageBreeds",
   components: {
     Preloader,
     Search,

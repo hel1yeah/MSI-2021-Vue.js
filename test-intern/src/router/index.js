@@ -2,9 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import HeaderRight from "@/views/HeaderRight.vue";
-import Voting from "@/views/Voting.vue";
-import Breeds from "@/views/Breeds.vue";
-import Gallery from "@/views/Gallery.vue";
+import PageVoting from "@/views/PageVoting.vue";
+import PageBreeds from "@/views/PageBreeds.vue";
+import PageGallery from "@/views/PageGallery.vue";
 
 import DogLike from "@/components/voting/DogLike.vue";
 import DogDislike from "@/components/voting/DogDislike.vue";
@@ -21,8 +21,13 @@ const routes = [
   {
     path: "/voting/",
     name: "voting",
-    component: Voting,
+    component: PageVoting,
     children: [
+      {
+        path: "vote",
+        name: "dogLike",
+        component: DogLike,
+      },
       {
         path: "like",
         name: "dogLike",
@@ -43,12 +48,12 @@ const routes = [
   {
     path: "/breeds",
     name: "breeds",
-    component: Breeds,
+    component: PageBreeds,
   },
   {
     path: "/gallery",
     name: "gallery",
-    component: Gallery,
+    component: PageGallery,
   },
 ];
 

@@ -101,7 +101,7 @@ import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
 
 export default {
-  name: "Voting",
+  name: "PageVoting",
   components: {
     Attitude,
     ButtonClose,
