@@ -1,10 +1,15 @@
 <template>
   <section class="voting">
     <div class="search-attitude-wrapper">
-      <Search></Search>
+      <router-link to="/voting" class="voting__home">voting</router-link>
       <Attitude></Attitude>
     </div>
     <div class="action-wrapper">
+      <transition name="appearance" mode="out-in">
+        <!-- преключение между страницамис помощью роута -->
+
+        <router-view></router-view>
+      </transition>
       <div class="voting-top">
         <ButtonClose></ButtonClose>
         <NamePage :nameComponent="nameComponent"></NamePage>
@@ -14,11 +19,6 @@
           class="voting__content-img"
           :style="{ backgroundImage: `url(${dog.url})` }"
         ></div>
-        <!-- <img
-          class="voting__content-img"
-          :src="dog.url"
-          alt="dog"
-        /> -->
         <div class="voting__content--attitude-wrapper">
           <div
             class="voting__content--attitude photo__attitude--likes"
@@ -96,7 +96,6 @@ import { mapState } from "vuex";
 
 import { actionsTypes } from "@/store/modules/voting";
 
-import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
@@ -104,7 +103,6 @@ import NamePage from "@/components/NamePage.vue";
 export default {
   name: "Voting",
   components: {
-    Search,
     Attitude,
     ButtonClose,
     NamePage,
@@ -112,14 +110,7 @@ export default {
   data() {
     return {
       nameComponent: "Voting",
-      actions: [
-        {
-          time: "13:26",
-          id: "dfhgfh3",
-          action: "Likes",
-          actionImg: require("../assets/images/insignia/like.svg"),
-        },
-      ],
+      actions: [],
       likes: require("../assets/images/insignia/like.svg"),
       dislikes: require("../assets/images/insignia/dislikes.svg"),
       favorite: require("../assets/images/insignia/favourites.svg"),
@@ -143,6 +134,9 @@ export default {
       this.actions.push(this.creatActionItem("favourite"));
       this.$store.dispatch(actionsTypes.voteFavouriteImage);
       this.$store.dispatch(actionsTypes.getImage);
+    },
+    onSearchBreeds(name) {
+      this.$store.dispatch(actionsTypes.onSearchBreeds, name);
     },
     getActionImg(action) {
       let act = action.toLowerCase();
@@ -194,7 +188,21 @@ export default {
 //   justify-content: space-between;
 //   margin: 0 0 10px;
 // }
-
+.voting__home {
+  text-align: center;
+  border-radius: 10px;
+  background-color: var(--pink-color);
+  max-width: 146px;
+  padding: 5px 30px;
+  text-transform: uppercase;
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-decoration: none;
+}
 .action-wrapper {
   background-color: var(--white-color);
   padding: 20px;

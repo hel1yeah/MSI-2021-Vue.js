@@ -77,7 +77,6 @@
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
         </div>
-        
       </div>
     </div>
   </section>
@@ -127,7 +126,6 @@ export default {
     },
     sort(e) {
       e === "asc" ? (this.currentSort = true) : (this.currentSort = false);
-
       this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
     },
   },
