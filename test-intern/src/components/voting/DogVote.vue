@@ -123,7 +123,6 @@ export default {
     },
     getActionImg(action) {
       let act = action.toLowerCase();
-      console.log(act);
       if (act === "like") {
         return this.likes;
       } else if (act === "dislikes") {
@@ -135,8 +134,8 @@ export default {
     creatActionItem(act) {
       let id = this.dog.id;
       let actionItem = {
-        time: this.getTime(),
         id,
+        time: this.getTime(),
         action: act,
         actionImg: this.getActionImg(act),
       };

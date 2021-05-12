@@ -93,7 +93,7 @@ const actions = {
       votingAPI
         .voteLike(state.data.id)
         .then((response) => {
-          console.log(response);
+          console.log("Like");
         })
         .catch((err) => {
           console.log(err);
@@ -105,19 +105,19 @@ const actions = {
       votingAPI
         .voteDislike(state.data.id)
         .then((response) => {
-          console.log(response);
+          console.log("Dislike");
         })
         .catch((err) => {
           console.log(err);
         });
     });
   },
-  [actionsTypes.voteFavouriteImage](state) {
+  [actionsTypes.voteFavouriteImage]({state}) {
     return new Promise((resolve) => {
       votingAPI
         .voteFavouriteImage(state.data.id)
         .then((response) => {
-          console.log(response);
+          console.log("Favourite");
         })
         .catch((err) => {
           console.log(err);
@@ -130,6 +130,7 @@ const actions = {
       votingAPI
         .getVotes()
         .then((response) => {
+          console.log(response.data);
           commit(mutationsTypes.getVotesSuccess, response.data);
         })
         .catch((err) => {

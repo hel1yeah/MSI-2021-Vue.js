@@ -16,6 +16,7 @@ const voteLike = (id) => {
   };
   return axios.post("/votes", body);
 };
+
 const voteDislike = (id) => {
   let body = {
     image_id: id,
@@ -24,14 +25,15 @@ const voteDislike = (id) => {
   };
   return axios.post("/votes", body);
 };
+
 const voteFavouriteImage = (id) => {
   let post_body = {
     image_id: id,
-    value: 0,
     sub_id: "test-user-23",
   };
   return axios.post("/favourites", post_body);
 };
+
 const getVotes = () => {
   let query_params = {
     order: "DESC",

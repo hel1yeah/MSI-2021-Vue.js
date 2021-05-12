@@ -8,7 +8,8 @@
       <transition name="appearance" mode="out-in">
         <!-- преключение между страницамис помощью роута -->
 
-        <router-view></router-view>
+        <router-view>
+        </router-view>
       </transition>
       
     </div>
