@@ -1,13 +1,5 @@
 import axios from "@/api/axios";
 
-const getImage = () => {
-  const query_params = {
-    limit: 1,
-    size: "full",
-  };
-  return axios.get("/images/search", { params: query_params });
-};
-
 const voteLike = (id) => {
   let body = {
     image_id: id,
@@ -34,6 +26,14 @@ const voteFavouriteImage = (id) => {
   return axios.post("/favourites", post_body);
 };
 
+const getImage = () => {
+  const query_params = {
+    limit: 1,
+    size: "full",
+  };
+  return axios.get("/images/search", { params: query_params });
+};
+
 const getVotes = () => {
   let query_params = {
     order: "DESC",
@@ -42,10 +42,19 @@ const getVotes = () => {
   return axios.get("/votes", { params: query_params });
 };
 
+const getVotesFavourite = () => {
+  let query_params = {
+    order: "DESC",
+    sub_id: "test-user-24",
+  };
+  return axios.get("/favourites", { params: query_params });
+};
+
 export default {
-  getImage,
-  getVotes,
   voteLike,
   voteDislike,
   voteFavouriteImage,
+  getImage,
+  getVotes,
+  getVotesFavourite,
 };
