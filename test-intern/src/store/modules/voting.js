@@ -1,4 +1,5 @@
 import votingAPI from "@/api/voting";
+import calculateDislikesLikes from "@/helpers/calculateDislikesLikes";
 
 const state = {
   data: null,
@@ -20,15 +21,17 @@ export const mutationsTypes = {
   voteFavoriteStart: "[Voting] vote UnLike Start",
 
   getVotesStart: "[Voting] get Votes All",
+  getVotesSuccess: "[Voting] get Votes Success",
+  getVotesFailure: "[Voting] get Votes Failure",
 };
 
 export const actionsTypes = {
   getImage: "[Voting] get Image",
   getVotes: "[Voting] get Votes",
 
-  voteLike: "[Voting] vote Like",
-  voteDislike: "[Voting] vote Dislike",
-  voteFavouriteImage: "[Voting] vote Favourite Image",
+  // voteLike: "[Voting] vote Like",
+  // voteDislike: "[Voting] vote Dislike",
+  // voteFavouriteImage: "[Voting] vote Favourite Image",
 };
 
 const mutations = {
@@ -57,14 +60,17 @@ const mutations = {
   //voteFavouriteImage
   [mutationsTypes.voteFavouriteImageStart](state) {},
   //voteFavouriteImage
+
   [mutationsTypes.getVotesStart](state) {
     state.isVotes = null;
     state.isLoading = true;
     state.error = null;
   },
   [mutationsTypes.getVotesSuccess](state, payload) {
-    state.isVotes = payload;
+    state.isVotes = payload.res;
     state.isLoading = false;
+    state.isVotesLike = payload.like;
+    state.isVotesDislike = payload.dislike;
   },
   [mutationsTypes.getVotesFailure](state, payload) {
     state.isVotes = null;
@@ -87,32 +93,7 @@ const actions = {
         });
     });
   },
-
-  [actionsTypes.voteLike]({ commit, state }) {
-    return new Promise((resolve) => {
-      votingAPI
-        .voteLike(state.data.id)
-        .then((response) => {
-          console.log("Like");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  },
-  [actionsTypes.voteDislike]({ commit, state }) {
-    return new Promise((resolve) => {
-      votingAPI
-        .voteDislike(state.data.id)
-        .then((response) => {
-          console.log("Dislike");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  },
-  [actionsTypes.voteFavouriteImage]({state}) {
+  [actionsTypes.voteFavouriteImage]({ state }) {
     return new Promise((resolve) => {
       votingAPI
         .voteFavouriteImage(state.data.id)
@@ -130,11 +111,15 @@ const actions = {
       votingAPI
         .getVotes()
         .then((response) => {
-          console.log(response.data);
-          commit(mutationsTypes.getVotesSuccess, response.data);
+          calculateDislikesLikes.calculate(response.data);
+          commit(mutationsTypes.getVotesSuccess, {
+            res: response.data,
+            like: calculateDislikesLikes.like,
+            dislike: calculateDislikesLikes.disLike,
+          });
         })
         .catch((err) => {
-          commit(mutationsTypes.getImageFailure, err);
+          commit(mutationsTypes.getVotesFailure, err);
         });
     });
   },
