@@ -6,6 +6,7 @@
     </div>
 
     <div @click="getVotes">test button</div>
+    {{like}}
   </div>
 </template>
 
@@ -28,7 +29,7 @@ export default {
   },
   computed: {
     ...mapState({
-      vote: (state) => state.voting.isVotes,
+      like: (state) => state.voting.isVotesLike,
     }),
   },
   created() {

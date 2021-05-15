@@ -26,7 +26,7 @@ const voteFavouriteImage = (id) => {
   return axios.post("/favourites", post_body);
 };
 
-const getImage = () => {
+const getSearchImage = () => {
   const query_params = {
     limit: 1,
     size: "full",
@@ -54,7 +54,7 @@ export default {
   voteLike,
   voteDislike,
   voteFavouriteImage,
-  getImage,
+  getSearchImage,
   getVotes,
   getVotesFavourite,
 };

@@ -1,5 +1,6 @@
 let like = [];
 let disLike = [];
+
 function calculate(votes) {
   votes.forEach((vote) => {
     if (vote.value) {

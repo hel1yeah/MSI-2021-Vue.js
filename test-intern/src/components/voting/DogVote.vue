@@ -100,23 +100,23 @@ export default {
     };
   },
   methods: {
-    getImage() {
-      this.$store.dispatch(actionsTypes.getImage);
+    getSearchImage() {
+      this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteLike() {
       this.actions.push(this.creatActionItem("like"));
       this.$store.dispatch(actionsTypes.voteLike);
-      this.$store.dispatch(actionsTypes.getImage);
+      this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteDislike() {
       this.actions.push(this.creatActionItem("dislikes"));
       this.$store.dispatch(actionsTypes.voteDislike);
-      this.$store.dispatch(actionsTypes.getImage);
+      this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteFavouriteImage() {
       this.actions.push(this.creatActionItem("favourite"));
       this.$store.dispatch(actionsTypes.voteFavouriteImage);
-      this.$store.dispatch(actionsTypes.getImage);
+      this.$store.dispatch(actionsTypes.getSearchImage);
     },
     onSearchBreeds(name) {
       this.$store.dispatch(actionsTypes.onSearchBreeds, name);
@@ -155,7 +155,7 @@ export default {
     }),
   },
   created() {
-    this.getImage();
+    this.getSearchImage();
   },
 };
 </script>

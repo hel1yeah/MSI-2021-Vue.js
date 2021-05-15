@@ -16,11 +16,11 @@ export const mutationsTypes = {
   voteDislikeStart: "[Voting] vote UnLike Start",
   voteFavoriteStart: "[Voting] vote UnLike Start",
 
-  getImageStart: "[Voting] get Image Start",
-  getImageSuccess: "[Voting] get Image Success",
-  getImageFailure: "[Voting] get Image Start",
+  getSearchImageStart: "[Voting] get Image Start",
+  getSearchImageSuccess: "[Voting] get Image Success",
+  getSearchImageFailure: "[Voting] get Image Start",
 
-  getVotesStart: "[Voting] get Votes All",
+  getVotesStart: "[Voting] get Votes All Start",
   getVotesSuccess: "[Voting] get Votes Success",
   getVotesFailure: "[Voting] get Votes Failure",
 
@@ -34,39 +34,42 @@ export const actionsTypes = {
   voteDislike: "[Voting] vote Dislike",
   voteFavouriteImage: "[Voting] vote Favourite Image",
 
-  getImage: "[Voting] get Image",
+  getSearchImage: "[Voting] get Search Image",
+
   getVotes: "[Voting] get Votes",
   getVotesFavorite: "[Voting] get Votes Favorite",
 };
 
 const mutations = {
-  // votes 
+  // votes
   [mutationsTypes.voteLikeStart](state) {},
   [mutationsTypes.voteDislikeStart](state) {},
   [mutationsTypes.voteFavouriteImageStart](state) {},
 
-  // getImage
-  [mutationsTypes.getImageStart](state) {
+  // getSearchImage
+  [mutationsTypes.getSearchImageStart](state) {
     state.data = null;
     state.isLoading = true;
     state.error = null;
   },
-  [mutationsTypes.getImageSuccess](state, payload) {
+  [mutationsTypes.getSearchImageSuccess](state, payload) {
     state.data = payload;
     state.isLoading = false;
     state.error = null;
   },
-  [mutationsTypes.getImageFailure](state, payload) {
+  [mutationsTypes.getSearchImageFailure](state, payload) {
     state.data = null;
     state.isLoading = false;
     state.error = payload;
   },
 
-  // get Votes All 
+  // get Votes All
   [mutationsTypes.getVotesStart](state) {
     state.isVotes = null;
     state.isLoading = true;
     state.error = null;
+    state.isVotesLike = null;
+    state.isVotesDislike = null;
   },
   [mutationsTypes.getVotesSuccess](state, payload) {
     state.isVotes = payload.res;
@@ -79,7 +82,8 @@ const mutations = {
     state.isLoading = false;
     state.error = payload;
   },
-  // get Votes Favorite 
+
+  // get Votes Favorite
   [mutationsTypes.getVotesFavoriteStart](state) {
     state.isVotesFavorite = null;
     state.isLoading = true;
@@ -133,16 +137,16 @@ const actions = {
         });
     });
   },
-  [actionsTypes.getImage]({ commit }) {
-    commit(mutationsTypes.getImageStart);
+  [actionsTypes.getSearchImage]({ commit }) {
+    commit(mutationsTypes.getSearchImageStart);
     return new Promise((resolve) => {
       votingAPI
-        .getImage()
+        .getSearchImage()
         .then((response) => {
-          commit(mutationsTypes.getImageSuccess, response.data[0]);
+          commit(mutationsTypes.getSearchImageSuccess, response.data[0]);
         })
         .catch((err) => {
-          commit(mutationsTypes.getImageFailure, err);
+          commit(mutationsTypes.getSearchImageFailure, err);
         });
     });
   },
@@ -152,11 +156,22 @@ const actions = {
       votingAPI
         .getVotes()
         .then((response) => {
-          calculateDislikesLikes.calculate(response.data);
+          let like = [];
+          let disLike = [];
+          function calculate(votes) {
+            votes.forEach((vote) => {
+              if (vote.value) {
+                like.push(vote);
+              } else {
+                disLike.push(vote);
+              }
+            });
+          }
+          calculate(response.data)
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
-            like: calculateDislikesLikes.like,
-            dislike: calculateDislikesLikes.disLike,
+            like: like,
+            dislike: disLike,
           });
         })
         .catch((err) => {
@@ -166,15 +181,15 @@ const actions = {
   },
   [actionsTypes.getVotesFavorite]({ commit }) {
     return new Promise((resolve) => {
-      commit(mutationsTypes.getVotesFavoriteStart)
+      commit(mutationsTypes.getVotesFavoriteStart);
       votingAPI
         .getVotesFavourite()
         .then((response) => {
-          commit(mutationsTypes.getVotesFavoriteSuccess, response.data)
+          commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
           console.log("Favourite");
         })
         .catch((err) => {
-          commit(mutationsTypes.getVotesFavoriteFailure, response.data)
+          commit(mutationsTypes.getVotesFavoriteFailure, response.data);
         });
     });
   },

@@ -15,7 +15,9 @@
         <div class="header__card">
           <div
             class="header__card--bg fiolet"
-            :class="{ active: this.$route.path == '/voting' }"
+            :class="{
+              active: this.$route.path == '/voting',
+            }"
           >
             <img
               class="header__card--img"
