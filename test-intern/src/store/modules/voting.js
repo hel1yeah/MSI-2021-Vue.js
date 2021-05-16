@@ -5,10 +5,13 @@ const state = {
   data: null,
   isLoading: false,
   error: null,
+
   isVotes: null,
   isVotesLike: null,
   isVodesDislike: null,
   isVotesFavorite: null,
+
+  isSearchDogs: null,
 };
 
 export const mutationsTypes = {
@@ -27,6 +30,10 @@ export const mutationsTypes = {
   getVotesFavoriteStart: "[Voting] get Votes Favorite Start",
   getVotesFavoriteSuccess: "[Voting] get Votes Favorite Success",
   getVotesFavoriteFailure: "[Voting] get Votes Favorite Failure",
+
+  getSearchDogsStart: "[Voting] get Search Dogs Start",
+  getSearchDogsSuccess: "[Voting] get Search Dogs Success",
+  getSearchDogsFailure: "[Voting] get Search Dogs Failure",
 };
 
 export const actionsTypes = {
@@ -38,6 +45,8 @@ export const actionsTypes = {
 
   getVotes: "[Voting] get Votes",
   getVotesFavorite: "[Voting] get Votes Favorite",
+
+  getSearchDogs: "[Voting] get Search Dogs",
 };
 
 const mutations = {
@@ -97,6 +106,20 @@ const mutations = {
     state.isVotesFavorite = null;
     state.isLoading = false;
     state.error = payload;
+  },
+  // get Search Dogs
+  [mutationsTypes.getSearchDogsStart](state) {
+    state.isSearchDogs = null;
+    state.isLoading = true;
+  },
+  [mutationsTypes.getSearchDogsSuccess](state, payload) {
+    state.isSearchDogs = payload;
+    state.isLoading = false;
+  },
+  [mutationsTypes.getSearchDogsFailure](state, payload) {
+    state.isSearchDogs = null;
+    state.error = payload;
+    state.isLoading = false;
   },
 };
 
@@ -167,7 +190,7 @@ const actions = {
               }
             });
           }
-          calculate(response.data)
+          calculate(response.data);
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
             like: like,
@@ -192,6 +215,17 @@ const actions = {
           commit(mutationsTypes.getVotesFavoriteFailure, response.data);
         });
     });
+  },
+  [actionsTypes.getSearchDogs]() {
+    let requests = state.isVotesLike.map((item) => {
+      votingAPI.getSearchDogs(item.image_id);
+    });
+
+
+    Promise.all(requests).then((response) => {
+      console.log(response);
+    });
+
   },
 };
 

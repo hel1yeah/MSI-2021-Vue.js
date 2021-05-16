@@ -5,8 +5,9 @@
       <ButtonClose></ButtonClose>
     </div>
 
-    <div @click="getVotes">test button</div>
-    {{like}}
+    <div @click="getVotes">test getVotes</div>
+    <div @click="getSearchDogs">test getSearchDogs</div>
+    {{ like }}
   </div>
 </template>
 
@@ -25,6 +26,9 @@ export default {
   methods: {
     getVotes() {
       this.$store.dispatch(actionsTypes.getVotes);
+    },
+    getSearchDogs() {
+      this.$store.dispatch(actionsTypes.getSearchDogs);
     },
   },
   computed: {
