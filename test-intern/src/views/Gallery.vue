@@ -124,7 +124,7 @@ export default {
   width: 680px;
 }
 .gallery-content {
-  background-color: var(--white-color);
+  background-color: var(--block-bg-color);
   border-radius: 20px;
   padding: 20px;
 }
@@ -182,8 +182,8 @@ export default {
   font-size: 16px;
   line-height: 24px;
   border-radius: 10px;
-  color: var(--black-color);
-  background: var(--white-color);
+  color: var(--bold-text-color);
+  background: var(--block-bg-color);
   outline: transparent;
   border: transparent;
   cursor: pointer;
@@ -204,7 +204,7 @@ export default {
   width: 46px;
   height: 40px;
 
-  background: var(--white-color);
+  background: var(--block-bg-color);
   border-radius: 10px;
   margin: 0 0 0 10px;
 
@@ -215,16 +215,16 @@ export default {
   cursor: pointer;
   transition: var(--speed);
   &:hover {
-    background: var(--pink-color);
+    background: var(--btn-active-bg-color);
   }
   &:hover .btn-update-arrow__img {
-    fill: var(--white-color);
+    fill: var(--block-bg-color);
   }
 }
 .btn-update-arrow__img {
   transition: var(--speed);
   width: 18px;
   height: 20px;
-  fill: var(--pink-color);
+  fill: var(--btn-active-bg-color);
 }
 </style>

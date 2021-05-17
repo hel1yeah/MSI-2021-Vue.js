@@ -37,15 +37,15 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--pink-color);
+  color: var(--btn-active-bg-color);
   letter-spacing: 2px;
   font-weight: 500;
-  fill: var(--pink-color);
+  fill: var(--btn-active-bg-color);
   transition: var(--speed);
   &:hover {
-    background-color: var(--pink-color);
-    color: var(--white-color);
-    fill: var(--white-color);
+    background-color: var(--btn-active-bg-color);
+    color: var(--block-bg-color);
+    fill: var(--block-bg-color);
   }
 }
 .button-upload__img {
