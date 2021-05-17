@@ -133,7 +133,7 @@ export default {
     background-color: var(--fiolet-card-color);
     border: 4px solid rgba(226, 227, 251, 0.7);
     &.active {
-      border: 4px solid var(--btn-active-bg-color);
+      border: 4px solid var(--header-card-active-color);
     }
   }
 
@@ -141,7 +141,7 @@ export default {
     background-color: var(--grean-card-color);
     border: 4px solid rgba(204, 249, 222, 0.9);
     &.active {
-      border: 4px solid var(--btn-active-bg-color);
+      border: 4px solid var(--header-card-active-color);
     }
   }
 
@@ -149,7 +149,7 @@ export default {
     background-color: var(--orange-card-color);
     border: 4px solid rgba(255, 230, 182, 1);
     &.active {
-      border: 4px solid var(--btn-active-bg-color);
+      border: 4px solid var(--header-card-active-color);
     }
   }
 }

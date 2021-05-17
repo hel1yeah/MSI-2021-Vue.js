@@ -296,7 +296,7 @@ export default {
   height: 100%;
   top: 100%;
   left: 0;
-  background-color: var(--btn-active-bg-color);
+  background-color: var(--hover-grid-card-color);
 
   display: flex;
   align-items: flex-end;
