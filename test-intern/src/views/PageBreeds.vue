@@ -156,7 +156,7 @@ export default {
   width: 680px;
 }
 .breeds__content {
-  background-color: var(--white-color);
+  background-color: var(--block-bg-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -230,11 +230,11 @@ export default {
   transition: 0.6s;
   &:hover {
     border: 2px solid var(--hover-color);
-    fill: var(--pink-color);
+    fill: var(--btn-active-bg-color);
   }
   &.breeds-select-active {
     border: 2px solid var(--hover-color);
-    fill: var(--pink-color);
+    fill: var(--btn-active-bg-color);
   }
 }
 
@@ -294,7 +294,7 @@ export default {
   height: 100%;
   top: 100%;
   left: 0;
-  background-color: var(--pink-color);
+  background-color: var(--hover-grid-card-color);
 
   display: flex;
   align-items: flex-end;
@@ -303,8 +303,8 @@ export default {
 .name-breeds {
   font-size: 16px;
   line-height: 24px;
-  color: var(--pink-color);
-  background-color: var(--white-color);
+  color: var(--btn-active-bg-color);
+  background-color: var(--block-bg-color);
   padding: 5px 5px;
   width: 180px;
   text-align: center;

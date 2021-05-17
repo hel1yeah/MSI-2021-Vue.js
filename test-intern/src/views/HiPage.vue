@@ -87,7 +87,7 @@ export default {
   font-weight: 500;
   font-size: 44px;
   line-height: 58px;
-  color: var(--black-color);
+  color: var(--bold-text-color);
 }
 .header__info--descr {
   color: var(--gray-color);
@@ -114,10 +114,10 @@ export default {
   transition: all 0.6s;
   &:hover .header__card--title {
     background-color: var(--hover-color);
-    color: var(--pink-color);
+    color: var(--btn-active-bg-color);
   }
   &:hover .header__card--bg {
-    border: 4px solid var(--white-color);
+    border: 4px solid var(--block-bg-color);
   }
 }
 .header__card--bg {
@@ -134,7 +134,7 @@ export default {
     background-color: var(--fiolet-card-color);
     border: 4px solid rgba(226, 227, 251, 0.7);
     &.active {
-      border: 4px solid var(--pink-color);
+      border: 4px solid var(--header-card-active-color);
     }
   }
 
@@ -142,7 +142,7 @@ export default {
     background-color: var(--grean-card-color);
     border: 4px solid rgba(204, 249, 222, 0.9);
     &.active {
-      border: 4px solid var(--pink-color);
+      border: 4px solid var(--header-card-active-color);
     }
   }
 
@@ -150,7 +150,7 @@ export default {
     background-color: var(--orange-card-color);
     border: 4px solid rgba(255, 230, 182, 1);
     &.active {
-      border: 4px solid var(--pink-color);
+      border: 4px solid var(--header-card-active-color);
     }
   }
 }
@@ -168,8 +168,8 @@ export default {
 }
 .header__card--title {
   text-transform: uppercase;
-  color: var(--pink-color);
-  background: var(--white-color);
+  color: var(--btn-active-bg-color);
+  background: var(--block-bg-color);
   border-radius: 10px;
   width: 100%;
   padding: 10px 0;
@@ -183,12 +183,12 @@ export default {
   }
 }
 .router-link-exact-active > .header__card--title {
-  background-color: var(--pink-color);
-  color: var(--white-color);
+  background-color: var(--btn-active-bg-color);
+  color: var(--block-bg-color);
 }
 .router-link-exact-active > .header__card--title .header__card--bg {
-  background-color: var(--pink-color);
-  color: var(--white-color);
+  background-color: var(--btn-active-bg-color);
+  color: var(--block-bg-color);
 }
 // hover
 </style>

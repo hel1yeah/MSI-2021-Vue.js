@@ -65,7 +65,7 @@ export default {};
 .attitude__item {
   width: 60px;
   height: 60px;
-  background-color: var(--white-color);
+  background-color: var(--block-bg-color);
   border-radius: 20px;
   cursor: pointer;
 
@@ -73,12 +73,12 @@ export default {};
   align-items: center;
   justify-content: center;
 
-  fill: var(--pink-color);
+  fill: var(--btn-active-bg-color);
   transition: 0.6s;
 
   &:hover {
-    fill: var(--white-color);
-    background-color: var(--pink-color);
+    fill: var(--block-bg-color);
+    background-color: var(--btn-active-bg-color);
   }
 }
 .attitude__img {
