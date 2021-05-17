@@ -2,10 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import HeaderRight from "@/views/HeaderRight.vue";
-import Voting from "@/views/Voting.vue";
-import Breeds from "@/views/Breeds.vue";
-import Gallery from "@/views/Gallery.vue";
+import PageVoting from "@/views/PageVoting.vue";
+import PageBreeds from "@/views/PageBreeds.vue";
+import PageGallery from "@/views/PageGallery.vue";
 
+import DogVote from "@/components/voting/DogVote.vue";
+import DogLike from "@/components/voting/DogLike.vue";
+import DogDislike from "@/components/voting/DogDislike.vue";
+import DogFavourite from "@/components/voting/DogFavourite.vue";
 
 Vue.use(VueRouter);
 
@@ -16,29 +20,42 @@ const routes = [
     component: HeaderRight,
   },
   {
-    path: "/voting",
+    path: "/voting/",
     name: "voting",
-    component: Voting,
+    component: PageVoting,
+    children: [
+      {
+        path: "vote",
+        name: "dogVote",
+        component: DogVote,
+      },
+      {
+        path: "like",
+        name: "dogLike",
+        component: DogLike,
+      },
+      {
+        path: "dislike",
+        name: "dogDislike",
+        component: DogDislike,
+      },
+      {
+        path: "favourite",
+        name: "dogFavourite",
+        component: DogFavourite,
+      },
+    ],
   },
   {
     path: "/breeds",
     name: "breeds",
-    component: Breeds,
+    component: PageBreeds,
   },
   {
     path: "/gallery",
     name: "gallery",
-    component: Gallery,
+    component: PageGallery,
   },
-//   {
-//     path: "/about",
-//     name: "About",
-//     // route level code-splitting
-//     // this generates a separate chunk (about.[hash].js) for this route
-//     // which is lazy-loaded when the route is visited.
-//     component: () =>
-//       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-//   },
 ];
 
 const router = new VueRouter({

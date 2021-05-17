@@ -77,7 +77,6 @@
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
         </div>
-        
       </div>
     </div>
   </section>
@@ -95,7 +94,7 @@ import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
 
 export default {
-  name: "Breeds",
+  name: "PageBreeds",
   components: {
     Preloader,
     Search,
@@ -127,7 +126,6 @@ export default {
     },
     sort(e) {
       e === "asc" ? (this.currentSort = true) : (this.currentSort = false);
-
       this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
     },
   },

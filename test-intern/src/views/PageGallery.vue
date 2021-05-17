@@ -97,7 +97,7 @@ import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
 import ButtonUpload from "@/components/ButtonUpload.vue";
 export default {
-  name: "Gallery",
+  name: "PageGallery",
   components: {
     Preloader,
     Search,
