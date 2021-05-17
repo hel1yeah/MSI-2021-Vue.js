@@ -35,6 +35,7 @@ export default {
 <style lang="scss">
 #app {
   background-color: var(--main-color);
+  height: 100%;
 }
 .wrapper-content {
   width: 100%;
