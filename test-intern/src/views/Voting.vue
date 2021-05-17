@@ -188,7 +188,7 @@ export default {
 // }
 
 .action-wrapper {
-  background-color: var(--white-color);
+  background-color: var(--block-bg-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -220,8 +220,8 @@ export default {
   margin: -44px auto 0 auto;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #fff;
-  border: 4px solid var(--white-color);
+  background-color: white;
+  border: 4px solid var(--block-bg-color);
 
   display: flex;
   align-items: center;
@@ -237,7 +237,7 @@ export default {
   width: 80px;
   height: 80px;
 
-  fill: var(--white-color);
+  fill: var(--block-bg-color);
 
   &:not(:last-child) {
     margin: 0 4px 0 0;
@@ -250,14 +250,14 @@ export default {
   background-color: var(--grean-card-color);
   &:hover {
     background-color: rgb(208, 250, 225);
-    fill: #97eab9;
+    fill: rgb(151, 234, 185);
   }
 }
 .photo__attitude--favourites {
-  background-color: var(--pink-color);
+  background-color: var(--btn-active-bg-color);
   &:hover {
     background-color: #ffadb2;
-    fill: var(--pink-color);
+    fill: var(--btn-active-bg-color);
   }
 }
 .photo__attitude--dislikes {
@@ -279,7 +279,7 @@ export default {
   justify-content: space-between;
 }
 .action-user__time {
-  background-color: var(--white-color);
+  background-color: var(--block-bg-color);
   padding: 3px 10px;
   font-weight: 600;
   font-size: 16px;
@@ -291,7 +291,7 @@ export default {
   line-height: 24px;
   color: var(--gray-color);
   & span {
-    color: var(--black-color);
+    color: var(--bold-text-color);
     font-weight: 600;
   }
 }

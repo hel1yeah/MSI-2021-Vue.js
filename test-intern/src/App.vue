@@ -1,12 +1,14 @@
 <template>
-  <div id="app">
+  <div id="app" data-theme="light">
     <div class="container">
       <div class="wrapper-content">
         <div class="interactive">
-          <HiPage /> <!-- главное меню -->
+          <HiPage />
+          <!-- главное меню -->
         </div>
         <div class="pages">
-          <transition name='appearance' mode="out-in"> <!-- преключение между страницамис помощью роута -->
+          <transition name="appearance" mode="out-in">
+            <!-- преключение между страницамис помощью роута -->
 
             <router-view></router-view>
           </transition>
@@ -17,7 +19,7 @@
 </template>
 
 <script>
-import HiPage from '@/views/HiPage.vue'
+import HiPage from "@/views/HiPage.vue";
 
 export default {
   components: {
@@ -31,6 +33,9 @@ export default {
 </script>
 
 <style lang="scss">
+#app {
+  background-color: var(--main-color);
+}
 .wrapper-content {
   width: 100%;
   display: flex;

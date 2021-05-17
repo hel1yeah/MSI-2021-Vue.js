@@ -36,11 +36,11 @@ export default {
 
   border-radius: 10px;
 
-  fill: var(--pink-color);
+  fill: var(--btn-active-bg-color);
   transition: 0.6s;
   &:hover {
-    fill: var(--white-color);
-    background-color: var(--pink-color);
+    fill: var(--block-bg-color);
+    background-color: var(--btn-active-bg-color);
   }
 }
 </style>
