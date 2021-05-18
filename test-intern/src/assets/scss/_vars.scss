@@ -1,34 +1,41 @@
 [data-theme="light"] {
-  --main-color: rgb(241, 240, 240); // задний фон всёй страницы
+  --main-color-bg: rgb(241, 240, 240);
+  --bold-text-color: rgb(29, 29, 29);
+  --help-text-color: rgb(140, 140, 140);
+  --default-block-bg-color: rgb(255, 255, 255);
+  --breeds-select-bg: rgb(248, 248, 247);
+
   --btn-active-bg-color: rgba(255, 134, 142, 1);
   --header-card-active-color: rgb(251, 224, 220);
   --hover-grid-card-color: rgba(255, 134, 142, 0.6);
   --hover-color: rgb(251, 223, 218);
-  --block-bg-color: rgb(255, 255, 255);
-  --bold-text-color: rgb(29, 29, 29);
-  --gray-color: rgb(140, 140, 140);
+
   --options-color: rgb(248, 248, 247);
   --bgc-title-color: rgb(251, 224, 220);
 
-  // --border-card-color:
+  // цвета что не меняються в зависимости от темы
   --fiolet-card-color: rgba(180, 183, 255, 1);
   --grean-card-color: rgba(151, 234, 185, 1);
-  --orange-card-color: rgba(255, 237, 204,1);
+  --orange-card-color: rgba(255, 237, 204, 1);
   --speed: 0.6s;
 }
 
 [data-theme="dark"] {
-  --main-color: rgb(29, 29, 29);
-  --btn-active-bg-color: rgba(255, 134, 142, 1);
-  --hover-color: rgb(251, 223, 218);
-  --block-bg-color: rgb(40, 40, 40);
+ 
+  --main-color-bg: rgba(40, 40, 40);
   --bold-text-color: rgb(255, 255, 255);
-  --gray-color: rgb(140, 140, 140);
-  --options-color: rgb(248, 248, 247);
-  --bgc-title-color: rgb(251, 224, 220);
-  // --border-card-color:
+  --help-text-color: rgb(140, 140, 140);
+  --default-block-bg-color: rgb(52, 52, 52);
+  --breeds-select-bg: rgb(71, 71, 71);
+
+  --btn-active-bg-color: rgba(255, 134, 142, 1);
+  --header-card-active-color: rgb(251, 224, 220);
+  --hover-grid-card-color: rgba(255, 134, 142, 0.6);
+  --hover-color: rgb(251, 223, 218);
+
+  // цвета что не меняються в зависимости от темы
   --fiolet-card-color: rgba(180, 183, 255, 1);
   --grean-card-color: rgba(151, 234, 185, 1);
-  --orange-card-color: rgba(248, 223, 177, 1);
+  --orange-card-color: rgba(255, 237, 204, 1);
   --speed: 0.6s;
 }

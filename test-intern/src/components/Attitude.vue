@@ -65,7 +65,7 @@ export default {};
 .attitude__item {
   width: 60px;
   height: 60px;
-  background-color: var(--block-bg-color);
+  background-color: var(--default-block-bg-color);
   border-radius: 20px;
   cursor: pointer;
 
@@ -77,7 +77,7 @@ export default {};
   transition: 0.6s;
 
   &:hover {
-    fill: var(--block-bg-color);
+    fill: var(--default-block-bg-color);
     background-color: var(--btn-active-bg-color);
   }
 }

@@ -39,7 +39,7 @@ export default {
   fill: var(--btn-active-bg-color);
   transition: 0.6s;
   &:hover {
-    fill: var(--block-bg-color);
+    fill: var(--default-block-bg-color);
     background-color: var(--btn-active-bg-color);
   }
 }

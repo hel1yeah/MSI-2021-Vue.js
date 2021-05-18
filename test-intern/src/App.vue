@@ -34,7 +34,7 @@ export default {
 
 <style lang="scss">
 #app {
-  background-color: var(--main-color);
+  background-color: var(--main-color-bg);
   position: fixed;
   height: 100%;
   width: 100%;

@@ -45,7 +45,7 @@ export default {
 .voting__search-wrapper {
   position: relative;
   width: 470px;
-  background-color: var(--block-bg-color);
+  background-color: var(--default-block-bg-color);
   border-radius: 20px;
   padding: 15px 10px 15px 20px;
 }
@@ -74,7 +74,7 @@ export default {
   fill: var(--btn-active-bg-color);
   &:hover {
     background-color: var(--btn-active-bg-color);
-    fill: var(--block-bg-color);
+    fill: var(--default-block-bg-color);
   }
 }
 .voting__search--icon {

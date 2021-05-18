@@ -124,7 +124,7 @@ export default {
   width: 680px;
 }
 .gallery-content {
-  background-color: var(--block-bg-color);
+  background-color: var(--default-block-bg-color);
   border-radius: 20px;
   padding: 20px;
 }
@@ -173,7 +173,7 @@ export default {
   line-height: 18px;
 
   text-transform: uppercase;
-  color: var(--gray-color);
+  color: var(--help-text-color);
   letter-spacing: 1px;
 }
 .gallery-select {
@@ -182,14 +182,14 @@ export default {
   font-size: 16px;
   line-height: 24px;
   border-radius: 10px;
-  color: var(--bold-text-color);
-  background: var(--block-bg-color);
+  // color: var(--bold-text-color);
+  background: var(--default-block-bg-color);
   outline: transparent;
   border: transparent;
   cursor: pointer;
 }
 .gallery-select__option {
-  color: var(--gray-color);
+  color: var(--help-text-color);
   background: var(--options-color);
   font-size: 16px;
   line-height: 24px;
@@ -204,7 +204,7 @@ export default {
   width: 46px;
   height: 40px;
 
-  background: var(--block-bg-color);
+  background: var(--default-block-bg-color);
   border-radius: 10px;
   margin: 0 0 0 10px;
 
@@ -218,7 +218,7 @@ export default {
     background: var(--btn-active-bg-color);
   }
   &:hover .btn-update-arrow__img {
-    fill: var(--block-bg-color);
+    fill: var(--default-block-bg-color);
   }
 }
 .btn-update-arrow__img {

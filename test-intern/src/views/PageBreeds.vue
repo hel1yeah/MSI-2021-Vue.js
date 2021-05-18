@@ -156,7 +156,7 @@ export default {
   width: 680px;
 }
 .breeds__content {
-  background-color: var(--block-bg-color);
+  background-color: var(--default-block-bg-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -174,22 +174,22 @@ export default {
   font-size: 16px;
   line-height: 24px;
   border-radius: 10px;
-  color: var(--gray-color);
-  background: var(--options-color);
+  color: var(--help-text-color);
+  background: var(--breeds-select-bg);
   outline: transparent;
   border: transparent;
   cursor: pointer;
 }
 .breeds-select__option {
-  color: var(--gray-color);
-  background: var(--options-color);
+  color: var(--help-text-color);
+  background: var(--breeds-select-bg);
   font-size: 16px;
   line-height: 24px;
   padding: 20px;
   height: 30px;
   cursor: pointer;
   &:hover {
-    background: var(--options-color);
+    background: var(--breeds-select-bg);
   }
 }
 .breeds-select__limit {
@@ -198,24 +198,13 @@ export default {
   font-size: 16px;
   line-height: 24px;
   border-radius: 10px;
-  color: var(--gray-color);
-  background: var(--options-color);
+  color: var(--help-text-color);
+  background: var(--breeds-select-bg);
   outline: transparent;
   border: transparent;
   cursor: pointer;
 }
-// .breeds-select__limit--option {
-//   color: var(--gray-color);
-//   background: var(--options-color);
-//   font-size: 16px;
-//   line-height: 24px;
-//   padding: 20px;
-//   height: 30px;
-//   cursor: pointer;
-//   &:hover {
-//     background: var(--options-color);
-//   }
-// }
+
 .breeds-select__abc-up,
 .breeds-select__abc-down {
   display: flex;
@@ -224,9 +213,9 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: var(--options-color);
+  background: var(--breeds-select-bg);
   cursor: pointer;
-  fill: var(--gray-color);
+  fill: var(--help-text-color);
   transition: 0.6s;
   &:hover {
     border: 2px solid var(--hover-color);
@@ -280,12 +269,7 @@ export default {
     top: 0;
   }
 }
-// .grid-container__item--img {
-//   width: 100%;
-//   transform: scale(1.1);
 
-//   background-color: var(--fiolet-card-color);
-// }
 .grid-container__item--hover {
   transition: var(--speed);
   position: absolute;
@@ -304,7 +288,7 @@ export default {
   font-size: 16px;
   line-height: 24px;
   color: var(--btn-active-bg-color);
-  background-color: var(--block-bg-color);
+  background-color: var(--default-block-bg-color);
   padding: 5px 5px;
   width: 180px;
   text-align: center;

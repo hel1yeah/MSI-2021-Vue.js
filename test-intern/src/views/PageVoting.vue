@@ -1,16 +1,16 @@
 <template>
   <section class="voting">
     <div class="search-attitude-wrapper">
-      <router-link :to="{name : 'dogVote'}" class="voting__home">voting</router-link>
+      <router-link :to="{ name: 'dogVote' }" class="voting__home"
+        >voting</router-link
+      >
       <Attitude></Attitude>
     </div>
     <div class="action-wrapper">
       <transition name="appearance" mode="out-in">
         <!-- преключение между страницамис помощью роута -->
-        <router-view>
-        </router-view>
+        <router-view> </router-view>
       </transition>
-      
     </div>
   </section>
 </template>
@@ -47,13 +47,13 @@ export default {
   cursor: pointer;
   text-decoration: none;
   transition: var(--speed);
-  &.router-link-exact-active{
-    background-color: var(--pink-color);
-      color: var(--white-color);
+  &.router-link-exact-active {
+    background-color: var(--btn-active-bg-color);
+    color: var(--default-block-bg-color);
   }
 }
 .action-wrapper {
-  background-color: var(--white-color);
+  background-color: var(--default-block-bg-color);
   padding: 20px;
   border-radius: 20px;
 }
@@ -86,7 +86,7 @@ export default {
   border-radius: 20px;
   overflow: hidden;
   background-color: #fff;
-  border: 4px solid var(--white-color);
+  border: 4px solid var(--default-block-bg-color);
 
   display: flex;
   align-items: center;
@@ -102,7 +102,7 @@ export default {
   width: 80px;
   height: 80px;
 
-  fill: var(--white-color);
+  fill: var(--default-block-bg-color);
 
   &:not(:last-child) {
     margin: 0 4px 0 0;
@@ -119,10 +119,10 @@ export default {
   }
 }
 .photo__attitude--favourites {
-  background-color: var(--pink-color);
+  background-color: var(--btn-active-bg-color);
   &:hover {
     background-color: #ffadb2;
-    fill: var(--pink-color);
+    fill: var(--btn-active-bg-color);
   }
 }
 .photo__attitude--dislikes {
@@ -135,7 +135,7 @@ export default {
 
 .action-user {
   max-width: 100%;
-  background-color: var(--main-color);
+  // background-color: var(--main-color-bg);
   padding: 15px 20px 15px 15px;
   margin: 15px 0 0;
   border-radius: 10px;
@@ -154,9 +154,9 @@ export default {
 .action-user__description {
   font-size: 16px;
   line-height: 24px;
-  color: var(--gray-color);
+  color: var(--help-text-color);
   & span {
-    color: var(--black-color);
+    color: var(--bold-text-color);
     font-weight: 600;
   }
 }
