@@ -34,11 +34,11 @@ export default {
 .voting__home {
   text-align: center;
   border-radius: 10px;
-  background-color: var(--white-color);
+  background-color: var(--btn-active-bg-color);
   max-width: 146px;
   padding: 5px 30px;
   text-transform: uppercase;
-  color: var(--pink-color);
+  color: var(--while-color);
 
   font-weight: 500;
   font-size: 20px;

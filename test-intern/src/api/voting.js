@@ -50,6 +50,7 @@ const getVotesFavourite = () => {
   return axios.get("/favourites", { params: query_params });
 };
 
+
 const getSearchDogs = async (id) => {
   // console.log(await axios.get(`/images/${id}`));
   return await axios.get(`/images/${id}`)
