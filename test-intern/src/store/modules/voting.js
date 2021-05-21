@@ -1,4 +1,12 @@
-import votingAPI from "@/api/voting";
+import {
+  voteLike,
+  voteDislike,
+  voteFavouriteImage,
+  getSearchImage,
+  getVotes,
+  getVotesFavourite,
+  getSearchDogs
+} from "@/api/voting";
 import calculateDislikesLikes from "@/helpers/calculateDislikesLikes";
 
 const state = {
@@ -51,9 +59,9 @@ export const actionsTypes = {
 
 const mutations = {
   // votes
-  [mutationsTypes.voteLikeStart](state) {},
-  [mutationsTypes.voteDislikeStart](state) {},
-  [mutationsTypes.voteFavouriteImageStart](state) {},
+  [mutationsTypes.voteLikeStart](state) { },
+  [mutationsTypes.voteDislikeStart](state) { },
+  [mutationsTypes.voteFavouriteImageStart](state) { },
 
   // getSearchImage
   [mutationsTypes.getSearchImageStart](state) {
@@ -126,8 +134,7 @@ const mutations = {
 const actions = {
   [actionsTypes.voteFavouriteImage]({ state }) {
     return new Promise((resolve) => {
-      votingAPI
-        .voteFavouriteImage(state.data.id)
+      voteFavouriteImage(state.data.id)
         .then((response) => {
           console.log("Favourite");
         })
@@ -138,8 +145,7 @@ const actions = {
   },
   [actionsTypes.voteLike]({ state }) {
     return new Promise((resolve) => {
-      votingAPI
-        .voteLike(state.data.id)
+      voteLike(state.data.id)
         .then((response) => {
           console.log("Like");
         })
@@ -150,8 +156,7 @@ const actions = {
   },
   [actionsTypes.voteDislike]({ state }) {
     return new Promise((resolve) => {
-      votingAPI
-        .voteDislike(state.data.id)
+      voteDislike(state.data.id)
         .then((response) => {
           console.log("Dislike");
         })
@@ -163,8 +168,7 @@ const actions = {
   [actionsTypes.getSearchImage]({ commit }) {
     commit(mutationsTypes.getSearchImageStart);
     return new Promise((resolve) => {
-      votingAPI
-        .getSearchImage()
+      getSearchImage()
         .then((response) => {
           commit(mutationsTypes.getSearchImageSuccess, response.data[0]);
         })
@@ -176,8 +180,7 @@ const actions = {
   [actionsTypes.getVotes]({ commit }) {
     return new Promise((resolve) => {
       commit(mutationsTypes.getVotesStart);
-      votingAPI
-        .getVotes()
+      getVotes()
         .then((response) => {
           let like = [];
           let disLike = [];
@@ -205,8 +208,7 @@ const actions = {
   [actionsTypes.getVotesFavorite]({ commit }) {
     return new Promise((resolve) => {
       commit(mutationsTypes.getVotesFavoriteStart);
-      votingAPI
-        .getVotesFavourite()
+      getVotesFavourite()
         .then((response) => {
           commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
           console.log("Favourite");
@@ -217,14 +219,14 @@ const actions = {
     });
   },
   [actionsTypes.getSearchDogs]() {
-    let requests = state.isVotesLike.map((item) => {
-      votingAPI.getSearchDogs(item.image_id);
+    const requests = state.isVotesLike.map((item) => {
+      return getSearchDogs(item.image_id);
     });
 
-
-    Promise.all(requests).then((response) => {
-      console.log(response);
-    });
+    Promise.all(requests)
+      .then((response) => {
+        console.log(response);
+      });
 
   },
 };
