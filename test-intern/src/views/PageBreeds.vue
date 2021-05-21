@@ -175,21 +175,21 @@ export default {
   line-height: 24px;
   border-radius: 10px;
   color: var(--help-text-color);
-  background: var(--breeds-select-bg);
+  background: var(--breeds-select-bg-color);
   outline: transparent;
   border: transparent;
   cursor: pointer;
 }
 .breeds-select__option {
   color: var(--help-text-color);
-  background: var(--breeds-select-bg);
+  background: var(--breeds-select-bg-color);
   font-size: 16px;
   line-height: 24px;
   padding: 20px;
   height: 30px;
   cursor: pointer;
   &:hover {
-    background: var(--breeds-select-bg);
+    background: var(--breeds-select-bg-color);
   }
 }
 .breeds-select__limit {
@@ -199,7 +199,7 @@ export default {
   line-height: 24px;
   border-radius: 10px;
   color: var(--help-text-color);
-  background: var(--breeds-select-bg);
+  background: var(--breeds-select-bg-color);
   outline: transparent;
   border: transparent;
   cursor: pointer;
@@ -213,7 +213,7 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: var(--breeds-select-bg);
+  background: var(--breeds-select-bg-color);
   cursor: pointer;
   fill: var(--help-text-color);
   transition: 0.6s;

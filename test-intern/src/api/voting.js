@@ -51,9 +51,9 @@ const getVotesFavourite = () => {
 };
 
 
-const getSearchDogs = async (id) => {
+const getSearchDogs = (id) => {
   // console.log(await axios.get(`/images/${id}`));
-  return await axios.get(`/images/${id}`)
+  return axios.get(`/images/${id}`)
     .then((res) => res.data);
 };
 

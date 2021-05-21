@@ -135,7 +135,7 @@ export default {
 
 .action-user {
   max-width: 100%;
-  // background-color: var(--main-color-bg);
+  background-color: var(--action-user-bg-color);
   padding: 15px 20px 15px 15px;
   margin: 15px 0 0;
   border-radius: 10px;
@@ -144,7 +144,8 @@ export default {
   justify-content: space-between;
 }
 .action-user__time {
-  background-color: var(--white-color);
+  background-color: var(--time-bg-color);
+  color: var(--bold-text-color);
   padding: 3px 10px;
   font-weight: 600;
   font-size: 16px;
