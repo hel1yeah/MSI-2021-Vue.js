@@ -38,7 +38,7 @@ export default {
   position: fixed;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 .wrapper-content {
   width: 100%;

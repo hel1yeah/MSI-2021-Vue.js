@@ -50,18 +50,14 @@ const getVotesFavourite = () => {
   return axios.get("/favourites", { params: query_params });
 };
 
-// const getSearchDogs = (id) => {
-// return axios.get(`/images/${id}`);
-// };
 
-const getSearchDogs = (id) => {
-  return axios.get(`/images/${id}`).then((response) => {
-    // console.log(response.data);
-
-  });
+const getSearchDogs = async (id) => {
+  // console.log(await axios.get(`/images/${id}`));
+  return await axios.get(`/images/${id}`)
+    .then((res) => res.data);
 };
 
-export default {
+export {
   voteLike,
   voteDislike,
   voteFavouriteImage,

@@ -7,7 +7,7 @@
     <div class="voting__content">
       <div
         class="voting__content-img"
-        :style="{ backgroundImage: `url(${dog.url})` }"
+        :style="{ backgroundImage: `url(${dog && dog.url})` }"
       ></div>
       <div class="voting__content--attitude-wrapper">
         <div
