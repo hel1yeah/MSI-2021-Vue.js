@@ -37,6 +37,7 @@ export default {
       this.$emit("onSearchBreeds", this.search );
       this.search = null;
     },
+    
   },
 };
 </script>

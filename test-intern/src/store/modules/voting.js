@@ -217,14 +217,11 @@ const actions = {
     });
   },
   [actionsTypes.getSearchDogs]() {
-    let requests = state.isVotesLike.map((item) => {
+    console.log(state.isVotesLike.map((item) => {
       votingAPI.getSearchDogs(item.image_id);
-    });
+    }));
+    
 
-
-    Promise.all(requests).then((response) => {
-      console.log(response);
-    });
 
   },
 };
