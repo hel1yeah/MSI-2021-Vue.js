@@ -5,9 +5,8 @@ import {
   getSearchImage,
   getVotes,
   getVotesFavourite,
-  getSearchDogs
+  getSearchDogs,
 } from "@/api/voting";
-import calculateDislikesLikes from "@/helpers/calculateDislikesLikes";
 
 const state = {
   data: null,
@@ -59,9 +58,9 @@ export const actionsTypes = {
 
 const mutations = {
   // votes
-  [mutationsTypes.voteLikeStart](state) { },
-  [mutationsTypes.voteDislikeStart](state) { },
-  [mutationsTypes.voteFavouriteImageStart](state) { },
+  [mutationsTypes.voteLikeStart](state) {},
+  [mutationsTypes.voteDislikeStart](state) {},
+  [mutationsTypes.voteFavouriteImageStart](state) {},
 
   // getSearchImage
   [mutationsTypes.getSearchImageStart](state) {
@@ -184,6 +183,7 @@ const actions = {
         .then((response) => {
           let like = [];
           let disLike = [];
+          calculate(response.data);
           function calculate(votes) {
             votes.forEach((vote) => {
               if (vote.value) {
@@ -193,7 +193,7 @@ const actions = {
               }
             });
           }
-          calculate(response.data);
+
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
             like: like,
@@ -223,10 +223,9 @@ const actions = {
       return getSearchDogs(item.image_id);
     });
 
-    Promise.all(requests)
-      .then((response) => {
-        console.log(response);
-      });
+    Promise.all(requests).then((response) => {
+      console.log(response);
+    });
   },
 };
 

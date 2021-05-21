@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     getBreeds() {
-      this.$store.dispatch(actionsTypes.getBreeds);
+      this.dogs ? '' : this.$store.dispatch(actionsTypes.getBreeds)
     },
     getLimitBreeds() {
       this.$store.dispatch(actionsTypes.getBreedsLimit, { limit: this.limit });

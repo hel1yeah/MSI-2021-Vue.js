@@ -16,7 +16,7 @@ const getBreedsLimit = (limit) => {
 
 
 
-export default {
+export {
   getBreeds,
   getBreedsLimit,
 

@@ -144,8 +144,10 @@ export default {
   justify-content: space-between;
 }
 .action-user__time {
+  text-align: center;
   background-color: var(--time-bg-color);
   color: var(--bold-text-color);
+  width: 62px;
   padding: 3px 10px;
   font-weight: 600;
   font-size: 16px;

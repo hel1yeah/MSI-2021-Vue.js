@@ -1,4 +1,4 @@
-import breedsAPI from "@/api/breeds";
+import { getBreeds, getBreedsLimit } from "@/api/breeds";
 
 import { dogNames, getForNameBreeds } from "@/helpers/getBreedsName";
 
@@ -67,8 +67,7 @@ const actions = {
   [actionsTypes.getBreeds]({ commit }) {
     commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI
-        .getBreeds()
+      getBreeds()
         .then((response) => {
           const names = dogNames(response.data);
           commit(mutationsTypes.getBreedsNameSuccess, names);
@@ -83,8 +82,7 @@ const actions = {
   [actionsTypes.getBreedsLimit]({ commit }, { limit }) {
     commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI
-        .getBreedsLimit(limit)
+      getBreedsLimit(limit)
         .then((response) => {
           commit(mutationsTypes.getBreedsSuccess, response.data);
         })
@@ -97,8 +95,7 @@ const actions = {
   [actionsTypes.getForNameBreeds]({ commit }, { name }) {
     commit(mutationsTypes.getBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI
-        .getBreeds()
+      getBreeds()
         .then((response) => {
           if (name === "All Breeds") {
             commit(mutationsTypes.getBreedsSuccess, response.data);
@@ -116,9 +113,7 @@ const actions = {
   },
   [actionsTypes.sortForName](context, { sortingType }) {
     context.commit(mutationsTypes.sortStart);
-
     let sortArr = context.state.data;
-
     if (sortingType === "asc") {
       sortArr.sort((a, b) => {
         let nameA = a.name.toUpperCase();
@@ -149,8 +144,7 @@ const actions = {
   [actionsTypes.onSearchBreeds]({ commit }, name) {
     commit(mutationsTypes.onSearchBreedsStart);
     return new Promise((resolve) => {
-      breedsAPI
-        .getBreeds()
+      getBreeds()
         .then((response) => {
           commit(
             mutationsTypes.onSearchBreedsSuccess,

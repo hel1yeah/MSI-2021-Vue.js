@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     getSearchImage() {
-      this.$store.dispatch(actionsTypes.getSearchImage);
+      this.dog ? "" : this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteLike() {
       this.actions.push(this.creatActionItem("like"));
