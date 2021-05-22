@@ -18,8 +18,7 @@ const state = {
   isVodesDislike: null,
   isVotesFavorite: null,
 
-  isSearchDogsLike: null,
-  // isSearchDogsDislike: null,
+  isSearchDogs: null,
 };
 
 export const mutationsTypes = {
@@ -39,9 +38,9 @@ export const mutationsTypes = {
   getVotesFavoriteSuccess: "[Voting] get Votes Favorite Success",
   getVotesFavoriteFailure: "[Voting] get Votes Favorite Failure",
 
-  getSearchDogsLikeStart: "[Voting] get Search Dogs like Start",
-  getSearchDogsLikeSuccess: "[Voting] get Search Dogs like Success",
-  getSearchDogsLikeFailure: "[Voting] get Search Dogs like Failure",
+  getSearchDogsStart: "[Voting] get Search Dogs Start",
+  getSearchDogsSuccess: "[Voting] get Search Dogs Success",
+  getSearchDogsFailure: "[Voting] get Search Dogs Failure",
 };
 
 export const actionsTypes = {
@@ -54,7 +53,7 @@ export const actionsTypes = {
   getVotes: "[Voting] get Votes",
   getVotesFavorite: "[Voting] get Votes Favorite",
 
-  getSearchDogsLike: "[Voting] get Search Dogs Like",
+  getSearchDogs: "[Voting] get Search Dogs Like",
 };
 
 const mutations = {
@@ -98,6 +97,8 @@ const mutations = {
     state.isVotes = null;
     state.isLoading = false;
     state.error = payload;
+    state.isVotesLike = null;
+    state.isVotesDislike = null;
   },
 
   // get Votes Favorite
@@ -116,16 +117,15 @@ const mutations = {
     state.error = payload;
   },
   // get Search Dogs like
-  [mutationsTypes.getSearchDogsLikeStart](state) {
-    state.isSearchDogsLike = null;
+  [mutationsTypes.getSearchDogsStart](state) {
+    state.isSearchDogs = null;
     state.isLoading = true;
   },
-  [mutationsTypes.getSearchDogsLikeSuccess](state, payload) {
-    state.isSearchDogsLike = payload;
+  [mutationsTypes.getSearchDogsSuccess](state, payload) {
+    state.isSearchDogs = payload;
     state.isLoading = false;
   },
-  [mutationsTypes.getSearchDogsLikeFailure](state, payload) {
-    state.isSearchDogsLike = null;
+  [mutationsTypes.getSearchDogsFailure](state, payload) {
     state.error = payload;
     state.isLoading = false;
   },
@@ -158,6 +158,18 @@ const actions = {
     return new Promise((resolve) => {
       voteDislike(state.data.id)
         .then((response) => {
+          console.log("Dislike");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  },
+  [actionsTypes.voteUnLike]({ state }, id) {
+    return new Promise((resolve) => {
+      voteDislike(id)
+        .then((response) => {
+          console.log(response);
           console.log("Dislike");
         })
         .catch((err) => {
@@ -218,19 +230,26 @@ const actions = {
         });
     });
   },
-  [actionsTypes.getSearchDogsLike]({ commit, state }) {
-    commit(mutationsTypes.getSearchDogsLikeStart);
-    const requests = state.isVotesLike.map((item) => {
-      return getSearchDogs(item.image_id);
-    });
-
+  [actionsTypes.getSearchDogs]({ commit, state }, triger) {
+    let requests = "";
+    commit(mutationsTypes.getSearchDogsStart);
+    if (triger === "like") {
+      requests = state.isVotesLike.map((item) => {
+        return getSearchDogs(item.image_id);
+      });
+    } else {
+      requests = state.isVodesDislike.map((item) => {
+        return getSearchDogs(item.image_id);
+      });
+    }
     Promise.all(requests)
       .then((response) => {
         console.log(response);
-        commit(mutationsTypes.getSearchDogsLikeSuccess, response);
+        commit(mutationsTypes.getSearchDogsSuccess, response);
       })
       .catch((err) => {
-        commit(mutationsTypes.getSearchDogsLikeFailure, err);
+        console.log(err);
+        commit(mutationsTypes.getSearchDogsFailure, err);
       });
   },
 };

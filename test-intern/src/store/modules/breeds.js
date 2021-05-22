@@ -49,17 +49,21 @@ const mutations = {
     state.isLoading = true;
   },
   [mutationsTypes.sortFinish](state, payload) {
-    (state.isLoading = false), (state.data = payload);
+    state.isLoading = false;
+    state.data = payload;
   },
 
   [mutationsTypes.onSearchBreedsStart](state) {
-    (state.isLoading = true), (state.data = null);
+    state.isLoading = true;
+    state.data = null;
   },
   [mutationsTypes.onSearchBreedsSuccess](state, payload) {
-    (state.isLoading = false), (state.data = payload);
+    state.isLoading = false;
+    state.data = payload;
   },
   [mutationsTypes.onSearchBreedsFailure](state, payload) {
-    (state.isLoading = false), (state.data = payload);
+    state.isLoading = false;
+    state.data = payload;
   },
 };
 
