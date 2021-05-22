@@ -4,10 +4,18 @@
     <div class="dog-like__info">
       <ButtonClose></ButtonClose>
     </div>
-
+    <div class="grid-container">
+      <div
+        class="grid-container__item"
+        v-for="dog in dogsLikes"
+        :key="dog.id"
+        :style="{ backgroundImage: `url(${dog.url})` }"
+      >
+        <div class="grid-container__item--hover"></div>
+      </div>
+    </div> 
     <div @click="getVotes">test getVotes</div>
-    <div @click="getSearchDogs">test getSearchDogs</div>
-    {{ like }}
+    <div @click="getSearchDogsLike">test getSearchDogsLike</div>
   </div>
 </template>
 
@@ -22,22 +30,28 @@ export default {
   components: {
     ButtonClose,
   },
+  data() {
+    return {
+      like: "like",
+    };
+  },
   name: "DogLike",
   methods: {
     getVotes() {
       this.$store.dispatch(actionsTypes.getVotes);
     },
-    getSearchDogs() {
-      this.$store.dispatch(actionsTypes.getSearchDogs);
+    getSearchDogsLike() {
+      this.$store.dispatch(actionsTypes.getSearchDogsLike, this.like);
     },
   },
   computed: {
     ...mapState({
-      like: (state) => state.voting.isVotesLike,
+      dogsLikes: (state) => state.voting.isSearchDogsLike,
     }),
   },
   created() {
-    this.getVotes();
+    // this.getVotes();
+    this.getSearchDogsLike();
   },
 };
 </script>

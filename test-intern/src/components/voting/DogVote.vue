@@ -73,6 +73,7 @@
         <img class="action-user__attitude" :src="action.actionImg" alt="dog" />
       </div>
     </div>
+    <!-- {{ votes }} -->
   </div>
 </template>
 
@@ -100,37 +101,34 @@ export default {
     };
   },
   methods: {
+    getVotes() {
+      this.$store.dispatch(actionsTypes.getVotes)
+    },
     getSearchImage() {
       this.dog ? "" : this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteLike() {
       this.actions.push(this.creatActionItem("like"));
+      this.$store.dispatch(actionsTypes.getVotes)
       this.$store.dispatch(actionsTypes.voteLike);
       this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteDislike() {
       this.actions.push(this.creatActionItem("dislikes"));
+      this.$store.dispatch(actionsTypes.getVotes)
       this.$store.dispatch(actionsTypes.voteDislike);
       this.$store.dispatch(actionsTypes.getSearchImage);
     },
     voteFavouriteImage() {
       this.actions.push(this.creatActionItem("favourite"));
+      this.$store.dispatch(actionsTypes.getVotes)
       this.$store.dispatch(actionsTypes.voteFavouriteImage);
       this.$store.dispatch(actionsTypes.getSearchImage);
     },
     onSearchBreeds(name) {
       this.$store.dispatch(actionsTypes.onSearchBreeds, name);
     },
-    getActionImg(action) {
-      let act = action.toLowerCase();
-      if (act === "like") {
-        return this.likes;
-      } else if (act === "dislikes") {
-        return this.dislikes;
-      } else {
-        return this.favorite;
-      }
-    },
+
     creatActionItem(act) {
       let id = this.dog.id;
       let actionItem = {
@@ -148,14 +146,26 @@ export default {
       let time = `${hours}:${minutes}`;
       return time;
     },
+    getActionImg(action) {
+      let act = action.toLowerCase();
+      if (act === "like") {
+        return this.likes;
+      } else if (act === "dislikes") {
+        return this.dislikes;
+      } else {
+        return this.favorite;
+      }
+    },
   },
   computed: {
     ...mapState({
       dog: (state) => state.voting.data,
+      votes: (state) => state.voting.isVotes,
     }),
   },
   created() {
     this.getSearchImage();
+    this.getVotes();
   },
 };
 </script>

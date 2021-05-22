@@ -38,7 +38,6 @@ const getSearchImage = () => {
 
 const getVotes = () => {
   let query_params = {
-    order: "DESC",
     sub_id,
   };
   return axios.get("/votes", { params: query_params });
@@ -56,7 +55,7 @@ const getVotesFavourite = () => {
 const getSearchDogs = (id) => {
   // console.log(await axios.get(`/images/${id}`));
   return axios.get(`/images/${id}`)
-    .then((res) => res.data);
+    .then((response) => response.data);
 };
 
 export {

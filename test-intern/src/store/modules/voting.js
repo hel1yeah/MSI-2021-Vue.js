@@ -18,7 +18,8 @@ const state = {
   isVodesDislike: null,
   isVotesFavorite: null,
 
-  isSearchDogs: null,
+  isSearchDogsLike: null,
+  // isSearchDogsDislike: null,
 };
 
 export const mutationsTypes = {
@@ -38,9 +39,9 @@ export const mutationsTypes = {
   getVotesFavoriteSuccess: "[Voting] get Votes Favorite Success",
   getVotesFavoriteFailure: "[Voting] get Votes Favorite Failure",
 
-  getSearchDogsStart: "[Voting] get Search Dogs Start",
-  getSearchDogsSuccess: "[Voting] get Search Dogs Success",
-  getSearchDogsFailure: "[Voting] get Search Dogs Failure",
+  getSearchDogsLikeStart: "[Voting] get Search Dogs like Start",
+  getSearchDogsLikeSuccess: "[Voting] get Search Dogs like Success",
+  getSearchDogsLikeFailure: "[Voting] get Search Dogs like Failure",
 };
 
 export const actionsTypes = {
@@ -53,7 +54,7 @@ export const actionsTypes = {
   getVotes: "[Voting] get Votes",
   getVotesFavorite: "[Voting] get Votes Favorite",
 
-  getSearchDogs: "[Voting] get Search Dogs",
+  getSearchDogsLike: "[Voting] get Search Dogs Like",
 };
 
 const mutations = {
@@ -114,17 +115,17 @@ const mutations = {
     state.isLoading = false;
     state.error = payload;
   },
-  // get Search Dogs
-  [mutationsTypes.getSearchDogsStart](state) {
-    state.isSearchDogs = null;
+  // get Search Dogs like
+  [mutationsTypes.getSearchDogsLikeStart](state) {
+    state.isSearchDogsLike = null;
     state.isLoading = true;
   },
-  [mutationsTypes.getSearchDogsSuccess](state, payload) {
-    state.isSearchDogs = payload;
+  [mutationsTypes.getSearchDogsLikeSuccess](state, payload) {
+    state.isSearchDogsLike = payload;
     state.isLoading = false;
   },
-  [mutationsTypes.getSearchDogsFailure](state, payload) {
-    state.isSearchDogs = null;
+  [mutationsTypes.getSearchDogsLikeFailure](state, payload) {
+    state.isSearchDogsLike = null;
     state.error = payload;
     state.isLoading = false;
   },
@@ -193,7 +194,6 @@ const actions = {
               }
             });
           }
-
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
             like: like,
@@ -218,14 +218,20 @@ const actions = {
         });
     });
   },
-  [actionsTypes.getSearchDogs]() {
+  [actionsTypes.getSearchDogsLike]({ commit, state }) {
+    commit(mutationsTypes.getSearchDogsLikeStart);
     const requests = state.isVotesLike.map((item) => {
       return getSearchDogs(item.image_id);
     });
 
-    Promise.all(requests).then((response) => {
-      console.log(response);
-    });
+    Promise.all(requests)
+      .then((response) => {
+        console.log(response);
+        commit(mutationsTypes.getSearchDogsLikeSuccess, response);
+      })
+      .catch((err) => {
+        commit(mutationsTypes.getSearchDogsLikeFailure, err);
+      });
   },
 };
 
