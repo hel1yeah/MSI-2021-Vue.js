@@ -12,7 +12,7 @@
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
         <div class="dog-like-grid-container__item--hover">
-          <div class="dog-like__active-img" @click="voteUnLike(dog.id)">
+          <div class="dog-like__active-img" @click="voteDelete(dog.id)">
             <svg
               width="30"
               height="30"
@@ -39,6 +39,7 @@ import { actionsTypes } from "@/store/modules/voting";
 import ButtonClose from "@/components/ButtonClose";
 
 export default {
+  name: "DogLike",
   components: {
     ButtonClose,
   },
@@ -47,17 +48,18 @@ export default {
       like: "like",
     };
   },
-  name: "DogLike",
   methods: {
     getVotes() {
-      this.$store.dispatch(actionsTypes.getVotes);
+      this.$store.dispatch(actionsTypes.getVotes).then(() => {
+        this.getSearchDogs();
+      });
     },
     getSearchDogs() {
       this.$store.dispatch(actionsTypes.getSearchDogs, this.like);
     },
-    voteUnLike(id) {
-      console.log((typeof  id, id));
-      this.$store.dispatch(actionsTypes.voteUnLike, id);
+    voteDelete(id) {
+      this.$store.dispatch(actionsTypes.voteDelete, id);
+      this.getVotes();
     },
   },
   computed: {
@@ -66,8 +68,8 @@ export default {
     }),
   },
   mounted() {
-    this.getVotes()
-    this.getSearchDogs();
+    this.getVotes();
+    // this.getSearchDogs();
   },
 };
 </script>

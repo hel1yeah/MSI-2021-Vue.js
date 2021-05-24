@@ -40,25 +40,27 @@ import { actionsTypes } from "@/store/modules/voting";
 import ButtonClose from "@/components/ButtonClose";
 
 export default {
+  name: "DogLike",
   components: {
     ButtonClose,
   },
   data() {
     return {
-      Dislike: "dislike",
+      dislike: "dislike",
     };
   },
-  name: "DogLike",
   methods: {
     getVotes() {
-      this.$store.dispatch(actionsTypes.getVotes);
+      this.$store.dispatch(actionsTypes.getVotes).then(() => {
+        this.getSearchDogs();
+      });
     },
     getSearchDogs() {
       this.$store.dispatch(actionsTypes.getSearchDogs, this.like);
     },
     voteUnLike(id) {
-      console.log(toString(id));
-      // this.$store.dispatch(actionsTypes.voteDislike, id);
+      this.$store.dispatch(actionsTypes.voteDelete, id);
+      this.getVotes();
     },
   },
   computed: {
@@ -66,9 +68,9 @@ export default {
       dogsLikes: (state) => state.voting.isSearchDogs,
     }),
   },
-  created() {},
   mounted() {
-    this.getSearchDogs();
+    this.getVotes();
+    // this.getSearchDogs();
   },
 };
 </script>
