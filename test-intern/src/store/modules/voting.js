@@ -15,7 +15,7 @@ const state = {
 
   isVotes: null,
   isVotesLike: null,
-  isVodesDislike: null,
+  isVotesDislike: null,
   isVotesFavorite: null,
 
   isSearchDogs: null,
@@ -54,6 +54,7 @@ export const actionsTypes = {
   getVotesFavorite: "[Voting] get Votes Favorite",
 
   getSearchDogs: "[Voting] get Search Dogs Like",
+  voteUnLike: '[Voting] vote UnLike'
 };
 
 const mutations = {
@@ -165,11 +166,11 @@ const actions = {
         });
     });
   },
-  [actionsTypes.voteUnLike]({ state }, id) {
+  [actionsTypes.voteUnLike]({state},id) {
+    console.log(id);
     return new Promise((resolve) => {
       voteDislike(id)
         .then((response) => {
-          console.log(response);
           console.log("Dislike");
         })
         .catch((err) => {
@@ -224,6 +225,7 @@ const actions = {
         .then((response) => {
           commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
           console.log("Favourite");
+          
         })
         .catch((err) => {
           commit(mutationsTypes.getVotesFavoriteFailure, response.data);
@@ -238,7 +240,7 @@ const actions = {
         return getSearchDogs(item.image_id);
       });
     } else {
-      requests = state.isVodesDislike.map((item) => {
+      requests = state.isVotesDislike.map((item) => {
         return getSearchDogs(item.image_id);
       });
     }
@@ -248,7 +250,7 @@ const actions = {
         commit(mutationsTypes.getSearchDogsSuccess, response);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         commit(mutationsTypes.getSearchDogsFailure, err);
       });
   },

@@ -4,8 +4,6 @@
     <div class="dog-like__info">
       <ButtonClose></ButtonClose>
     </div>
-    <div @click="getVotes">test getVotes</div>
-    <div @click="getSearchDogs">test getSearchDogs</div>
     <div class="dog-like-grid-container">
       <div
         class="dog-like-grid-container__item"
@@ -14,7 +12,7 @@
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
         <div class="dog-like-grid-container__item--hover">
-          <div class="dog-like__active-img" @click="voteUnLike(dog.breeds[0].reference_image_id)">
+          <div class="dog-like__active-img" @click="voteUnLike(dog.id)">
             <svg
               width="30"
               height="30"
@@ -58,8 +56,8 @@ export default {
       this.$store.dispatch(actionsTypes.getSearchDogs, this.like);
     },
     voteUnLike(id) {
-      console.log(id);
-      this.$store.dispatch(actionsTypes.voteDislike, id);
+      console.log((typeof  id, id));
+      this.$store.dispatch(actionsTypes.voteUnLike, id);
     },
   },
   computed: {
@@ -67,8 +65,8 @@ export default {
       dogsLikes: (state) => state.voting.isSearchDogs,
     }),
   },
-  created() {},
   mounted() {
+    this.getVotes()
     this.getSearchDogs();
   },
 };

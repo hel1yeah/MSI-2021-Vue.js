@@ -1,6 +1,6 @@
 import axios from "@/api/axios";
 
-const sub_id = 'test-user-26';
+const sub_id = "test-user-26";
 
 const voteLike = (id) => {
   let body = {
@@ -51,11 +51,14 @@ const getVotesFavourite = () => {
   return axios.get("/favourites", { params: query_params });
 };
 
-
 const getSearchDogs = (id) => {
   // console.log(await axios.get(`/images/${id}`));
-  return axios.get(`/images/${id}`)
-    .then((response) => response.data);
+  return axios.get(`/images/${id}`).then(
+    (response) =>
+      // response.data.image_id = id
+      // console.log(response.data);
+      response.data
+  );
 };
 
 export {
