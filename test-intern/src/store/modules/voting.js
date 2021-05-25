@@ -55,7 +55,7 @@ export const actionsTypes = {
   getVotesFavorite: "[Voting] get Votes Favorite",
 
   getSearchDogs: "[Voting] get Search Dogs Like",
-  voteDelete : "[Voting] vote UnLike",
+  voteDelete: "[Voting] vote UnLike",
 };
 
 const mutations = {
@@ -186,6 +186,7 @@ const actions = {
       voteDelete(id)
         .then((response) => {
           console.log("Dislike");
+          resolve();
         })
         .catch((err) => {
           console.log(err);
@@ -204,30 +205,29 @@ const actions = {
         });
     });
   },
-  [actionsTypes.getVotes]({ commit,  }) {
+  [actionsTypes.getVotes]({ commit }) {
     return new Promise((resolve) => {
       commit(mutationsTypes.getVotesStart);
       getVotes()
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           let like = [];
           let disLike = [];
 
-
           response.data.forEach((vote) => {
-              if (vote.value) {
-                like.push(vote);
-              } else {
-                disLike.push(vote);
-              }
-            });
-
+            if (vote.value) {
+              like.push(vote);
+            } else {
+              disLike.push(vote);
+            }
+          });
+          // console.log(like);
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
             like: like,
             dislike: disLike,
           });
-          resolve()
+          resolve();
         })
         .catch((err) => {
           commit(mutationsTypes.getVotesFailure, err);
@@ -240,20 +240,19 @@ const actions = {
     commit(mutationsTypes.getSearchDogsStart);
     if (triger === "like") {
       requests = state.isVotesLike.map((item) => {
-        return getSearchDogs(item.image_id);
+        return getSearchDogs(item.image_id, item.id);
       });
     } else {
       requests = state.isVotesDislike.map((item) => {
-        return getSearchDogs(item.image_id);
+        return getSearchDogs(item.image_id, item.id);
       });
     }
+    
     Promise.all(requests)
       .then((response) => {
-        console.log(response);
         commit(mutationsTypes.getSearchDogsSuccess, response);
       })
       .catch((err) => {
-        // console.log(err);
         commit(mutationsTypes.getSearchDogsFailure, err);
       });
   },

@@ -12,7 +12,7 @@
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
         <div class="dog-like-grid-container__item--hover">
-          <div class="dog-like__active-img" @click="voteDelete(dog.id)">
+          <div class="dog-like__active-img" @click="voteDelete(dog.vote_id)">
             <svg
               width="30"
               height="30"
@@ -57,9 +57,10 @@ export default {
     getSearchDogs() {
       this.$store.dispatch(actionsTypes.getSearchDogs, this.like);
     },
-    voteDelete(id) {
-      this.$store.dispatch(actionsTypes.voteDelete, id);
-      this.getVotes();
+    voteDelete(vote_id) {
+      this.$store.dispatch(actionsTypes.voteDelete, vote_id).then(() => {
+        this.getVotes();
+      });
     },
   },
   computed: {
