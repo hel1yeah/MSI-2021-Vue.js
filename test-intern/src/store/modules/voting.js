@@ -181,15 +181,14 @@ const actions = {
     });
   },
   [actionsTypes.voteDelete]({ state }, id) {
-    console.log(id);
     return new Promise((resolve) => {
       voteDelete(id)
-        .then((response) => {
-          console.log("Dislike");
+        .then(() => {
+          console.log("Vote Delete");
           resolve();
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     });
   },
@@ -247,7 +246,7 @@ const actions = {
         return getSearchDogs(item.image_id, item.id);
       });
     }
-    
+
     Promise.all(requests)
       .then((response) => {
         commit(mutationsTypes.getSearchDogsSuccess, response);
