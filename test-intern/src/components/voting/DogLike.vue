@@ -4,7 +4,8 @@
     <div class="dog-like__info">
       <ButtonClose></ButtonClose>
     </div>
-    <div class="dog-like-grid-container">
+    <Preloader v-if="isLoading" />
+    <div class="dog-like-grid-container" v-if="isLoading !== true">
       <div
         class="dog-like-grid-container__item"
         v-for="dog in dogsLikes"
@@ -37,11 +38,12 @@ import { mapState } from "vuex";
 import { actionsTypes } from "@/store/modules/voting";
 
 import ButtonClose from "@/components/ButtonClose";
-
+import Preloader from "@/components/Preloader";
 export default {
   name: "DogLike",
   components: {
     ButtonClose,
+    Preloader,
   },
   data() {
     return {
@@ -66,6 +68,7 @@ export default {
   computed: {
     ...mapState({
       dogsLikes: (state) => state.voting.isSearchDogs,
+      isLoading: (state) => state.voting.isLoading,
     }),
   },
   mounted() {
