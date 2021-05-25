@@ -1,16 +1,16 @@
 <template>
-  <div  class="loader">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-    </div>
+  <div class="loader">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
 </template>
 <script>
 export default {
-  name: 'Preloader'
-}
+  name: "Preloader",
+};
 </script>
 
 <style lang="scss">
@@ -31,12 +31,12 @@ export default {
     animation-duration: 5.5s;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       width: 5px;
       height: 5px;
       border-radius: 5px;
-      background: mediumseagreen; /* Pick a color */
+      background: var(--btn-active-bg-color); /* Pick a color */
     }
 
     &:nth-child(2) {

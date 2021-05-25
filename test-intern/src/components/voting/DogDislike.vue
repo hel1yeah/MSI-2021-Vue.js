@@ -4,7 +4,8 @@
     <div class="dog-like__info">
       <ButtonClose></ButtonClose>
     </div>
-    <div class="dog-dislike-grid-container">
+    <Preloader v-if="isLoading" />
+    <div class="dog-dislike-grid-container" v-if="isLoading !== true">
       <div
         class="dog-dislike-grid-container__item"
         v-for="dog in dogsLikes"
@@ -12,9 +13,8 @@
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
         <div class="dog-dislike-grid-container__item--hover">
-          
-          <div class="dog-like__active-img" @click="voteUnLike(dog.id)">
-             <svg
+          <div class="dog-like__active-img" @click="voteUnLike(dog.vote_id)">
+            <svg
               width="30"
               height="30"
               viewBox="0 0 30 30"
@@ -38,11 +38,13 @@ import { mapState } from "vuex";
 import { actionsTypes } from "@/store/modules/voting";
 
 import ButtonClose from "@/components/ButtonClose";
+import Preloader from "@/components/Preloader";
 
 export default {
   name: "DogLike",
   components: {
     ButtonClose,
+    Preloader,
   },
   data() {
     return {
@@ -58,19 +60,20 @@ export default {
     getSearchDogs() {
       this.$store.dispatch(actionsTypes.getSearchDogs, this.like);
     },
-    voteUnLike(id) {
-      this.$store.dispatch(actionsTypes.voteDelete, id);
-      this.getVotes();
+    voteUnLike(vote_id) {
+      this.$store.dispatch(actionsTypes.voteDelete, vote_id).then(() => {
+        this.getVotes();
+      });
     },
   },
   computed: {
     ...mapState({
       dogsLikes: (state) => state.voting.isSearchDogs,
+      isLoading: (state) => state.voting.isLoading,
     }),
   },
   mounted() {
     this.getVotes();
-    // this.getSearchDogs();
   },
 };
 </script>
