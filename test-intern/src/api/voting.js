@@ -20,12 +20,6 @@ const voteDislike = (id) => {
   return axios.post("/votes", body);
 };
 const voteDelete = (id) => {
-  let body = {
-    image_id: id,
-    value: 0,
-    sub_id,
-    // axios.get(`/images/${id}`)
-  };
   return axios.delete(`/votes/${id}`);
 };
 
@@ -60,9 +54,23 @@ const getVotesFavourite = () => {
   return axios.get("/favourites", { params: query_params });
 };
 
-const getSearchDogs = (id) => {
-  return axios.get(`/images/${id}`).then((response) => response.data);
-};
+// const getSearchDogs = (image_id, vote) => {
+//   return axios.get(`/images/${image_id}`).then((response) => {
+//     let obj = response.data;
+//     obj.vote_id = vote;
+//     return obj;
+//   });
+// };
+
+// const getSearchDogs = (image_id) => {
+//   return axios.get(`/images/${image_id}`).then((response) => response.data);
+// };
+
+const getSearchDogs = (image_id, vote) =>
+  axios.get(`/images/${image_id}`).then(({ data }) => ({
+    ...data,
+    vote_id: vote,
+  }));
 
 export {
   voteLike,
