@@ -56,6 +56,7 @@ export default {
   background-color: var(--default-block-bg-color);
   padding: 20px;
   border-radius: 20px;
+  min-height: 50vh;
 }
 .voting-top {
   display: flex;
