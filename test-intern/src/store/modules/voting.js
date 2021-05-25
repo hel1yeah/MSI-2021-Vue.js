@@ -1,6 +1,7 @@
 import {
   voteLike,
   voteDislike,
+  voteDelete,
   voteFavouriteImage,
   getSearchImage,
   getVotes,
@@ -54,7 +55,7 @@ export const actionsTypes = {
   getVotesFavorite: "[Voting] get Votes Favorite",
 
   getSearchDogs: "[Voting] get Search Dogs Like",
-  voteUnLike: '[Voting] vote UnLike'
+  voteDelete : "[Voting] vote UnLike",
 };
 
 const mutations = {
@@ -166,10 +167,23 @@ const actions = {
         });
     });
   },
-  [actionsTypes.voteUnLike]({state},id) {
+  [actionsTypes.getVotesFavorite]({ commit }) {
+    return new Promise((resolve) => {
+      commit(mutationsTypes.getVotesFavoriteStart);
+      getVotesFavourite()
+        .then((response) => {
+          commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
+          console.log("Favourite");
+        })
+        .catch((err) => {
+          commit(mutationsTypes.getVotesFavoriteFailure, response.data);
+        });
+    });
+  },
+  [actionsTypes.voteDelete]({ state }, id) {
     console.log(id);
     return new Promise((resolve) => {
-      voteDislike(id)
+      voteDelete(id)
         .then((response) => {
           console.log("Dislike");
         })
@@ -190,48 +204,37 @@ const actions = {
         });
     });
   },
-  [actionsTypes.getVotes]({ commit }) {
+  [actionsTypes.getVotes]({ commit,  }) {
     return new Promise((resolve) => {
       commit(mutationsTypes.getVotesStart);
       getVotes()
         .then((response) => {
+          console.log(response);
           let like = [];
           let disLike = [];
-          calculate(response.data);
-          function calculate(votes) {
-            votes.forEach((vote) => {
+
+
+          response.data.forEach((vote) => {
               if (vote.value) {
                 like.push(vote);
               } else {
                 disLike.push(vote);
               }
             });
-          }
+
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
             like: like,
             dislike: disLike,
           });
+          resolve()
         })
         .catch((err) => {
           commit(mutationsTypes.getVotesFailure, err);
         });
     });
   },
-  [actionsTypes.getVotesFavorite]({ commit }) {
-    return new Promise((resolve) => {
-      commit(mutationsTypes.getVotesFavoriteStart);
-      getVotesFavourite()
-        .then((response) => {
-          commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
-          console.log("Favourite");
-          
-        })
-        .catch((err) => {
-          commit(mutationsTypes.getVotesFavoriteFailure, response.data);
-        });
-    });
-  },
+
   [actionsTypes.getSearchDogs]({ commit, state }, triger) {
     let requests = "";
     commit(mutationsTypes.getSearchDogsStart);

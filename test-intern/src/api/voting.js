@@ -19,6 +19,15 @@ const voteDislike = (id) => {
   };
   return axios.post("/votes", body);
 };
+const voteDelete = (id) => {
+  let body = {
+    image_id: id,
+    value: 0,
+    sub_id,
+    // axios.get(`/images/${id}`)
+  };
+  return axios.delete(`/votes/${id}`);
+};
 
 const voteFavouriteImage = (id) => {
   let post_body = {
@@ -52,18 +61,13 @@ const getVotesFavourite = () => {
 };
 
 const getSearchDogs = (id) => {
-  // console.log(await axios.get(`/images/${id}`));
-  return axios.get(`/images/${id}`).then(
-    (response) =>
-      // response.data.image_id = id
-      // console.log(response.data);
-      response.data
-  );
+  return axios.get(`/images/${id}`).then((response) => response.data);
 };
 
 export {
   voteLike,
   voteDislike,
+  voteDelete,
   voteFavouriteImage,
   getSearchImage,
   getVotes,
