@@ -1,8 +1,10 @@
 <template>
   <div class="dog-like">
-    DogLike
     <div class="dog-like__info">
       <ButtonClose></ButtonClose>
+      <div class="dog-like__info__name-component">
+        <NamePage :nameComponent="nameComponent"></NamePage>
+      </div>
     </div>
     <Preloader v-if="isLoading" />
     <div class="dog-like-grid-container" v-if="isLoading !== true">
@@ -39,15 +41,18 @@ import { actionsTypes } from "@/store/modules/voting";
 
 import ButtonClose from "@/components/ButtonClose";
 import Preloader from "@/components/Preloader";
+import NamePage from "@/components/NamePage";
 export default {
   name: "DogLike",
   components: {
     ButtonClose,
     Preloader,
+    NamePage,
   },
   data() {
     return {
       like: "like",
+      nameComponent: "Likes",
     };
   },
   methods: {
@@ -145,5 +150,13 @@ export default {
   & svg {
     fill: var(--btn-active-bg-color);
   }
+}
+.dog-like__info {
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px 0;
+}
+.dog-like__info__name-component{
+  margin: 0 0 0 10px;
 }
 </style>
