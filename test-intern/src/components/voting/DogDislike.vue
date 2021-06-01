@@ -1,6 +1,6 @@
 <template>
   <div class="dog-dislike">
-    DogDislike
+    DogDislikes
     <div class="dog-like__info">
       <ButtonClose></ButtonClose>
     </div>
