@@ -22,6 +22,9 @@ const voteDislike = (id) => {
 const voteDelete = (id) => {
   return axios.delete(`/votes/${id}`);
 };
+const voteDeleteFavorite = (id) => {
+  return axios.delete(`/favourites/${id}`);
+};
 
 const voteFavouriteImage = (id) => {
   let post_body = {
@@ -76,6 +79,7 @@ export {
   voteLike,
   voteDislike,
   voteDelete,
+  voteDeleteFavorite,
   voteFavouriteImage,
   getSearchImage,
   getVotes,

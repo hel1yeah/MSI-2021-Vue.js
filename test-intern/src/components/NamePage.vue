@@ -21,7 +21,6 @@ export default {
   text-align: center;
   border-radius: 10px;
   background-color: var(--btn-active-bg-color);
-  max-width: 146px;
   padding: 5px 30px;
   text-transform: uppercase;
   color: var(--default-block-bg-color);

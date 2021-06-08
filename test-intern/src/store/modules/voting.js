@@ -7,6 +7,7 @@ import {
   getVotes,
   getVotesFavourite,
   getSearchDogs,
+  voteDeleteFavorite,
 } from "@/api/voting";
 
 const state = {
@@ -18,6 +19,7 @@ const state = {
   isVotesLike: null,
   isVotesDislike: null,
   isVotesFavorite: null,
+  isVotesFavoriteFull: null,
 
   isSearchDogs: null,
 };
@@ -53,9 +55,11 @@ export const actionsTypes = {
 
   getVotes: "[Voting] get Votes",
   getVotesFavorite: "[Voting] get Votes Favorite",
+  getVotesFavoriteFull: "[Voting] get Votes Favorite Full",
 
   getSearchDogs: "[Voting] get Search Dogs Like",
-  voteDelete: "[Voting] vote UnLike",
+  voteDelete: "[Voting] vote Delete",
+  voteDeleteFavorite: "[Voting] vote Delete Favorite",
 };
 
 const mutations = {
@@ -110,8 +114,9 @@ const mutations = {
     state.error = null;
   },
   [mutationsTypes.getVotesFavoriteSuccess](state, payload) {
-    state.isLoading = false;
     state.isVotesFavorite = payload;
+    state.isLoading = false;
+    state.error = null;
   },
   [mutationsTypes.getVotesFavoriteFailure](state, payload) {
     state.isVotesFavorite = null;
@@ -173,10 +178,22 @@ const actions = {
       getVotesFavourite()
         .then((response) => {
           commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
-          console.log("Favourite");
+          console.log(response.data);
         })
         .catch((err) => {
-          commit(mutationsTypes.getVotesFavoriteFailure, response.data);
+          commit(mutationsTypes.getVotesFavoriteFailure, err);
+        });
+    });
+  },
+  [actionsTypes.voteDeleteFavorite]({ state }, id) {
+    return new Promise((resolve) => {
+      voteDeleteFavorite(id)
+        .then(() => {
+          console.log("vote Delete Favorite");
+          resolve();
+        })
+        .catch((err) => {
+          console.error(err);
         });
     });
   },
@@ -209,7 +226,6 @@ const actions = {
       commit(mutationsTypes.getVotesStart);
       getVotes()
         .then((response) => {
-          // console.log(response);
           let like = [];
           let disLike = [];
 
@@ -220,7 +236,7 @@ const actions = {
               disLike.push(vote);
             }
           });
-          // console.log(like);
+
           commit(mutationsTypes.getVotesSuccess, {
             res: response.data,
             like: like,
@@ -255,6 +271,7 @@ const actions = {
         commit(mutationsTypes.getSearchDogsFailure, err);
       });
   },
+  [actionsTypes.getVotesFavoriteFull]() {},
 };
 
 export default {
