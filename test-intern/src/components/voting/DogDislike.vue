@@ -8,7 +8,7 @@
     <div class="dog-dislike-grid-container" v-if="isLoading !== true">
       <div
         class="dog-dislike-grid-container__item"
-        v-for="dog in dogsLikes"
+        v-for="dog in dogsLikes" 
         :key="dog.id"
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
