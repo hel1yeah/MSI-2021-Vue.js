@@ -35,6 +35,7 @@
 </template>
 
 <script>
+
 import { mapState } from "vuex";
 
 import { actionsTypes } from "@/store/modules/voting";
