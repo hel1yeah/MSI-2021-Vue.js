@@ -1,19 +1,21 @@
 <template>
   <div class="dog-dislike">
-    DogDislikes
-    <div class="dog-like__info">
+    <div class="dog-dislike__info">
       <ButtonClose></ButtonClose>
+      <div class="dog-dislike__info__name-component">
+        <NamePage :nameComponent="nameComponent"></NamePage>
+      </div>
     </div>
     <Preloader v-if="isLoading" />
     <div class="dog-dislike-grid-container" v-if="isLoading !== true">
       <div
         class="dog-dislike-grid-container__item"
-        v-for="dog in dogsLikes" 
+        v-for="dog in dogsLikes"
         :key="dog.id"
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
         <div class="dog-dislike-grid-container__item--hover">
-          <div class="dog-like__active-img" @click="voteUnLike(dog.vote_id)">
+          <div class="dog-dislike__active-img" @click="voteUnLike(dog.vote_id)">
             <svg
               width="30"
               height="30"
@@ -39,15 +41,18 @@ import { actionsTypes } from "@/store/modules/voting";
 
 import ButtonClose from "@/components/ButtonClose";
 import Preloader from "@/components/Preloader";
+import NamePage from "@/components/NamePage";
 
 export default {
   name: "DogLike",
   components: {
     ButtonClose,
     Preloader,
+    NamePage,
   },
   data() {
     return {
+      nameComponent: "Dislike",
       dislike: "dislike",
     };
   },
@@ -135,7 +140,7 @@ export default {
   justify-content: center;
 }
 
-.dog-like__active-img {
+.dog-dislike__active-img {
   background-color: var(--time-bg-color);
   border-radius: 10px;
   padding: 9px 10px;
@@ -145,5 +150,13 @@ export default {
   & svg {
     fill: var(--btn-active-bg-color);
   }
+}
+.dog-dislike__info {
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px 0;
+}
+.dog-dislike__info__name-component{
+  margin: 0 0 0 10px;
 }
 </style>
