@@ -17,7 +17,7 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">order</label>
-            <select class="gallery-select">
+            <select class="gallery-select" v-model="random">
               <option class="gallery-select__option" value="random">
                 Random
               </option>
@@ -29,12 +29,12 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">type</label>
-            <select class="gallery-select">
+            <select class="gallery-select" v-model="type">
               <option class="gallery-select__option" value="all">All</option>
               <option class="gallery-select__option" value="static">
                 Static
               </option>
-              <option class="gallery-select__option" value="Animated">
+              <option class="gallery-select__option" value="animated">
                 Animated
               </option>
             </select>
@@ -43,9 +43,10 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">Breed</label>
-            <select class="gallery-select">
-              <option class="gallery-select__option" value="All Breeds">
-                None
+            <select class="gallery-select" v-model="breed">
+              <option class="gallery-select__option" value="all">None</option>
+              <option v-for="(name, index) in breeds" :key="index">
+                {{ name }}
               </option>
             </select>
           </div>
@@ -53,7 +54,7 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">limit</label>
-            <select class="gallery-select">
+            <select class="gallery-select" v-model="limit">
               <option class="gallery-select__option" value="5">
                 5 items per page
               </option>
@@ -85,11 +86,25 @@
           </button>
         </div>
       </div>
+      <div class="grid-container">
+        <!-- <div
+          class="grid-container__item"
+          v-for="dog in dogs"
+          :key="dog.id"
+          :style="{ backgroundImage: `url(${dog.image.url})` }"
+        >
+          <div class="grid-container__item--hover">
+            <div class="name-breeds">{{ dog.name }}</div>
+          </div>
+        </div> -->
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 import Preloader from "@/components/Preloader.vue";
 import Search from "@/components/Search.vue";
 import Attitude from "@/components/Attitude.vue";
@@ -109,12 +124,22 @@ export default {
   data() {
     return {
       nameComponent: "gallery",
+      random: "random",
+      type: "all",
+      breed: "all",
+      limit: 5,
     };
   },
-  computed: {
-    loading() {
-      return this.$store.state.gallery.isLoading;
+  methods: {
+    getBreeds() {
+      this.dogs ? "" : this.$store.dispatch(actionsTypes.getBreeds);
     },
+  },
+  computed: {
+    ...mapState({
+      breeds: (state) => state.breeds.breeds,
+      loading: (state) => state.breeds.isLoading,
+    }),
   },
 };
 </script>

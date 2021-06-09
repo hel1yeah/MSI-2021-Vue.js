@@ -68,11 +68,6 @@
           :key="dog.id"
           :style="{ backgroundImage: `url(${dog.image.url})` }"
         >
-          <!-- <img
-            class="grid-container__item--img"
-            :src="dog.image.url"
-            :alt="dog.name"
-          /> -->
           <div class="grid-container__item--hover">
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
@@ -112,7 +107,7 @@ export default {
   },
   methods: {
     getBreeds() {
-      this.dogs ? '' : this.$store.dispatch(actionsTypes.getBreeds)
+      this.dogs ? "" : this.$store.dispatch(actionsTypes.getBreeds);
     },
     getLimitBreeds() {
       this.$store.dispatch(actionsTypes.getBreedsLimit, { limit: this.limit });

@@ -57,6 +57,7 @@ export default {
   padding: 20px;
   border-radius: 20px;
   min-height: 50vh;
+  min-width: 680px;
 }
 .voting-top {
   display: flex;
