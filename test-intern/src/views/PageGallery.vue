@@ -44,7 +44,7 @@
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">Breed</label>
             <select class="gallery-select" v-model="breed_id">
-              <option class="gallery-select__option" value="all">None</option>
+              <option class="gallery-select__option" value="">None</option>
               <option
                 v-for="(breed, index) in breeds"
                 :key="index"

@@ -40,7 +40,6 @@ const actions = {
       commit(mutationsTypes.searchImagesStart);
       getSearchDogs(breed)
         .then((res) => {
-          console.log(res.data);
           commit(mutationsTypes.searchImagesSuccess, res.data);
         })
         .catch((err) => {
