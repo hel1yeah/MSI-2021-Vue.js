@@ -1,21 +1,56 @@
+import { getSearchDogs } from "@/api/gallery";
+
 const state = {
-  // isLoading: false,
+  data: null,
+  error: null,
+  isLoading: false,
+};
+
+export const mutationsTypes = {
+  searchImagesStart: "[Gallery] Search Images Start",
+  searchImagesSuccess: "[Gallery] Search Images Start",
+  searchImagesFailure: "[Gallery] Search Images Start",
 };
 
 const mutations = {
-  isLoadingStart(state) {
-    // isLoading = true;
+  [mutationsTypes.searchImagesStart](state) {
+    state.data = null;
+    state.error = null;
+    state.isLoading = true;
   },
-  isLoadingFinish(state) {
-    // isLoading = false;
+  [mutationsTypes.searchImagesSuccess](state, payload) {
+    state.data = payload;
+    state.error = null;
+    state.isLoading = false;
+  },
+  [mutationsTypes.searchImagesFailure](state, payload) {
+    state.data = null;
+    state.error = payload;
+    state.isLoading = false;
   },
 };
 
-const actions = {
+export const actionsTypes = {
+  getSearchDogs: "[Gallery] Search Image",
+};
 
+const actions = {
+  [actionsTypes.getSearchDogs]({ commit }, breed) {
+    return new Promise(() => {
+      commit(mutationsTypes.searchImagesStart);
+      getSearchDogs(breed)
+        .then((response) => {
+          console.log(`query ${breed.breed_id} `, response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  },
 };
 
 export default {
   state,
   mutations,
+  actions,
 };

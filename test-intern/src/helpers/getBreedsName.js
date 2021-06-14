@@ -1,4 +1,4 @@
-export const dogNames = (dogs) => {
+const dogNames = (dogs) => {
   let names = [];
 
   dogs.forEach((element) => {
@@ -7,7 +7,7 @@ export const dogNames = (dogs) => {
   return names;
 };
 
-export const getForNameBreeds = (data, name) => {
+const getForNameBreeds = (data, name) => {
   let dog = [];
   data.forEach((e) => {
     if (
@@ -22,3 +22,5 @@ export const getForNameBreeds = (data, name) => {
   });
   return dog;
 };
+
+export { dogNames, getForNameBreeds };

@@ -104,9 +104,7 @@ const actions = {
           if (name === "All Breeds") {
             commit(mutationsTypes.getBreedsSuccess, response.data);
           } else {
-            commit(
-              mutationsTypes.getBreedsSuccess,
-              getForNameBreeds(response.data, name)
+            commit(mutationsTypes.getBreedsSuccess, getForNameBreeds(response.data, name)
             );
           }
         })

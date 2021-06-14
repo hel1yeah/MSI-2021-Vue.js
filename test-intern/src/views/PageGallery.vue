@@ -29,12 +29,12 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">type</label>
-            <select class="gallery-select" v-model="type">
-              <option class="gallery-select__option" value="all">All</option>
-              <option class="gallery-select__option" value="static">
-                Static
+            <select class="gallery-select" v-model="mime_types">
+              <option class="gallery-select__option" value="gif,jpg,png">
+                All
               </option>
-              <option class="gallery-select__option" value="animated">
+              <option class="gallery-select__option" value="jpg">Static</option>
+              <option class="gallery-select__option" value="gif">
                 Animated
               </option>
             </select>
@@ -43,10 +43,14 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">Breed</label>
-            <select class="gallery-select" v-model="breed">
+            <select class="gallery-select" v-model="breed_id">
               <option class="gallery-select__option" value="all">None</option>
-              <option v-for="(name, index) in breeds" :key="index">
-                {{ name }}
+              <option
+                v-for="(breed, index) in breeds"
+                :key="index"
+                :value="breed.id"
+              >
+                {{ breed.name }}
               </option>
             </select>
           </div>
@@ -87,6 +91,7 @@
         </div>
       </div>
       <div class="grid-container">
+        <button @click="getSearchDogs()">test mthfuker</button>
         <!-- <div
           class="grid-container__item"
           v-for="dog in dogs"
@@ -103,7 +108,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
+
+import { actionsTypes as actionsTypesBreeds } from "@/store/modules/breeds";
+
+import { actionsTypes as actionsTypesGallery } from "@/store/modules/gallery";
 
 import Preloader from "@/components/Preloader.vue";
 import Search from "@/components/Search.vue";
@@ -111,6 +120,7 @@ import Attitude from "@/components/Attitude.vue";
 import ButtonClose from "@/components/ButtonClose.vue";
 import NamePage from "@/components/NamePage.vue";
 import ButtonUpload from "@/components/ButtonUpload.vue";
+
 export default {
   name: "PageGallery",
   components: {
@@ -124,22 +134,36 @@ export default {
   data() {
     return {
       nameComponent: "gallery",
-      random: "random",
-      type: "all",
-      breed: "all",
+      mime_types: "gif,jpg,png",
       limit: 5,
+      random: "random",
+      breed_id: "all",
     };
   },
   methods: {
     getBreeds() {
-      this.dogs ? "" : this.$store.dispatch(actionsTypes.getBreeds);
+      this.$store.dispatch(actionsTypesBreeds.getBreeds);
+    },
+    getSearchDogs() {
+      // console.log(this.breed_id);
+      this.$store.dispatch(actionsTypesGallery.getSearchDogs, {
+        mime_types: this.mime_types,
+        limit: this.limit,
+        random: this.random,
+        breed_id: this.breed_id,
+      });
     },
   },
   computed: {
     ...mapState({
-      breeds: (state) => state.breeds.breeds,
-      loading: (state) => state.breeds.isLoading,
+      breeds: (state) => state.breeds.data,
+      loading: (state) => state.gallery.isLoading,
+      dog: (state) => state.gallery.data,
     }),
+  },
+  mounted() {
+    this.getBreeds();
+    this.getSearchDogs();
   },
 };
 </script>

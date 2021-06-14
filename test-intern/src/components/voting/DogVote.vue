@@ -75,7 +75,6 @@
         <img class="action-user__attitude" :src="action.actionImg" alt="dog" />
       </div>
     </div>
-
   </div>
 </template>
 
