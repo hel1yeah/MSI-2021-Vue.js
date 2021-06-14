@@ -8,8 +8,8 @@ const state = {
 
 export const mutationsTypes = {
   searchImagesStart: "[Gallery] Search Images Start",
-  searchImagesSuccess: "[Gallery] Search Images Start",
-  searchImagesFailure: "[Gallery] Search Images Start",
+  searchImagesSuccess: "[Gallery] search Images Success",
+  searchImagesFailure: "[Gallery] Search Images Failure",
 };
 
 const mutations = {
@@ -18,14 +18,14 @@ const mutations = {
     state.error = null;
     state.isLoading = true;
   },
-  [mutationsTypes.searchImagesSuccess](state, payload) {
-    state.data = payload;
+  [mutationsTypes.searchImagesSuccess](state, arrayFoundDogs) {
+    state.data = arrayFoundDogs;
     state.error = null;
     state.isLoading = false;
   },
-  [mutationsTypes.searchImagesFailure](state, payload) {
+  [mutationsTypes.searchImagesFailure](state, err) {
     state.data = null;
-    state.error = payload;
+    state.error = err;
     state.isLoading = false;
   },
 };
@@ -39,11 +39,12 @@ const actions = {
     return new Promise(() => {
       commit(mutationsTypes.searchImagesStart);
       getSearchDogs(breed)
-        .then((response) => {
-          console.log(`query ${breed.breed_id} `, response.data);
+        .then((res) => {
+          console.log(res.data);
+          commit(mutationsTypes.searchImagesSuccess, res.data);
         })
         .catch((err) => {
-          console.log(err);
+          commit(mutationsTypes.searchImagesFailure, err);
         });
     });
   },

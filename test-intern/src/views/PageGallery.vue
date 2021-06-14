@@ -90,18 +90,18 @@
           </button>
         </div>
       </div>
+      <button @click="getSearchDogs()">test mthfuker</button>
       <div class="grid-container">
-        <button @click="getSearchDogs()">test mthfuker</button>
-        <!-- <div
+        <div
           class="grid-container__item"
           v-for="dog in dogs"
           :key="dog.id"
-          :style="{ backgroundImage: `url(${dog.image.url})` }"
+          :style="{ backgroundImage: `url(${dog.url})` }"
         >
           <div class="grid-container__item--hover">
             <div class="name-breeds">{{ dog.name }}</div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </section>
@@ -137,7 +137,7 @@ export default {
       mime_types: "gif,jpg,png",
       limit: 5,
       random: "random",
-      breed_id: "all",
+      breed_id: "",
     };
   },
   methods: {
@@ -145,7 +145,6 @@ export default {
       this.$store.dispatch(actionsTypesBreeds.getBreeds);
     },
     getSearchDogs() {
-      // console.log(this.breed_id);
       this.$store.dispatch(actionsTypesGallery.getSearchDogs, {
         mime_types: this.mime_types,
         limit: this.limit,
@@ -158,12 +157,11 @@ export default {
     ...mapState({
       breeds: (state) => state.breeds.data,
       loading: (state) => state.gallery.isLoading,
-      dog: (state) => state.gallery.data,
+      dogs: (state) => state.gallery.data,
     }),
   },
   mounted() {
     this.getBreeds();
-    this.getSearchDogs();
   },
 };
 </script>
