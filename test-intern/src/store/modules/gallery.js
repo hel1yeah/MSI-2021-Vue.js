@@ -1,4 +1,4 @@
-import { getSearchDogs } from "@/api/gallery";
+import { getSearchDogs, voteFavouriteImage } from "@/api/gallery";
 
 const state = {
   data: null,
@@ -32,6 +32,7 @@ const mutations = {
 
 export const actionsTypes = {
   getSearchDogs: "[Gallery] Search Image",
+  voteFavouriteImage: "[Gallery] vote Favourite Image",
 };
 
 const actions = {
@@ -44,6 +45,17 @@ const actions = {
         })
         .catch((err) => {
           commit(mutationsTypes.searchImagesFailure, err);
+        });
+    });
+  },
+  [actionsTypes.voteFavouriteImage]({ state }, id) {
+    return new Promise((reject) => {
+      voteFavouriteImage(id)
+        .then((res) => {
+          console.log("picture added to favourite : ", res.statusText);
+        })
+        .catch((err) => {
+          console.log("picture added to favourite : ", err);
         });
     });
   },

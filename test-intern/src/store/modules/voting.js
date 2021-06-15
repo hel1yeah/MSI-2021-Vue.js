@@ -140,13 +140,14 @@ const mutations = {
 
 const actions = {
   [actionsTypes.voteFavouriteImage]({ state }) {
+    console.log(state.data.id);
     return new Promise((resolve) => {
       voteFavouriteImage(state.data.id)
         .then((response) => {
-          console.log("Favourite");
+          console.log("picture added to favourite");
         })
         .catch((err) => {
-          console.log(err);
+          console.log("error while adding favourite:", err);
         });
     });
   },
@@ -154,10 +155,10 @@ const actions = {
     return new Promise((resolve) => {
       voteLike(state.data.id)
         .then((response) => {
-          console.log("Like");
+          console.log("picture added to like");
         })
         .catch((err) => {
-          console.log(err);
+          console.log("error while adding like:", err);
         });
     });
   },
@@ -165,10 +166,10 @@ const actions = {
     return new Promise((resolve) => {
       voteDislike(state.data.id)
         .then((response) => {
-          console.log("Dislike");
+          console.log("picture added to dislike");
         })
         .catch((err) => {
-          console.log(err);
+          console.log("error while adding dislike:", err);
         });
     });
   },
@@ -178,7 +179,6 @@ const actions = {
       getVotesFavourite()
         .then((response) => {
           commit(mutationsTypes.getVotesFavoriteSuccess, response.data);
-          console.log(response.data);
         })
         .catch((err) => {
           commit(mutationsTypes.getVotesFavoriteFailure, err);
@@ -188,12 +188,15 @@ const actions = {
   [actionsTypes.voteDeleteFavorite]({ state }, id) {
     return new Promise((resolve) => {
       voteDeleteFavorite(id)
-        .then(() => {
-          console.log("vote Delete Favorite");
+        .then((res) => {
+          console.log("deleting a picture from Favorite : ", res.statusText);
           resolve();
         })
         .catch((err) => {
-          console.error(err);
+          console.error(
+            "error when deleting a picture from from Favorite : ",
+            err
+          );
         });
     });
   },
@@ -201,11 +204,11 @@ const actions = {
     return new Promise((resolve) => {
       voteDelete(id)
         .then(() => {
-          console.log("Vote Delete");
+          console.log("deleting a vote");
           resolve();
         })
         .catch((err) => {
-          console.error(err);
+          console.error("error when deleting vote : ", err);
         });
     });
   },
@@ -228,7 +231,6 @@ const actions = {
         .then((response) => {
           let like = [];
           let disLike = [];
-          console.log(response);
 
           response.data.forEach((vote) => {
             if (vote.value) {
@@ -271,7 +273,7 @@ const actions = {
         commit(mutationsTypes.getSearchDogsFailure, err);
       });
   },
-  [actionsTypes.getVotesFavoriteFull]() {},
+  // [actionsTypes.getVotesFavoriteFull]() {},
 };
 
 export default {
