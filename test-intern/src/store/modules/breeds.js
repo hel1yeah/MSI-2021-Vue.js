@@ -76,6 +76,7 @@ const actions = {
           const names = dogNames(response.data);
           commit(mutationsTypes.getBreedsNameSuccess, names);
           commit(mutationsTypes.getBreedsSuccess, response.data);
+          resolve();
         })
         .catch((err) => {
           // console.error(err);

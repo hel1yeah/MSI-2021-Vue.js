@@ -27,11 +27,11 @@ const state = {
 export const mutationsTypes = {
   voteLikeStart: "[Voting] vote Like Start",
   voteDislikeStart: "[Voting] vote UnLike Start",
-  voteFavoriteStart: "[Voting] vote UnLike Start",
+  voteFavoriteStart: "[Voting] vote Favorite Start",
 
-  getSearchImageStart: "[Voting] get Image Start",
-  getSearchImageSuccess: "[Voting] get Image Success",
-  getSearchImageFailure: "[Voting] get Image Start",
+  getSearchImageStart: "[Voting] get Search Image Start",
+  getSearchImageSuccess: "[Voting] get Search Image Success",
+  getSearchImageFailure: "[Voting] get Search Image Failure",
 
   getVotesStart: "[Voting] get Votes All Start",
   getVotesSuccess: "[Voting] get Votes Success",
@@ -228,6 +228,7 @@ const actions = {
         .then((response) => {
           let like = [];
           let disLike = [];
+          console.log(response);
 
           response.data.forEach((vote) => {
             if (vote.value) {
@@ -262,7 +263,6 @@ const actions = {
         return getSearchDogs(item.image_id, item.id);
       });
     }
-
     Promise.all(requests)
       .then((response) => {
         commit(mutationsTypes.getSearchDogsSuccess, response);

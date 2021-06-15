@@ -37,7 +37,7 @@ const voteFavouriteImage = (id) => {
 const getSearchImage = () => {
   const query_params = {
     limit: 1,
-    size: "full",
+    size: "small",
   };
   return axios.get("/images/search", { params: query_params });
 };
@@ -66,7 +66,10 @@ const getVotesFavourite = () => {
 // };
 
 // const getSearchDogs = (image_id) => {
-//   return axios.get(`/images/${image_id}`).then((response) => response.data);
+//   return axios.get(`/images/${image_id}`).then((response) => {
+//     console.log('response -->', response);
+//     return response.data;
+//   });
 // };
 
 const getSearchDogs = (image_id, vote) =>

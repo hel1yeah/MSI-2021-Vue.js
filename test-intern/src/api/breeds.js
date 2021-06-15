@@ -1,6 +1,5 @@
 import axios from "@/api/axios";
 
-
 const getBreeds = () => {
   return axios.get("/breeds");
 };
@@ -14,10 +13,7 @@ const getBreedsLimit = (limit) => {
   });
 };
 
-
-
 export {
   getBreeds,
   getBreedsLimit,
-
 };
