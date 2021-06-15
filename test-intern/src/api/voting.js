@@ -57,20 +57,6 @@ const getVotesFavourite = () => {
   return axios.get("/favourites", { params: query_params });
 };
 
-// const getSearchDogs = (image_id, vote) => {
-//   return axios.get(`/images/${image_id}`).then((response) => {
-//     let obj = response.data;
-//     obj.vote_id = vote;
-//     return obj;
-//   });
-// };
-
-// const getSearchDogs = (image_id) => {
-//   return axios.get(`/images/${image_id}`).then((response) => {
-//     console.log('response -->', response);
-//     return response.data;
-//   });
-// };
 
 const getSearchDogs = (image_id, vote) =>
   axios.get(`/images/${image_id}`).then(({ data }) => ({

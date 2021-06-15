@@ -15,10 +15,7 @@
         :style="{ backgroundImage: `url(${dog.image.url})` }"
       >
         <div class="dog-like-grid-container__item--hover">
-          <div
-            class="dog-like__active-img"
-            @click="voteDeleteFavorite(dog.id)"
-          >
+          <div class="dog-like__active-img" @click="voteDeleteFavorite(dog.id)">
             <svg
               width="30"
               height="30"
@@ -64,7 +61,7 @@ export default {
     },
     voteDeleteFavorite(vote_id) {
       this.$store
-        .dispatch(actionsTypes.voteDeleteFavorite, vote_id)
+        .dispatch(actionsTypes.voteDeleteFavorite, vote_id )
         .then(() => {
           this.getVotesFavorite();
         });

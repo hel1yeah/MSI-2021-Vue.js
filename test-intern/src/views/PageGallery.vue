@@ -42,11 +42,7 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">Breed</label>
-            <select
-              class="gallery-select"
-              v-on:change="getBreeds"
-              v-model="breed_id"
-            >
+            <select class="gallery-select" v-model="breed_id">
               <option class="gallery-select__option" value="">None</option>
               <option
                 v-for="(breed, index) in breeds"
@@ -93,17 +89,34 @@
           </button>
         </div>
       </div>
-      <div class="wrapper">
+      <div class="grid-container__wrapper gallery-grid-container__wrapper">
         <Preloader v-if="loading"></Preloader>
-        <div class="grid-container" v-if="loading == loading">
+        <div class="grid-container" v-if="loading === loading">
           <div
             class="grid-container__item"
             v-for="dog in dogs"
             :key="dog.id"
             :style="{ backgroundImage: `url(${dog.url})` }"
           >
-            <div class="grid-container__item--hover">
-              <div class="name-breeds">{{ dog.name }}</div>
+            <div
+              class="grid-container__item--hover gallery-grid-container__item--hover"
+            >
+              <button
+                class="button-favorite"
+                @click="voteFavouriteImage(dog.id)"
+              >
+                <svg
+                  class="button-favorite__img"
+                  viewBox="0 0 30 26"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8.07107 2C4.71811 2 2 4.71811 2 8.07107C2 9.68122 2.63963 11.2254 3.77817 12.364L15 23.5858L26.2218 12.364C27.3604 11.2254 28 9.68121 28 8.07107C28 4.71811 25.2819 2 21.9289 2C20.3188 2 18.7746 2.63963 17.636 3.77817L15.7071 5.70711C15.3166 6.09763 14.6834 6.09763 14.2929 5.70711L12.364 3.77818C11.2254 2.63963 9.68121 2 8.07107 2ZM0 8.07107C0 3.61354 3.61354 0 8.07107 0C10.2116 0 12.2646 0.850343 13.7782 2.36396L15 3.58579L16.2218 2.36396C17.7354 0.850341 19.7884 0 21.9289 0C26.3865 0 30 3.61354 30 8.07107C30 10.2116 29.1497 12.2646 27.636 13.7782L15.7071 25.7071C15.3166 26.0976 14.6834 26.0976 14.2929 25.7071L2.36396 13.7782C0.850339 12.2646 0 10.2116 0 8.07107Z"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -166,12 +179,15 @@ export default {
         breed_id: this.breed_id,
       });
     },
-    setDefaultSettings(){
+    setDefaultSettings() {
       this.mime_types = "gif,jpg,png";
       this.limit = 5;
       this.random = "random";
       this.breed_id = "";
-    }
+    },
+    voteFavouriteImage(id) {
+      this.$store.dispatch(actionsTypesGallery.voteFavouriteImage, id);
+    },
   },
   computed: {
     ...mapState({
@@ -201,8 +217,9 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper {
+.grid-container__wrapper {
   position: relative;
+  padding: 20px 0;
 }
 
 .gallery {
@@ -309,6 +326,37 @@ export default {
 .btn-update-arrow__img {
   transition: var(--speed);
   width: 18px;
+  height: 20px;
+  fill: var(--btn-active-bg-color);
+}
+
+.gallery-grid-container__wrapper {
+}
+.gallery-grid-container__item--hover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-favorite {
+  width: 40px;
+  height: 40px;
+  background-color: var(--options-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--speed);
+  &:hover {
+    background-color: var(--btn-active-bg-color);
+  }
+  &:hover .button-favorite__img {
+    fill: var(--header-card-active-color);
+  }
+}
+.button-favorite__img {
+  width: 17px;
   height: 20px;
   fill: var(--btn-active-bg-color);
 }
