@@ -76,6 +76,7 @@ const actions = {
           const names = dogNames(response.data);
           commit(mutationsTypes.getBreedsNameSuccess, names);
           commit(mutationsTypes.getBreedsSuccess, response.data);
+          resolve();
         })
         .catch((err) => {
           // console.error(err);
@@ -104,7 +105,9 @@ const actions = {
           if (name === "All Breeds") {
             commit(mutationsTypes.getBreedsSuccess, response.data);
           } else {
-            commit(mutationsTypes.getBreedsSuccess, getForNameBreeds(response.data, name)
+            commit(
+              mutationsTypes.getBreedsSuccess,
+              getForNameBreeds(response.data, name)
             );
           }
         })

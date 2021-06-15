@@ -4,7 +4,6 @@
       <Search />
       <Attitude />
     </div>
-    <Preloader v-if="loading"></Preloader>
     <div class="gallery-content">
       <div class="gallery-content__title">
         <div class="gallery-content__title--item">
@@ -43,7 +42,11 @@
         <div class="gallery-content__filters--item">
           <div class="gallery-content__filters--inner">
             <label class="gallery-label">Breed</label>
-            <select class="gallery-select" v-model="breed_id">
+            <select
+              class="gallery-select"
+              v-on:change="getBreeds"
+              v-model="breed_id"
+            >
               <option class="gallery-select__option" value="">None</option>
               <option
                 v-for="(breed, index) in breeds"
@@ -73,7 +76,7 @@
               </option>
             </select>
           </div>
-          <button class="btn-update-arrow">
+          <button class="btn-update-arrow" @click="setDefaultSettings">
             <svg
               class="btn-update-arrow__img"
               width="18"
@@ -90,16 +93,18 @@
           </button>
         </div>
       </div>
-      <button @click="getSearchDogs()">test mthfuker</button>
-      <div class="grid-container">
-        <div
-          class="grid-container__item"
-          v-for="dog in dogs"
-          :key="dog.id"
-          :style="{ backgroundImage: `url(${dog.url})` }"
-        >
-          <div class="grid-container__item--hover">
-            <div class="name-breeds">{{ dog.name }}</div>
+      <div class="wrapper">
+        <Preloader v-if="loading"></Preloader>
+        <div class="grid-container" v-if="loading == loading">
+          <div
+            class="grid-container__item"
+            v-for="dog in dogs"
+            :key="dog.id"
+            :style="{ backgroundImage: `url(${dog.url})` }"
+          >
+            <div class="grid-container__item--hover">
+              <div class="name-breeds">{{ dog.name }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -141,8 +146,17 @@ export default {
     };
   },
   methods: {
+    getBreedsFirtsLoadPage() {
+      this.dogs
+        ? ""
+        : this.$store.dispatch(actionsTypesBreeds.getBreeds).then(() => {
+            this.getSearchDogs();
+          });
+    },
     getBreeds() {
-      this.$store.dispatch(actionsTypesBreeds.getBreeds);
+      this.$store.dispatch(actionsTypesBreeds.getBreeds).then(() => {
+        this.getSearchDogs();
+      });
     },
     getSearchDogs() {
       this.$store.dispatch(actionsTypesGallery.getSearchDogs, {
@@ -152,6 +166,12 @@ export default {
         breed_id: this.breed_id,
       });
     },
+    setDefaultSettings(){
+      this.mime_types = "gif,jpg,png";
+      this.limit = 5;
+      this.random = "random";
+      this.breed_id = "";
+    }
   },
   computed: {
     ...mapState({
@@ -161,12 +181,30 @@ export default {
     }),
   },
   mounted() {
-    this.getBreeds();
+    this.getBreedsFirtsLoadPage();
+  },
+  watch: {
+    mime_types: function () {
+      this.getBreeds();
+    },
+    limit: function () {
+      this.getBreeds();
+    },
+    random: function () {
+      this.getBreeds();
+    },
+    breed_id: function () {
+      this.getBreeds();
+    },
   },
 };
 </script>
 
 <style lang="scss">
+.wrapper {
+  position: relative;
+}
+
 .gallery {
   width: 680px;
 }
