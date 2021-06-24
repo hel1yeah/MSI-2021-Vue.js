@@ -259,6 +259,7 @@ const actions = {
     if (triger === "like") {
       requests = state.isVotesLike.map((item) => {
         return getSearchDogs(item.image_id, item.id);
+        
       });
     } else {
       requests = state.isVotesDislike.map((item) => {

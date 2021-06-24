@@ -284,7 +284,7 @@ export default {
   font-size: 16px;
   line-height: 24px;
   border-radius: 10px;
-  // color: var(--bold-text-color);
+  color: var(--bold-text-color);
   background: var(--default-block-bg-color);
   outline: transparent;
   border: transparent;

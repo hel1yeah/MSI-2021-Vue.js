@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss">
 .button-close-component {
-  background-color: var(--hover-color);
+  background-color: var(--search-button-color);
   width: 40px;
   height: 40px;
   cursor: pointer;

@@ -34,10 +34,9 @@ export default {
   },
   methods: {
     searchBreeds() {
-      this.$emit("onSearchBreeds", this.search );
+      this.$emit("onSearchBreeds", this.search);
       this.search = null;
     },
-    
   },
 };
 </script>
@@ -56,6 +55,8 @@ export default {
   line-height: 30px;
   outline: transparent;
   border: transparent;
+  background-color: var(--default-block-bg-color);
+  color: var(--bold-text-color);
 }
 .voting__search--button {
   position: absolute;
@@ -64,7 +65,7 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background-color: var(--hover-color);
+  background-color: var(--search-button-color);
   outline: transparent;
   border: transparent;
   display: flex;

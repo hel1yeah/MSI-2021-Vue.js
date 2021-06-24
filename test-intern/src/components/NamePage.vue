@@ -23,7 +23,7 @@ export default {
   background-color: var(--btn-active-bg-color);
   padding: 5px 30px;
   text-transform: uppercase;
-  color: var(--default-block-bg-color);
+  color: var(--while-color);
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
