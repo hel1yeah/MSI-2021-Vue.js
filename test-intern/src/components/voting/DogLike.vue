@@ -7,14 +7,14 @@
       </div>
     </div>
     <Preloader v-if="isLoading" />
-    <div class="dog-like-grid-container" v-if="isLoading !== true">
+    <div class="grid-container" v-if="isLoading !== true">
       <div
-        class="dog-like-grid-container__item"
+        class="grid-container__item"
         v-for="dog in dogsLikes"
         :key="dog.id"
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
-        <div class="dog-like-grid-container__item--hover">
+        <div class="grid-container__item--hover">
           <div class="dog-like__active-img" @click="voteDelete(dog.vote_id)">
             <svg
               width="30"
@@ -84,62 +84,60 @@ export default {
 };
 </script>
 <style lang="scss">
-.dog-like-grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(140px, 200px));
-  grid-template-rows: repeat(9, minmax(140px, 200px));
-  gap: 20px 20px;
-}
-.dog-like-grid-container__item {
-  width: 100%;
-  height: 100%;
+// .dog-like-grid-container {
+//   display: grid;
+//   gap: 20px;
+//   grid-template-columns: repeat(3, minmax(140px, 200px));
+//   grid-auto-rows: minmax(140px, 200px);
+// }
+// .dog-like-grid-container__item {
+//   width: 100%;
+//   height: 100%;
 
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-width: 140px;
-  min-height: 140px;
+//   background-position: center center;
+//   background-size: cover;
+//   background-repeat: no-repeat;
 
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: var(--speed);
-  &:nth-child(2) {
-    grid-area: 1 / 1 / span 2 / 1;
-  }
-  &:nth-child(5) {
-    grid-area: 2 / 2 / span 2 / span 2;
-  }
-  &:nth-child(7) {
-    grid-area: 4 / 3 / span 2 / 4;
-  }
-  &:nth-child(10) {
-    grid-area: 5 / 1 / span 2 / span 2;
-  }
-  &:nth-child(12) {
-    grid-area: 7 / 1 / span 2 / 1;
-  }
-  &:nth-child(15) {
-    grid-area: 8 / 2 / span 2 / span 2;
-  }
-  &:hover .dog-like-grid-container__item--hover {
-    top: 0;
-  }
-}
+//   position: relative;
+//   border-radius: 20px;
+//   overflow: hidden;
+//   transition: var(--speed);
+// &:nth-child(10n + 1) {
+//     grid-row: span 2;
+//   }
+//   &:nth-child(10n + 4) {
+//     grid-column: 2/4;
+//     grid-row: span 2;
+//   }
+//   &:nth-child(10n + 6) {
+//     grid-row: auto;
+//   }
+//   &:nth-child(10n + 8) {
+//     grid-column: 3;
+//     grid-row: span 2;
+//   }
+//   &:nth-child(10n + 9) {
+//     grid-column: 1/3;
+//     grid-row: span 2;
+//   }
+//   &:hover .dog-like-grid-container__item--hover {
+//     top: 0;
+//   }
+// }
 
-.dog-like-grid-container__item--hover {
-  transition: var(--speed);
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  top: 100%;
-  left: 0;
-  background-color: var(--hover-grid-card-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .dog-like-grid-container__item--hover {
+//   transition: var(--speed);
+//   position: absolute;
+//   z-index: 1;
+//   width: 100%;
+//   height: 100%;
+//   top: 100%;
+//   left: 0;
+//   background-color: var(--hover-grid-card-color);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
 .dog-like__active-img {
   background-color: var(--time-bg-color);

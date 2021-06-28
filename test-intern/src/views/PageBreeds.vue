@@ -68,10 +68,10 @@
           :key="dog.id"
           :style="{ backgroundImage: `url(${dog.image.url})` }"
         >
-          <div class="grid-container__item--hover">
+          <div class="grid-container__item--hover end">
             <div @click.stop="muveToDogInfo(dog)" class="name-breeds">
               {{ dog.name }}
-              <!-- <router-link to="/breeds/dog.id"></router-link> -->
+
             </div>
           </div>
         </div>
@@ -227,63 +227,6 @@ export default {
     border: 2px solid var(--hover-color);
     fill: var(--btn-active-bg-color);
   }
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(140px, 200px));
-  grid-template-rows: repeat(9, minmax(140px, 200px));
-  gap: 20px 20px;
-}
-.grid-container__item {
-  width: 100%;
-  height: 100%;
-
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-width: 140px;
-  min-height: 140px;
-
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: var(--speed);
-  &:nth-child(2) {
-    grid-area: 1 / 1 / span 2 / 1;
-  }
-  &:nth-child(5) {
-    grid-area: 2 / 2 / span 2 / span 2;
-  }
-  &:nth-child(7) {
-    grid-area: 4 / 3 / span 2 / 4;
-  }
-  &:nth-child(10) {
-    grid-area: 5 / 1 / span 2 / span 2;
-  }
-  &:nth-child(12) {
-    grid-area: 7 / 1 / span 2 / 1;
-  }
-  &:nth-child(15) {
-    grid-area: 8 / 2 / span 2 / span 2;
-  }
-  &:hover .grid-container__item--hover {
-    top: 0;
-  }
-}
-
-.grid-container__item--hover {
-  transition: var(--speed);
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  top: 100%;
-  left: 0;
-  background-color: var(--hover-grid-card-color);
-
-  display: flex;
-  align-items: flex-end;
 }
 
 .name-breeds {

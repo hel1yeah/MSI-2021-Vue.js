@@ -96,7 +96,7 @@ export default {
 .dog-info__support {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 
   & :not(:last-child) {
     margin: 0 10px 0 0;
