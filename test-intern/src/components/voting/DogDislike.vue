@@ -7,14 +7,14 @@
       </div>
     </div>
     <Preloader v-if="isLoading" />
-    <div class="dog-dislike-grid-container" v-if="isLoading !== true">
+    <div class="grid-container" v-if="isLoading !== true">
       <div
-        class="dog-dislike-grid-container__item"
+        class="grid-container__item"
         v-for="dog in dogsLikes"
         :key="dog.id"
         :style="{ backgroundImage: `url(${dog.url})` }"
       >
-        <div class="dog-dislike-grid-container__item--hover">
+        <div class="grid-container__item--hover center">
           <div class="dog-dislike__active-img" @click="voteUnLike(dog.vote_id)">
             <svg
               width="30"
@@ -83,50 +83,8 @@ export default {
 };
 </script>
 <style lang="scss">
-.dog-dislike-grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(140px, 200px));
-  grid-template-rows: repeat(9, minmax(140px, 200px));
-  gap: 20px 20px;
-}
-.dog-dislike-grid-container__item {
-  width: 100%;
-  height: 100%;
 
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-width: 140px;
-  min-height: 140px;
-
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: var(--speed);
-  &:nth-child(2) {
-    grid-area: 1 / 1 / span 2 / 1;
-  }
-  &:nth-child(5) {
-    grid-area: 2 / 2 / span 2 / span 2;
-  }
-  &:nth-child(7) {
-    grid-area: 4 / 3 / span 2 / 4;
-  }
-  &:nth-child(10) {
-    grid-area: 5 / 1 / span 2 / span 2;
-  }
-  &:nth-child(12) {
-    grid-area: 7 / 1 / span 2 / 1;
-  }
-  &:nth-child(15) {
-    grid-area: 8 / 2 / span 2 / span 2;
-  }
-  &:hover .dog-dislike-grid-container__item--hover {
-    top: 0;
-  }
-}
-
-.dog-dislike-grid-container__item--hover {
+.grid-container__item--hover {
   transition: var(--speed);
   position: absolute;
   z-index: 1;

@@ -7,14 +7,14 @@
       </div>
     </div>
     <Preloader v-if="isLoading" />
-    <div class="dog-like-grid-container" v-if="isLoading !== true">
+    <div class="grid-container" v-if="isLoading !== true">
       <div
-        class="dog-like-grid-container__item"
+        class="grid-container__item"
         v-for="dog in isVotesFavorite"
         :key="dog.id"
         :style="{ backgroundImage: `url(${dog.image.url})` }"
       >
-        <div class="dog-like-grid-container__item--hover">
+        <div class="grid-container__item--hover">
           <div class="dog-like__active-img" @click="voteDeleteFavorite(dog.id)">
             <svg
               width="30"
