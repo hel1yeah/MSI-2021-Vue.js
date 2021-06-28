@@ -69,7 +69,10 @@
           :style="{ backgroundImage: `url(${dog.image.url})` }"
         >
           <div class="grid-container__item--hover">
-            <div class="name-breeds">{{ dog.name }}</div>
+            <div @click.stop="muveToDogInfo(dog)" class="name-breeds">
+              {{ dog.name }}
+              <!-- <router-link to="/breeds/dog.id"></router-link> -->
+            </div>
           </div>
         </div>
       </div>
@@ -78,7 +81,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 import { actionsTypes } from "@/store/modules/breeds";
 
@@ -122,6 +125,10 @@ export default {
     sort(e) {
       e === "asc" ? (this.currentSort = true) : (this.currentSort = false);
       this.$store.dispatch(actionsTypes.sortForName, { sortingType: e });
+    },
+    muveToDogInfo(dog) {
+      this.$router.push({ name: "dogInfo", params: { id: dog.id } });
+      this.$store.dispatch(actionsTypes.createDog, { dog: dog });
     },
   },
   computed: {

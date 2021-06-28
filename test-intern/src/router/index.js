@@ -6,10 +6,14 @@ import PageVoting from "@/views/PageVoting.vue";
 import PageBreeds from "@/views/PageBreeds.vue";
 import PageGallery from "@/views/PageGallery.vue";
 
+import DogInfo from "@/views/DogInfo.vue";
+
 import DogVote from "@/components/voting/DogVote.vue";
 import DogLike from "@/components/voting/DogLike.vue";
 import DogDislike from "@/components/voting/DogDislike.vue";
 import DogFavourite from "@/components/voting/DogFavourite.vue";
+
+
 
 Vue.use(VueRouter);
 
@@ -47,9 +51,15 @@ const routes = [
     ],
   },
   {
-    path: "/breeds",
+    path: "/breeds/",
     name: "breeds",
     component: PageBreeds,
+    // children: [{ path: "breeds/:id", name: "dogInfo", component: DogInfo, }],
+  },
+  {
+    path: "/breeds/dog/:id",
+    name: "dogInfo",
+    component: DogInfo,
   },
   {
     path: "/gallery",
