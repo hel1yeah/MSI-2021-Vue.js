@@ -7,6 +7,7 @@ const state = {
   isLoading: false,
   error: null,
   breeds: null,
+  dog: null,
 };
 
 export const mutationsTypes = {
@@ -14,11 +15,17 @@ export const mutationsTypes = {
   getBreedsSuccess: "[Breeds] get Breeds Success",
   getBreedsNameSuccess: "[Breeds] get Breeds Name Success",
   getBreedsFailure: "[Breeds] get Breeds Failure",
+
   sortStart: "[Breeds] Sort Start",
-  sortFinish: "[Breeds] Sort Finish",
+  sortSuccess: "[Breeds] Sort Finish",
+
   onSearchBreedsStart: "[Breeds] on Search Breeds Start",
   onSearchBreedsSuccess: "[Breeds] on Search Breeds Success",
   onSearchBreedsFailure: "[Breeds] on Search Breeds Failure",
+
+  createDogStart: "[Breeds] Create Dog Start",
+  createDogSuccess: "[Breeds] Create Dog Success",
+  createDogFailure: "[Breeds] Create Dog Failure",
 };
 
 export const actionsTypes = {
@@ -27,6 +34,7 @@ export const actionsTypes = {
   getForNameBreeds: "[Breeds] Get For Name Breeds",
   sortForName: "[Breeds] sort For Name",
   onSearchBreeds: "[Breeds] on Search Breeds For Name",
+  createDog: "[Breeds] Create Dog:",
 };
 
 const mutations = {
@@ -35,20 +43,22 @@ const mutations = {
     state.data = null;
   },
   [mutationsTypes.getBreedsSuccess](state, payload) {
-    (state.isLoading = false), (state.data = payload);
+    state.isLoading = false;
+    state.data = payload;
   },
 
   [mutationsTypes.getBreedsNameSuccess](state, payload) {
     state.breeds = payload;
   },
   [mutationsTypes.getBreedsFailure](state, payload) {
-    (state.isLoading = false), (state.data = payload);
+    state.isLoading = false;
+    state.data = payload;
   },
 
   [mutationsTypes.sortStart](state) {
     state.isLoading = true;
   },
-  [mutationsTypes.sortFinish](state, payload) {
+  [mutationsTypes.sortSuccess](state, payload) {
     state.isLoading = false;
     state.data = payload;
   },
@@ -65,6 +75,21 @@ const mutations = {
     state.isLoading = false;
     state.data = payload;
   },
+  [mutationsTypes.createDogStart](state) {
+    state.dog = null;
+    state.error = null;
+    state.isLoading = true;
+  },
+  [mutationsTypes.createDogSuccess](state, payload) {
+    state.dog = payload;
+    state.error = null;
+    state.isLoading = false;
+  },
+  [mutationsTypes.createDogFailure](state, payload) {
+    state.dog = null;
+    state.error = "no such dog found please try again";
+    state.isLoading = false;
+  },
 };
 
 const actions = {
@@ -79,7 +104,6 @@ const actions = {
           resolve();
         })
         .catch((err) => {
-          // console.error(err);
           commit(mutationsTypes.getBreedsFailure, err);
         });
     });
@@ -144,7 +168,7 @@ const actions = {
         return 0;
       });
     }
-    context.commit(mutationsTypes.sortFinish, sortArr);
+    context.commit(mutationsTypes.sortSuccess, sortArr);
   },
   [actionsTypes.onSearchBreeds]({ commit }, name) {
     commit(mutationsTypes.onSearchBreedsStart);
@@ -160,6 +184,15 @@ const actions = {
           commit(mutationsTypes.onSearchBreedsFailure, payload);
         });
     });
+  },
+  [actionsTypes.createDog]({ commit }, dog) {
+    commit(mutationsTypes.createDogStart);
+    console.log(dog);
+    if (dog) {
+      commit(mutationsTypes.createDogSuccess, dog.dog);
+    } else {
+      commit(mutationsTypes.createDogFailure);
+    }
   },
 };
 
