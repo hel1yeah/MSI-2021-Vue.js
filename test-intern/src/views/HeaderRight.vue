@@ -27,4 +27,27 @@ export default {
   top: -55px;
   left: -76px;
 }
+
+@media screen and (max-width: 1370px) {
+  .header-img__wrapper {
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .header-img__wrapper {
+    width: 500px;
+    height: 700px;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .header-img__wrapper {
+    width: 360px;
+    height: 560px;
+  }
+}
+@media screen and (max-width: 870px) {
+  .header-img__wrapper {
+    display: none;
+  }
+}
 </style>

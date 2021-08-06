@@ -2,7 +2,6 @@
   <section class="header">
     <router-link class="header__logo" :to="{ name: 'home' }">
       <!-- <img class="header__logo" src="../assets/logo.svg" alt="PetsPaw" /> -->
-
       <svg
         width="107"
         height="24"
@@ -70,7 +69,7 @@
             <div
               class="header__card--bg fiolet"
               :class="{
-                active: this.$route.path == '/voting',
+                active: this.$route.path === '/voting',
               }"
             >
               <img
@@ -88,7 +87,7 @@
           <div class="header__card">
             <div
               class="header__card--bg grean"
-              :class="{ active: this.$route.path == '/breeds' }"
+              :class="{ active: this.$route.path === '/breeds' }"
             >
               <img
                 class="header__card--img pet-breeds"
@@ -105,7 +104,7 @@
           <div class="header__card">
             <div
               class="header__card--bg orange"
-              :class="{ active: this.$route.path == '/gallery' }"
+              :class="{ active: this.$route.path === '/gallery' }"
             >
               <img
                 class="header__card--img images-search"
@@ -184,7 +183,6 @@ export default {
   }
 }
 .header__card--bg {
-  display: block;
   box-sizing: border-box;
   border-radius: 20px;
   height: 198px;
@@ -254,4 +252,25 @@ export default {
   color: var(--default-block-bg-color);
 }
 // hover
+
+@media screen and (max-width: 1190px) {
+  .header__logo {
+    margin: 0 0 40px;
+  }
+  .header__info--title {
+    line-height: 30px;
+  }
+}
+@media screen and (max-width: 1025px) {
+  .action-wrapper {
+    width: 370px;
+  }
+  .header__info--title {
+    font-size: 30px;
+  }
+  .header__info--descr{
+    margin: 0px 0 30px;
+  }
+
+}
 </style>

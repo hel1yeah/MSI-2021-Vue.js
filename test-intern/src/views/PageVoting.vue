@@ -28,7 +28,6 @@ export default {
 
 <style lang="scss">
 .voting {
-  width: 680px;
 }
 
 .voting__home {
@@ -56,8 +55,7 @@ export default {
   background-color: var(--default-block-bg-color);
   padding: 20px;
   border-radius: 20px;
-  min-height: 50vh;
-  min-width: 680px;
+  width: 680px;
 }
 .voting-top {
   display: flex;
@@ -168,5 +166,36 @@ export default {
 .action-user__attitude {
   width: 20px;
   height: 20px;
+}
+
+@media screen and (max-width: 1190px) {
+  .action-wrapper {
+    width: 510px;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .action-wrapper {
+    width: 400px;
+  }
+  .voting__content-img {
+    height: 270px;
+  }
+}
+@media screen and (max-width: 1025px) {
+  .action-wrapper {
+    width: 370px;
+  }
+  .voting__content-img {
+    height: 250px;
+  }
+}
+@media screen and (max-width: 870px) {
+  .action-wrapper {
+    width: 680px;
+  }
+  .voting__content-img {
+    height: 360px;
+  }
 }
 </style>
