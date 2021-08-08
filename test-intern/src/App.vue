@@ -3,7 +3,7 @@
     <div class="container">
       <div class="wrapper-content">
         <div class="interactive">
-          <HiPage />
+          <hi-page></hi-page>
           <!-- главное меню -->
         </div>
         <div class="pages">
@@ -65,7 +65,7 @@ export default {
     flex-direction: column;
   }
   .pages {
-    margin: 50px 0 0 0;
+    margin: 50px 0 50px;
   }
 }
 @media screen and (max-width: 1025px) {

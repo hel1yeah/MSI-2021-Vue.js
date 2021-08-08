@@ -52,7 +52,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Atitude",
+};
 </script>
 
 <style lang="scss">

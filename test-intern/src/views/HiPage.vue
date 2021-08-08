@@ -268,9 +268,48 @@ export default {
   .header__info--title {
     font-size: 30px;
   }
-  .header__info--descr{
-    margin: 0px 0 30px;
+  .header__info--descr {
+    margin: 0 0 30px;
   }
-
+}
+@media screen and (max-width: 769px) {
+  .header__logo {
+    margin: 0 0 15px;
+  }
+  .header__info--title {
+    line-height: 0;
+    font-size: 25px;
+  }
+  .header__info--descr {
+    font-size: 18px;
+    line-height: 25px;
+    margin: 0 0 20px;
+  }
+  .header__api--title {
+    font-size: 20px;
+    line-height: 10px;
+  }
+  .header__cards-wrapper {
+    width: 350px;
+  }
+  .header__card {
+    width: 110px;
+    overflow: hidden;
+  }
+  .header__card--bg {
+    height: 137px;
+  }
+  .header__card--img {
+    width: 80px;
+    height: 100px;
+  }
+  .header__card--img.pet-breeds {
+    width: 85px;
+    height: 124px;
+  }
+  .header__card--img.images-search {
+    width: 89px;
+    height: 130px;
+  }
 }
 </style>

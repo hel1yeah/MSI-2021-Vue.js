@@ -198,4 +198,12 @@ export default {
     height: 360px;
   }
 }
+@media screen and (max-width: 769px) {
+  .action-wrapper {
+    width: 350px;
+  }
+  .voting__content-img {
+    height: 270px;
+  }
+}
 </style>
