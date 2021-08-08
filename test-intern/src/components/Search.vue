@@ -4,7 +4,7 @@
       v-model="search"
       type="text"
       class="voting__search--input"
-      placeholder="Search for breeds by name"
+      placeholder="Search name"
       @keyup.enter="searchBreeds"
     />
     <button class="voting__search--button" @click="searchBreeds">
@@ -82,5 +82,26 @@ export default {
 .voting__search--icon {
   width: 20px;
   height: 20px;
+}
+@media screen and (max-width: 1200px) {
+  .voting__search-wrapper{
+    width: 260px;
+    padding: 15px 10px 15px 20px;
+    margin: 0 5px 0 0;
+  }
+}
+@media screen and (max-width: 1025px) {
+  .voting__search-wrapper{
+    width: 260px;
+    padding: 8px 10px;
+  }
+  .voting__search--button {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 11px
+  }
 }
 </style>

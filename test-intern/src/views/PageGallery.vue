@@ -99,7 +99,10 @@
             :style="{ backgroundImage: `url(${dog.url})` }"
           >
             <div
-              class="grid-container__item--hover gallery-grid-container__item--hover"
+              class="
+                grid-container__item--hover
+                gallery-grid-container__item--hover
+              "
             >
               <button
                 class="button-favorite"
@@ -206,6 +209,7 @@ export default {
     limit: function () {
       this.getBreeds();
     },
+
     random: function () {
       this.getBreeds();
     },
@@ -359,5 +363,33 @@ export default {
   width: 17px;
   height: 20px;
   fill: var(--btn-active-bg-color);
+}
+
+@media screen and (max-width: 1200px) {
+  .gallery {
+    width: 500px;
+  }
+  .gallery-content__filters {
+    flex-direction: column;
+  }
+  .gallery-content__filters--item {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .gallery {
+    width: 360px;
+  }
+}
+@media screen and (max-width: 870px) {
+  .gallery {
+    width: 500px;
+  }
+}
+@media screen and (max-width: 769px) {
+  .gallery {
+    width: 350px;
+  }
 }
 </style>

@@ -99,4 +99,11 @@ export default {
 }
 .attitude__dislikes--img {
 }
+
+@media screen and (max-width: 1025px) {
+  .attitude__item{
+    width: 50px;
+    height: 50px;
+  }
+}
 </style>
