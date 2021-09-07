@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Jost"; // семейство
-  src: local("Jost-Regular"), url("../font/Jost-Regular.woff2") format('woff2'),
-      url('../font/Jost-Regular.woff') format('woff');//format
+  src: local("Jost-Regular"), url("../fonts/Jost-Regular.woff2") format("woff2"),
+    url("../fonts/Jost-Regular.woff") format("woff"); //format
   font-weight: 400; // насыщенность
   font-style: normal; // стиль
   font-stretch: normal; // плотность растяжение
