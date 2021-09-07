@@ -3,7 +3,7 @@
     <div class="container">
       <div class="wrapper-content">
         <div class="interactive">
-          <HiPage />
+          <hi-page></hi-page>
           <!-- главное меню -->
         </div>
         <div class="pages">
@@ -57,5 +57,23 @@ export default {
 /* .slide-fade-leave-active до версии 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+
+@media screen and (max-width: 870px) {
+  .wrapper-content {
+    align-items: center;
+    flex-direction: column;
+  }
+  .pages {
+    margin: 50px 0 50px;
+  }
+}
+@media screen and (max-width: 1025px) {
+  .action-wrapper {
+    width: 400px;
+  }
+  .voting__content-img {
+    height: 270px;
+  }
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-
-    <div class="voting-tag">{{nameComponent}}</div>
-
+  <div class="voting-tag">{{ nameComponent }}</div>
 </template>
 
 <script>
@@ -28,5 +26,12 @@ export default {
   font-size: 20px;
   line-height: 30px;
   letter-spacing: 2px;
+}
+
+@media screen and (max-width: 1025px) {
+  .voting-tag {
+    font-size: 18px;
+    padding: 5px 10px;
+  }
 }
 </style>
